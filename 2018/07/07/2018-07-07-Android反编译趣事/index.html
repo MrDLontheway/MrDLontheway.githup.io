@@ -10,6 +10,9 @@
 
     <!--Description-->
     
+        <meta name="description" content="今日因为工作需要，要求钉钉远程打卡，第一想法是通过修改手机的虚拟定位来实现，但是因为阿里严格的审查，市面上大部分定位软件不可用。需求底层系统不太现实，
+然后同事发来了一款巨山寨的软件，进去一个显眼的某卡发平台网站的注册码来了，与APP界面的风格设计简直格格不入，使用了一天是没问题的，ps:软件是开发">
+    
 
     <!--Author-->
     
@@ -18,7 +21,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Hexo"/>
+        <meta property="og:title" content="Android反编译趣事.markdown"/>
     
 
     <!--Open Graph Description-->
@@ -29,7 +32,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -40,7 +43,7 @@
 
     <!-- Title -->
     
-    <title>Hexo</title>
+    <title>Android反编译趣事.markdown - Hexo</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="//unpkg.com/tachyons/css/tachyons.min.css">
@@ -120,14 +123,14 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">Welcome to DaiLe's blog</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">初心不忘,从始至终。</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">Android反编译趣事.markdown</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2018-07-07</p>
         </div>
     </div>
 
     <!-- Icon -->
     <div class="relative w-100 mw8 center white dn dn-m db-ns">
-        <i class="header-icon fa fa fa-magic"></i>
+        <i class="header-icon fa fa-file-text-o"></i>
     </div>
 </div>
 
@@ -135,124 +138,107 @@
 <div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
     <div class="content">
         <div class="mw8 center">
-            
-                <a href="/2018/08/24/hello-world/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-08-24</span> 
-                
-                
-                <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/ThisIsATag/'; return false;">#ThisIsATag</span> <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/Intro/'; return false;">#Intro</span> <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/Welcome/'; return false;">#Welcome</span> <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/Anodyne/'; return false;">#Anodyne</span>
-                
-            </div>
-            <span class="f3 fw3 lh-copy">learn<span>
+            <div class="cf">
+                <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
+                    <!-- Tags Vertical -->
+                    
+                        <div class="tags-container-vertical">
+                            <div class="tags-sub-container">
+                                <a class="fw3 ph1 dib" href="/tags/学习历程/">#学习历程</a> <a class="fw3 ph1 dib" href="/tags/生活趣事/">#生活趣事</a>
+                            </div>
+                        </div>
+                    
+
+                    <!-- Main Post Content -->
+                    <p>   今日因为工作需要，要求钉钉远程打卡，第一想法是通过修改手机的虚拟定位来实现，但是因为阿里严格的审查，市面上大部分定位软件不可用。需求底层系统不太现实，</p>
+<p>然后同事发来了一款巨山寨的软件，进去一个显眼的某卡发平台网站的注册码来了，与APP界面的风格设计简直格格不入，使用了一天是没问题的，ps:软件是开发者平台下载的</p>
+<p>没有上架，所以我感觉这个软件应该是山寨盗版，临下班找到了软件的正主大牛助手。大牛助手的功能做的还是不错的，后来陆陆续续发现了N个同版盗版，卖的还是挺贵的，</p>
+<p>于是我想通过反编译来实现软件的破解，之前有过一次反编译的第三方短信推送平台的经历，很不幸全部加密了，需要反编译安卓的伙伴可以参考这个博客</p>
+<p><a href="https://blog.csdn.net/s13383754499/article/details/78914592" target="_blank" rel="noopener">https://blog.csdn.net/s13383754499/article/details/78914592</a></p>
+<p>最终将盗版与正版大牛反编译完后 不出意外，全部加密了，而且内部实现调用的是C语言类库，原谅博主的菜逼，对于c++，c比较无知，内部还发现360雅虎的包，初步猜测应该是</p>
+<p>用的360加密工具进行加密的。最后还是老老实实购买了大牛助手的会员来解决问题。不过学会了安卓的APK反编译，以后可以制裁一些流氓软件了，不过挺不幸的是博主手机刚来上海在</p>
+<p>外滩被偷了，只能用之前不要的三星了，委屈。</p>
+
+                    
+                    <!-- Tags Bottom -->
+                    
+                        <div class="tags-container-bottom">
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/学习历程/">#学习历程</a> <a class="fw3 ph1 dib" href="/tags/生活趣事/">#生活趣事</a>
+                        </div>
+                    
+
+                    <!-- Comments -->
+                    
+
+
+
+                </div>
+                <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">
+                    
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 1: About -->
+                    <div class="mt5 mt0-l">
+    <article class="dt db-l mw8 mw8-m mw5-ns center ml0-l bg-white mv3">
+        <div class="dn dtc-m db-l v-mid tc pr4 pr0-l" style="min-width: 6rem;">
+            <img src="http://tachyons.io/img/avatar_1.jpg" class="mb4-l br-100 h3 w3 h4-l w4-l dib" title="John Doe">
         </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
+        <div class="dtc db-l v-mid lh-copy measure center f6 black-50 tj">
+            My name is Jonathan Klughertz and this is my blog.<br>I am a full stack software engineer with a strong front-end focus.<br> I currently live and work in Singapore, hit me up if you are in the region.
         </div>
-    </div>
-</a>
-            
-                <a href="/2018/07/07/2018-07-07-Android反编译趣事/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-07-07</span> 
-                
-                
-                <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/学习历程/'; return false;">#学习历程</span> <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/生活趣事/'; return false;">#生活趣事</span>
-                
-            </div>
-            <span class="f3 fw3 lh-copy">Android反编译趣事.markdown<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2018/07/04/2018-07-04-数据结构Tree/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-07-04</span> 
-                
-                
-                <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/学习历程/'; return false;">#学习历程</span> <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/数据结构/'; return false;">#数据结构</span>
-                
-            </div>
-            <span class="f3 fw3 lh-copy">数据结构Tree<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2018/07/02/2018-07-02-成都 I am coming/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-07-02</span> 
-                
-                
-                <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/日常生活/'; return false;">#日常生活</span> <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/学习历程/'; return false;">#学习历程</span>
-                
-            </div>
-            <span class="f3 fw3 lh-copy">成都 I am coming<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2018/06/20/2018-06-20-第一次的大数据面试经历/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-06-20</span> 
-                
-                
-                <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/日常生活/'; return false;">#日常生活</span> <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/学习历程/'; return false;">#学习历程</span>
-                
-            </div>
-            <span class="f3 fw3 lh-copy">第一次的大数据面试经历<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2018/04/05/2018-04-05-My First Article/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-04-05</span> 
-                
-                
-                <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/日常生活/'; return false;">#日常生活</span> <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/学习历程/'; return false;">#学习历程</span>
-                
-            </div>
-            <span class="f3 fw3 lh-copy">第一次写博客,记录自己的学习历程<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
-            
-        </div>
-    </div>
+    </article>
+</div>
+
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 2: Categories -->
+                    
+                        <div class="mt5 tc tl-l">
+    <h3>Categories</h3>
     
+        <p>
+            <a href="/categories/Learn/">Learn</a>
+        </p>
+    
+        <p>
+            <a href="/categories/Learn/生活记录/">生活记录</a>
+        </p>
+    
+</div>
+
+
+                        <hr class="dn-l mw4 black-50 mt5" />
+                    
+
+                    <!-- Widget 3: Recent Posts -->
+                    <div class="mt5 tc tl-l">
+    <h3>Recent Posts</h3>
+    
+        <p>
+            <a href="/2018/08/24/hello-world/">learn</a>
+        </p>
+    
+        <p>
+            <a href="/2018/07/07/2018-07-07-Android反编译趣事/">Android反编译趣事.markdown</a>
+        </p>
+    
+        <p>
+            <a href="/2018/07/04/2018-07-04-数据结构Tree/">数据结构Tree</a>
+        </p>
+    
+        <p>
+            <a href="/2018/07/02/2018-07-02-成都 I am coming/">成都 I am coming</a>
+        </p>
+    
+        <p>
+            <a href="/2018/06/20/2018-06-20-第一次的大数据面试经历/">第一次的大数据面试经历</a>
+        </p>
+    
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
