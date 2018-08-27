@@ -158,18 +158,17 @@
 <p> 左子节点值总是小于当前节点，右子节点值总是大于当前节点，所以寻找节点时根据寻找节点的值大于还是小于当前节点</p>
 <p> 一次递归下去直到null值 所以整个查找过程就是从根节点开始一直向下的一条路径，若假设树的高度是h，那么查找过程的时间复杂度就是O(h)。</p>
 <p>   AVL平衡树，相对于BST的特点就是 左右两边树的高度是平衡的，也就是任意子树高度不会高过另一子树1 ,这样的优点就是大大增加了查询的效率，例如BST遇到这样的树</p>
-<p> <img src="https://img-blog.csdn.net/20170808114332409?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY1MjU5MDY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="成果1"></p>
-<p>查询效率就会相对低，那AVL树是如何保证树总是平衡呢，这里就到了树旋转的操作，分为左旋和右旋，语言表达能力有限，可以自行百度左旋右旋的操作<br>当有节点插入或者删除时AVL树就会有一个平衡适应的操作通过不断旋转，保持树的平衡因子不超过1，树的平衡因子也就是左右子树高度差值。</p>
+<p> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree0.JPG" alt="成果1"><br> 左为平衡树  右为非平衡树查询效率就会相对低，那AVL树是如何保证树总是平衡呢，这里就到了树旋转的操作，分为左旋和右旋，语言表达能力有限，可以自行百度左旋右旋的操作<br>当有节点插入或者删除时AVL树就会有一个平衡适应的操作通过不断旋转，保持树的平衡因子不超过1，树的平衡因子也就是左右子树高度差值。</p>
 <p>   RBT红黑树，一种高级数据结构，很多linux源码中使用，以及很多语言都有相关的实现<br>RBT 树是相对平衡的  查询效率高 插入删除高于AVL树<br>每次插入新节点必为红色  因为如果为黑色无形的打破了  从根节点到子节点黑色节点个数相同的规则  黑高<br>若经过调整新节点为根节点最后会将根节点染黑<br>RBT 插入调整旋转 最多旋转2次<br>插入调整情况(fixAfterInsertion)<br>1.插入X为根节点 直接将X由红染黑 简称rootover<br>2.父节点P为黑色，BlackParentOver 简称bpOver<br>所以只需要考虑父节点为P为红色的情况，由于相邻两个节点不能为红色所以爷爷一定为黑色 分为三种情况</p>
 <p>case1.Y 为红色,X可以为左孩子或者右孩子:<br>P,Y染黑  G染红  X回溯至G</p>
-<p> <img src="http://note.youdao.com/yws/res/2127/93FC421CAADB46B7981DF055297226B3" alt="成果1"><br> <img src="http://note.youdao.com/yws/res/2129/B8314D1EF83F41C7B748CDD4A6BA1E2F" alt="成果1"></p>
+<p> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree1.png" alt="成果1"><br> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree2.png" alt="成果1"></p>
 <p>case2. Y为黑色 X为右孩子:<br> 左旋P X指向P 转化为case3</p>
-<p> <img src="http://note.youdao.com/yws/res/2133/WEBRESOURCE16994a4c45df16508e100da82dbb9ac8" alt="成果1"><br> <img src="http://note.youdao.com/yws/res/2135/WEBRESOURCE1590e939ff3fc651e2d898e3f065c614" alt="成果1"></p>
-<p>case3.Y为黑色，X为左孩子：P染黑 G染红 右旋G 结束<br><img src="http://note.youdao.com/yws/res/2137/WEBRESOURCEe34ce5bd19acd0708329e78b77fdaf26" alt="成果1"><br><img src="http://note.youdao.com/yws/res/2139/WEBRESOURCE0987c20e74e305a5394414b197931f30" alt="成果1"></p>
-<p>AVL与RBT 插入调整对比<br><img src="http://note.youdao.com/yws/res/2142/WEBRESOURCEe1d226f95e501d1e82a355d09f5868ff" alt="成果1"></p>
-<p>RBT 删除调整<br><img src="http://note.youdao.com/yws/res/2149/WEBRESOURCE53123c1a2f1e9a76c8c88947a5a83dbb" alt="成果1"><br><img src="http://note.youdao.com/yws/res/2151/WEBRESOURCE9e646752f04925e676edad9c6f109016" alt="成果1"></p>
+<p> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree3.png" alt="成果1"><br> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree4.png" alt="成果1"></p>
+<p>case3.Y为黑色，X为左孩子：P染黑 G染红 右旋G 结束<br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree5.png" alt="成果1"><br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree6.png" alt="成果1"></p>
+<p>AVL与RBT 插入调整对比<br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree7.png" alt="成果1"></p>
+<p>RBT 删除调整<br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree8.png" alt="成果1"><br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree9.png" alt="成果1"></p>
 <p>删除调整(fixAfterDeletion)<br>case1.兄弟节点S为红色  兄弟节点染黑 父节点染红 左旋P<br>case2.兄弟节点S为黑色  黑LN，黑RN ； S染红 X回溯P<br>case3.兄弟节点S为黑色   红LN  黑RN  ； LN染黑 S染红 ，右旋S<br>case4.黑S兄弟节点  LN随意，红RN ； S变P颜色    P和RN染黑，左旋P</p>
-<p><img src="http://note.youdao.com/yws/res/2161/WEBRESOURCE4323f29f01a7c853dd9c4f87869c883f" alt="成果1"><br><img src="http://note.youdao.com/yws/res/2163/WEBRESOURCE8376ba5f072d72b2007ac0c046a267e6" alt="成果1"></p>
+<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree10.png" alt="成果1"><br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree11.png" alt="成果1"></p>
 
                     
                     <!-- Tags Bottom -->
@@ -223,6 +222,10 @@
     <h3>Recent Posts</h3>
     
         <p>
+            <a href="/2018/07/07/2018-07-09-排序算法的小结/">Android反编译趣事</a>
+        </p>
+    
+        <p>
             <a href="/2018/07/07/2018-07-07-Android反编译趣事/">Android反编译趣事</a>
         </p>
     
@@ -236,10 +239,6 @@
     
         <p>
             <a href="/2018/06/20/2018-06-20-第一次的大数据面试经历/">第一次的大数据面试经历</a>
-        </p>
-    
-        <p>
-            <a href="/2018/04/05/2018-04-05-My First Article/">第一次写博客,记录自己的学习历程</a>
         </p>
     
 </div>
