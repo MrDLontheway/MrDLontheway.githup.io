@@ -1,332 +1,1860 @@
 <!DOCTYPE html>
-<html lang="en">
 
-<!-- Head tag -->
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
 <head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--Description-->
-    
 
-    <!--Author-->
-    
-        <meta name="author" content="DaiLe">
-    
 
-    <!--Open Graph Title-->
-    
-        <meta property="og:title" content="DaiLe&#39;s blog"/>
-    
 
-    <!--Open Graph Description-->
-    
 
-    <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="DaiLe&#39;s blog"/>
 
-    <!--Type page-->
-    
-        <meta property="og:type" content="website" />
-    
 
-    <!--Page Cover-->
-    
 
-    <meta name="twitter:card" content="summary" />
-    
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <!-- Title -->
-    
-    <title>DaiLe&#39;s blog</title>
 
-    <!-- Tachyons Core CSS -->
-    <link rel="stylesheet" href="//unpkg.com/tachyons/css/tachyons.min.css">
 
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/style.css">
 
-    <!-- Google Analytics -->
-    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DaiLe" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="DaiLe&#39;s blog">
+<meta property="og:url" content="https://mrdlontheway.github.io/index.html">
+<meta property="og:site_name" content="DaiLe&#39;s blog">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DaiLe&#39;s blog">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mrdlontheway.github.io/"/>
+
+
+
+
+
+  <title>DaiLe's blog</title>
+  
+
+
+
+
+
+
 
 
 </head>
 
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
 
-<body>
-
-<!-- Main Content -->
-<!-- Banner -->
-<!-- Banner -->
-<div class="w-100 bg-1 ph5-ns ph3 text-light">
+  
+  
     
-    <nav class="db dt-l w-100 mw8 center border-box pv3">
-        <a class="db dtc-l v-mid link dim w-100 w-25-l tc tl-l mb2 mb0-l white" href="/" title="DaiLe's blog">
-            <img src="http://www.codeblocq.com/assets/projects/hexo-theme-anodyne/assets/anodyne.svg" class="dib h3" alt="DaiLe's blog">
-        </a>
-        <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
-            
-                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
-                    href="/" 
-                    title="Home">
-                    Home
-                </a>
-            
-                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
-                    href="/archives" 
-                    title="Archives">
-                    Archives
-                </a>
-            
-                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
-                    href="/tags" 
-                    title="Tags">
-                    Tags
-                </a>
-            
-                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
-                    href="/categories" 
-                    title="Categories">
-                    Categories
-                </a>
-            
-                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
-                    href="/about" 
-                    title="About">
-                    About
-                </a>
-            
-                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
-                    href="/contact" 
-                    title="Contact">
-                    Contact
-                </a>
-            
-        </div>
-    </nav>
+  
 
-    <!-- Title -->
-    <div class="w-100 mw8 center vh-40 dt">
-        <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">Welcome to DaiLe's blog</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">初心不忘,从始至终。</p>
-        </div>
-    </div>
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
 
-    <!-- Icon -->
-    <div class="relative w-100 mw8 center white dn dn-m db-ns">
-        <i class="header-icon fa fa fa-magic"></i>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DaiLe's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-<!-- Content -->
-<div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
-    <div class="content">
-        <div class="mw8 center">
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-                <a href="/2018/07/08/2018-07-09-排序算法的小结/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-07-08</span> 
-                
-                
-                <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/学习历程/'; return false;">#学习历程</span>
-                
-            </div>
-            <span class="f3 fw3 lh-copy">排序算法总结 JDK1.8双轴快排分析<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-                <a href="/2018/07/07/2018-07-07-Android反编译趣事/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-07-07</span> 
-                
-                
-                <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/学习历程/'; return false;">#学习历程</span> <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/生活趣事/'; return false;">#生活趣事</span>
-                
-            </div>
-            <span class="f3 fw3 lh-copy">Android反编译趣事<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
             
-                <a href="/2018/07/04/2018-07-04-数据结构Tree/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-07-04</span> 
-                
-                
-                <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/学习历程/'; return false;">#学习历程</span> <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/数据结构/'; return false;">#数据结构</span>
-                
-            </div>
-            <span class="f3 fw3 lh-copy">数据结构Tree<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-                <a href="/2018/07/02/2018-07-02-成都 I am coming/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-07-02</span> 
-                
-                
-                <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/日常生活/'; return false;">#日常生活</span> <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/学习历程/'; return false;">#学习历程</span>
-                
-            </div>
-            <span class="f3 fw3 lh-copy">成都 I am coming<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
             
-                <a href="/2018/06/20/2018-06-20-第一次的大数据面试经历/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-06-20</span> 
-                
-                
-                <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/日常生活/'; return false;">#日常生活</span> <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/学习历程/'; return false;">#学习历程</span>
-                
-            </div>
-            <span class="f3 fw3 lh-copy">第一次的大数据面试经历<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-                <a href="/2018/04/05/2018-04-05-My First Article/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2018-04-05</span> 
-                
-                
-                <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/日常生活/'; return false;">#日常生活</span> <span class="fake-link fw3 ph1 dib" onclick="location.href = '/tags/学习历程/'; return false;">#学习历程</span>
-                
-            </div>
-            <span class="f3 fw3 lh-copy">第一次写博客,记录自己的学习历程<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/10/2018-07-11-数据结构Map 总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/10/2018-07-11-数据结构Map 总结/" itemprop="url">数据结构Map 总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T10:00:08+08:00">
+                2018-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1>Map</h1><br><h3>这里只对常用Map集合进行分析</h3><br><h2>HashMap</h2><br>   hashmap 底层是entry的一个数组 每个数组内又是一个entry维护的单向链表(至于为何还需要一个单向链表后续解释) 每个entry 存储 k v hash值<br>因为插入的位置是 hash值与table长度取模 所以无序 为什么entry数组内还要维护一个单向链表呢?  哈希冲突<br><br>哈希冲突<br><br>通过哈希函数得出的实际存储地址相同怎么办？也就是说，当我们对某个元素进行哈希运算，得到一个存储地址，然后要进行插入的时候，发现已经被其他元素占用了，<br>其实这就是所谓的哈希冲突，也叫哈希碰撞。前面我们提到过，哈希函数的设计至关重要，好的哈希函数会尽可能地保证 计算简单和散列地址分布均匀,但是，<br>我们需要清楚的是，数组是一块连续的固定长度的内存空间，再好的哈希函数也不能保证得到的存储地址绝对不发生冲突。<br>那么哈希冲突如何解决呢？哈希冲突的解决方案有多种:开放定址法（发生冲突，继续寻找下一块未被占用的存储地址），<br>再散列函数法，链地址法，而HashMap即是采用了链地址法，也就是数组+链表的方式，<br><br>简单来说就是因为两个key的hash值相同占用了数组同一位置 所以将数组元素转换为单向链表加入原 元素后面<br><br>二、HashMap实现原理<br><br>HashMap 结构图<br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/hashmap1.png" alt="成果1"><br><br>简单来说，HashMap由数组+链表组成的，数组是HashMap的主体，链表则是主要为了解决哈希冲突而存在的，如果定位到的数组位置不含链表（当前entry的next指向null）,<br>那么对于查找，添加等操作很快，仅需一次寻址即可；如果定位到的数组包含链表，对于添加操作，其时间复杂度为O(n)，首先遍历链表，存在即覆盖，否则新增；<br>对于查找操作来讲，仍需遍历链表，然后通过key对象的equals方法逐一比对查找。所以，性能考虑，HashMap中的链表出现越少，性能才会越好。<br><br>HashMap的主干是一个Entry数组。Entry是HashMap的基本组成单元，每一个Entry包含一个key-value键值对。<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//HashMap的主干数组，可以看到就是一个Entry数组，初始值为空数组&#123;&#125;，主干数组的长度一定是2的次幂，至于为什么这么做，后面会有详细分析。</span><br><span class="line">transient Entry&lt;K,V&gt;[] table = (Entry&lt;K,V&gt;[]) EMPTY_TABLE;</span><br></pre></td></tr></table></figure><br><br>Entry是HashMap中的一个静态内部类。代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;</span><br><span class="line">       final K key;</span><br><span class="line">       V value;</span><br><span class="line">       Entry&lt;K,V&gt; next;//存储指向下一个Entry的引用，单链表结构</span><br><span class="line">       int hash;//对key的hashcode值进行hash运算后得到的值，存储在Entry，避免重复计算</span><br><span class="line"></span><br><span class="line">       /**</span><br><span class="line">        * Creates new entry.</span><br><span class="line">        */</span><br><span class="line">       Entry(int h, K k, V v, Entry&lt;K,V&gt; n) &#123;</span><br><span class="line">           value = v;</span><br><span class="line">           next = n;</span><br><span class="line">           key = k;</span><br><span class="line">           hash = h;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure><br><br><h2>HashMap 方法使用及源码解析</h2><br><h3>put  首先查询原table内是否有该key  如果有则覆盖 没有则添加Entry</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public V put(K key, V value) &#123;</span><br><span class="line">       //如果table数组为空数组&#123;&#125;，进行数组填充（为table分配实际内存空间），入参为threshold，此时threshold为initialCapacity 默认是1&lt;&lt;4(24=16)</span><br><span class="line">       if (table == EMPTY_TABLE) &#123;</span><br><span class="line">           inflateTable(threshold);</span><br><span class="line">       &#125;</span><br><span class="line">      //如果key为null，存储位置为table[0]或table[0]的冲突链上</span><br><span class="line">       if (key == null)</span><br><span class="line">           return putForNullKey(value);</span><br><span class="line">       int hash = hash(key);//对key的hashcode进一步计算，确保散列均匀</span><br><span class="line">       int i = indexFor(hash, table.length);//获取在table中的实际位置</span><br><span class="line">       for (Entry&lt;K,V&gt; e = table[i]; e != null; e = e.next) &#123;</span><br><span class="line">       //如果该对应数据已存在，执行覆盖操作。用新value替换旧value，并返回旧value</span><br><span class="line">           Object k;</span><br><span class="line">           if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) &#123;</span><br><span class="line">               V oldValue = e.value;</span><br><span class="line">               e.value = value;</span><br><span class="line">               e.recordAccess(this);</span><br><span class="line">               return oldValue;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       modCount++;//保证并发访问时，若HashMap内部结构发生变化，快速响应失败</span><br><span class="line">       addEntry(hash, key, value, i);//新增一个entry</span><br><span class="line">       return null;</span><br><span class="line">   &#125;   </span><br><span class="line">/**</span><br><span class="line">     * Returns index for hash code h. 获取table内hash值的元素位置 h &amp; (length-1)</span><br><span class="line">     */</span><br><span class="line">    static int indexFor(int h, int length) &#123;</span><br><span class="line">        // assert Integer.bitCount(length) == 1 : &quot;length must be a non-zero power of 2&quot;;</span><br><span class="line">        return h &amp; (length-1);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><br><br><h3>get  根据hash值查找entry所在table内位置   遍历entry链表 直到hash相同，且key equals相同  返回元素</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public V get(Object key) &#123;</span><br><span class="line">    if (key == null)</span><br><span class="line">        return getForNullKey();</span><br><span class="line">    Entry&lt;K,V&gt; entry = getEntry(key);</span><br><span class="line"></span><br><span class="line">    return null == entry ? null : entry.getValue();</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * Returns the entry associated with the specified key in the</span><br><span class="line"> * HashMap.  Returns null if the HashMap contains no mapping</span><br><span class="line"> * for the key.</span><br><span class="line"> */</span><br><span class="line">final Entry&lt;K,V&gt; getEntry(Object key) &#123;</span><br><span class="line">    if (size == 0) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int hash = (key == null) ? 0 : hash(key);//计算keyhash值</span><br><span class="line">    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];//根据hash值查找entry所在table内位置</span><br><span class="line">         e != null;</span><br><span class="line">         e = e.next) &#123;//遍历entry链表 直到hash相同，且key equals相同  返回元素</span><br><span class="line">        Object k;</span><br><span class="line">        if (e.hash == hash &amp;&amp;</span><br><span class="line">            ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">            return e;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br>  这里因为hashMap内使用了table的一个数组，那如何解决数组的扩容问题 以及扩容后 hash值对应index的问题呢?<br>  先来看看inflateTable这个方法<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private void inflateTable(int toSize) &#123;</span><br><span class="line">        int capacity = roundUpToPowerOf2(toSize);//capacity一定是2的次幂</span><br><span class="line">        threshold = (int) Math.min(capacity * loadFactor, MAXIMUM_CAPACITY + 1);//此处为threshold赋值，取capacity*loadFactor和MAXIMUM_CAPACITY+1的最小值，capaticy一定不会超过MAXIMUM_CAPACITY，除非loadFactor大于1</span><br><span class="line">        table = new Entry[capacity];</span><br><span class="line">        initHashSeedAsNeeded(capacity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><br><br>inflateTable这个方法用于为主干数组table在内存中分配存储空间，通过roundUpToPowerOf2(toSize)可以确保capacity为大于或等于toSize的最接近toSize的二次幂，<br>比如toSize=13,则capacity=16;to_size=16,capacity=16;to_size=17,capacity=32.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private static int roundUpToPowerOf2(int number) &#123;</span><br><span class="line">       // assert number &gt;= 0 : &quot;number must be non-negative&quot;;</span><br><span class="line">       return number &gt;= MAXIMUM_CAPACITY</span><br><span class="line">               ? MAXIMUM_CAPACITY</span><br><span class="line">               : (number &gt; 1) ? Integer.highestOneBit((number - 1) &lt;&lt; 1) : 1;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><br><br>roundUpToPowerOf2中的这段处理使得数组长度一定为2的次幂，Integer.highestOneBit是用来获取最左边的bit（其他bit位为0）所代表的数值.<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//对key的hashcode进一步进行计算以及二进制位的调整等来保证最终获取的存储位置尽量分布均匀</span><br><span class="line">final int hash(Object k) &#123;</span><br><span class="line">        int h = hashSeed;</span><br><span class="line">        if (0 != h &amp;&amp; k instanceof String) &#123;</span><br><span class="line">            return sun.misc.Hashing.stringHash32((String) k);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        h ^= k.hashCode();</span><br><span class="line"></span><br><span class="line">        h ^= (h &gt;&gt;&gt; 20) ^ (h &gt;&gt;&gt; 12);</span><br><span class="line">        return h ^ (h &gt;&gt;&gt; 7) ^ (h &gt;&gt;&gt; 4);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">　/**</span><br><span class="line">     * 返回数组下标</span><br><span class="line">     */</span><br><span class="line">    static int indexFor(int h, int length) &#123;</span><br><span class="line">        return h &amp; (length-1);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void addEntry(int hash, K key, V value, int bucketIndex) &#123;</span><br><span class="line">        if ((size &gt;= threshold) &amp;&amp; (null != table[bucketIndex])) &#123;</span><br><span class="line">            resize(2 * table.length);//当size超过临界阈值threshold，并且即将发生哈希冲突时进行扩容</span><br><span class="line">            hash = (null != key) ? hash(key) : 0;</span><br><span class="line">            bucketIndex = indexFor(hash, table.length);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        createEntry(hash, key, value, bucketIndex);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><br><br>通过以上代码能够得知，当发生哈希冲突并且size大于阈值的时候，需要进行数组扩容，扩容时，需要新建一个长度为之前数组2倍的新的数组，<br>然后将当前的Entry数组中的元素全部传输过去，扩容后的新数组长度为之前的2倍，所以扩容相对来说是个耗资源的操作。<br><br>注意：重写equals方法需同时重写hashCode方法<br>尽管我们在进行get和put操作的时候，使用的key从逻辑上讲是等值的（通过equals比较是相等的），但由于没有重写hashCode方法，所以put操作时，<br>key(hashcode1)–&gt;hash–&gt;indexFor–&gt;最终索引位置 ，而通过key取出value的时候 key(hashcode1)–&gt;hash–&gt;indexFor–&gt;最终索引位置，由于hashcode1不等于hashcode2，<br>导致没有定位到一个数组位置而返回逻辑上错误的值null（也有可能碰巧定位到一个数组位置，但是也会判断其entry的hash值是否相等，上面get方法中有提到。）<br><br>所以，在重写equals的方法的时候，必须注意重写hashCode方法，同时还要保证通过equals判断相等的两个对象，调用hashCode方法要返回同样的整数值。<br>而如果equals判断不相等的两个对象，其hashCode可以相同（只不过会发生哈希冲突，应尽量避免）。<br><br>LinkedHashMap 继承自hashMap 在hashMap的基础上 增加为维护一个双向指针的操作 所以达到元素有序的效果<br>   这里源码方法就不解析了 基本就是增删元素 维护指针的操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">    * The head of the doubly linked list.</span><br><span class="line">    */</span><br><span class="line">   private transient Entry&lt;K,V&gt; header;</span><br><span class="line">   </span><br><span class="line">// These fields comprise the doubly linked list used for iteration.</span><br><span class="line">        Entry&lt;K,V&gt; before, after;</span><br><span class="line"></span><br><span class="line">        Entry(int hash, K key, V value, HashMap.Entry&lt;K,V&gt; next) &#123;</span><br><span class="line">            super(hash, key, value, next);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure><br><br><h1>TreeMap  java红黑树数据结构实现</h1>
+
+<p>由于之前讲过红黑树相关内容这里不做具体讲解有兴趣可以看之前的文章 这将源码与之前讲解一一对应</p>
+<p></p><h3>插入put(K key, V value)   插入红黑树元素</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">public V put(K key, V value) &#123;</span><br><span class="line">        Entry&lt;K,V&gt; t = root;</span><br><span class="line">        if (t == null) &#123;  //如果为空直接当作root加入</span><br><span class="line">            compare(key, key); // type (and possibly null) check</span><br><span class="line"></span><br><span class="line">            root = new Entry&lt;&gt;(key, value, null);</span><br><span class="line">            size = 1;</span><br><span class="line">            modCount++;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        int cmp;</span><br><span class="line">        Entry&lt;K,V&gt; parent;</span><br><span class="line">        // split comparator and comparable paths</span><br><span class="line">        Comparator&lt;? super K&gt; cpr = comparator;</span><br><span class="line">        if (cpr != null) &#123;//-----比较元素compareTo 寻找元素插入位置</span><br><span class="line">            do &#123;</span><br><span class="line">                parent = t;</span><br><span class="line">                cmp = cpr.compare(key, t.key);</span><br><span class="line">                if (cmp &lt; 0)</span><br><span class="line">                    t = t.left;</span><br><span class="line">                else if (cmp &gt; 0)</span><br><span class="line">                    t = t.right;</span><br><span class="line">                else</span><br><span class="line">                    return t.setValue(value);</span><br><span class="line">            &#125; while (t != null);</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            if (key == null)</span><br><span class="line">                throw new NullPointerException();</span><br><span class="line">            Comparable&lt;? super K&gt; k = (Comparable&lt;? super K&gt;) key;</span><br><span class="line">            do &#123;</span><br><span class="line">                parent = t;</span><br><span class="line">                cmp = k.compareTo(t.key);</span><br><span class="line">                if (cmp &lt; 0)</span><br><span class="line">                    t = t.left;</span><br><span class="line">                else if (cmp &gt; 0)</span><br><span class="line">                    t = t.right;</span><br><span class="line">                else</span><br><span class="line">                    return t.setValue(value);</span><br><span class="line">            &#125; while (t != null);</span><br><span class="line">        &#125;</span><br><span class="line">        Entry&lt;K,V&gt; e = new Entry&lt;&gt;(key, value, parent);</span><br><span class="line">        if (cmp &lt; 0)</span><br><span class="line">            parent.left = e;</span><br><span class="line">        else</span><br><span class="line">            parent.right = e;</span><br><span class="line">        fixAfterInsertion(e);//插入元素后进入fixAfterInsertion 插入调整</span><br><span class="line">        size++;</span><br><span class="line">        modCount++;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    //插入调整函数</span><br><span class="line">private void fixAfterInsertion(Entry&lt;K,V&gt; x) &#123;</span><br><span class="line">    x.color = RED;//首先元素插入必为红色 否则会改变黑高违反特性</span><br><span class="line"></span><br><span class="line">    while (x != null &amp;&amp; x != root &amp;&amp; x.parent.color == RED) &#123;//如果parent为黑色  blackover 结束无须调整</span><br><span class="line">        if (parentOf(x) == leftOf(parentOf(parentOf(x)))) &#123;</span><br><span class="line">            Entry&lt;K,V&gt; y = rightOf(parentOf(parentOf(x)));</span><br><span class="line">            if (colorOf(y) == RED) &#123;</span><br><span class="line">                setColor(parentOf(x), BLACK); //case 1 Y 为红色,X可以为左孩子或者右孩子:P,Y染黑 G染红 X回溯至G</span><br><span class="line">                setColor(y, BLACK);</span><br><span class="line">                setColor(parentOf(parentOf(x)), RED);</span><br><span class="line">                x = parentOf(parentOf(x));</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (x == rightOf(parentOf(x))) &#123; //case 2  Y为黑色 X为右孩子:左旋P X指向P 转化为case3</span><br><span class="line">                    x = parentOf(x);</span><br><span class="line">                    rotateLeft(x);</span><br><span class="line">                &#125;</span><br><span class="line">                setColor(parentOf(x), BLACK);</span><br><span class="line">                setColor(parentOf(parentOf(x)), RED);</span><br><span class="line">                rotateRight(parentOf(parentOf(x))); //case3.Y为黑色，X为左孩子：P染黑 G染红 右旋G 结束</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123; //  X 父亲为右孩子   前面三个case  镜像</span><br><span class="line">            Entry&lt;K,V&gt; y = leftOf(parentOf(parentOf(x)));</span><br><span class="line">            if (colorOf(y) == RED) &#123;</span><br><span class="line">                setColor(parentOf(x), BLACK);</span><br><span class="line">                setColor(y, BLACK);</span><br><span class="line">                setColor(parentOf(parentOf(x)), RED);</span><br><span class="line">                x = parentOf(parentOf(x));</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (x == leftOf(parentOf(x))) &#123;</span><br><span class="line">                    x = parentOf(x);</span><br><span class="line">                    rotateRight(x);</span><br><span class="line">                &#125;</span><br><span class="line">                setColor(parentOf(x), BLACK);</span><br><span class="line">                setColor(parentOf(parentOf(x)), RED);</span><br><span class="line">                rotateLeft(parentOf(parentOf(x)));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    root.color = BLACK;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p></p>
+<h2>红黑树删除元素 fixAfterDeletion 删除调整</h2>
+
+<p>删除调整(fixAfterDeletion)<br>case1.兄弟节点S为红色 兄弟节点染黑 父节点染红 左旋P<br>case2.兄弟节点S为黑色 黑LN，黑RN ； S染红 X回溯P<br>case3.兄弟节点S为黑色 红LN 黑RN ； LN染黑 S染红 ，右旋S<br>case4.黑S兄弟节点 LN随意，红RN ； S变P颜色 P和RN染黑，左旋P<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">     * Delete node p, and then rebalance the tree.</span><br><span class="line">     */</span><br><span class="line">    private void deleteEntry(Entry&lt;K,V&gt; p) &#123;</span><br><span class="line">        modCount++;</span><br><span class="line">        size--;</span><br><span class="line"></span><br><span class="line">        // If strictly internal, copy successor&apos;s element to p and then make p</span><br><span class="line">        // point to successor.</span><br><span class="line">        if (p.left != null &amp;&amp; p.right != null) &#123;</span><br><span class="line">            Entry&lt;K,V&gt; s = successor(p);</span><br><span class="line">            p.key = s.key;</span><br><span class="line">            p.value = s.value;</span><br><span class="line">            p = s;</span><br><span class="line">        &#125; // p has 2 children</span><br><span class="line"></span><br><span class="line">        // Start fixup at replacement node, if it exists.</span><br><span class="line">        Entry&lt;K,V&gt; replacement = (p.left != null ? p.left : p.right);</span><br><span class="line"></span><br><span class="line">        if (replacement != null) &#123;</span><br><span class="line">            // Link replacement to parent</span><br><span class="line">            replacement.parent = p.parent;</span><br><span class="line">            if (p.parent == null)</span><br><span class="line">                root = replacement;</span><br><span class="line">            else if (p == p.parent.left)</span><br><span class="line">                p.parent.left  = replacement;</span><br><span class="line">            else</span><br><span class="line">                p.parent.right = replacement;</span><br><span class="line"></span><br><span class="line">            // Null out links so they are OK to use by fixAfterDeletion.</span><br><span class="line">            p.left = p.right = p.parent = null;</span><br><span class="line"></span><br><span class="line">            // Fix replacement</span><br><span class="line">            if (p.color == BLACK)</span><br><span class="line">                fixAfterDeletion(replacement);</span><br><span class="line">        &#125; else if (p.parent == null) &#123; // return if we are the only node.</span><br><span class="line">            root = null;</span><br><span class="line">        &#125; else &#123; //  No children. Use self as phantom replacement and unlink.</span><br><span class="line">            if (p.color == BLACK)</span><br><span class="line">                fixAfterDeletion(p);</span><br><span class="line"></span><br><span class="line">            if (p.parent != null) &#123;</span><br><span class="line">                if (p == p.parent.left)</span><br><span class="line">                    p.parent.left = null;</span><br><span class="line">                else if (p == p.parent.right)</span><br><span class="line">                    p.parent.right = null;</span><br><span class="line">                p.parent = null;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** From CLR */</span><br><span class="line">    private void fixAfterDeletion(Entry&lt;K,V&gt; x) &#123;</span><br><span class="line">        while (x != root &amp;&amp; colorOf(x) == BLACK) &#123;</span><br><span class="line">            if (x == leftOf(parentOf(x))) &#123;</span><br><span class="line">                Entry&lt;K,V&gt; sib = rightOf(parentOf(x));</span><br><span class="line"></span><br><span class="line">                if (colorOf(sib) == RED) &#123;</span><br><span class="line">                    setColor(sib, BLACK);</span><br><span class="line">                    setColor(parentOf(x), RED);</span><br><span class="line">                    rotateLeft(parentOf(x));</span><br><span class="line">                    sib = rightOf(parentOf(x));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (colorOf(leftOf(sib))  == BLACK &amp;&amp;</span><br><span class="line">                    colorOf(rightOf(sib)) == BLACK) &#123;</span><br><span class="line">                    setColor(sib, RED);</span><br><span class="line">                    x = parentOf(x);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    if (colorOf(rightOf(sib)) == BLACK) &#123;</span><br><span class="line">                        setColor(leftOf(sib), BLACK);</span><br><span class="line">                        setColor(sib, RED);</span><br><span class="line">                        rotateRight(sib);</span><br><span class="line">                        sib = rightOf(parentOf(x));</span><br><span class="line">                    &#125;</span><br><span class="line">                    setColor(sib, colorOf(parentOf(x)));</span><br><span class="line">                    setColor(parentOf(x), BLACK);</span><br><span class="line">                    setColor(rightOf(sib), BLACK);</span><br><span class="line">                    rotateLeft(parentOf(x));</span><br><span class="line">                    x = root;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123; // symmetric</span><br><span class="line">                Entry&lt;K,V&gt; sib = leftOf(parentOf(x));</span><br><span class="line"></span><br><span class="line">                if (colorOf(sib) == RED) &#123;</span><br><span class="line">                    setColor(sib, BLACK);</span><br><span class="line">                    setColor(parentOf(x), RED);</span><br><span class="line">                    rotateRight(parentOf(x));</span><br><span class="line">                    sib = leftOf(parentOf(x));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (colorOf(rightOf(sib)) == BLACK &amp;&amp;</span><br><span class="line">                    colorOf(leftOf(sib)) == BLACK) &#123;</span><br><span class="line">                    setColor(sib, RED);</span><br><span class="line">                    x = parentOf(x);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    if (colorOf(leftOf(sib)) == BLACK) &#123;</span><br><span class="line">                        setColor(rightOf(sib), BLACK);</span><br><span class="line">                        setColor(sib, RED);</span><br><span class="line">                        rotateLeft(sib);</span><br><span class="line">                        sib = leftOf(parentOf(x));</span><br><span class="line">                    &#125;</span><br><span class="line">                    setColor(sib, colorOf(parentOf(x)));</span><br><span class="line">                    setColor(parentOf(x), BLACK);</span><br><span class="line">                    setColor(leftOf(sib), BLACK);</span><br><span class="line">                    rotateRight(parentOf(x));</span><br><span class="line">                    x = root;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        setColor(x, BLACK);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
     </div>
     
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/10/2018-07-10-数据结构List 总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/10/2018-07-10-数据结构List 总结/" itemprop="url">数据结构List 总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T10:00:08+08:00">
+                2018-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p></p><h1>List</h1><p></p>
+<p></p><h3>这里只对常用list集合进行分析</h3><p></p>
+<p></p><h2>ArrayList </h2><br>   标准的线性数组结构封装实现了Collection和List接口，可以灵活的设置数组的大小。要注意的是ArrayList并不是线程安全的，因此一般建议在单线程中使用ArrayList。<p></p>
+<p>##ArrayList的方法使用和源码解析</p>
+<p>###构造方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">//1-----------------------</span><br><span class="line">public ArrayList() &#123;</span><br><span class="line">        this(10);</span><br><span class="line">        //调用ArrayList(10) 默认初始化一个大小为10的object数组。</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//2-------------------------</span><br><span class="line">public ArrayList(int initialCapacity) &#123;    </span><br><span class="line">        if (initialCapacity &lt; 0)</span><br><span class="line">            throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+</span><br><span class="line">                                               initialCapacity);</span><br><span class="line">         //如果用户初始化大小小于0抛异常，否则新建一个用户初始值大小的object数组。                                      </span><br><span class="line">        this.elementData = new Object[initialCapacity];</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">//3--------------------------</span><br><span class="line">public ArrayList(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">        elementData = c.toArray();</span><br><span class="line">        size = elementData.length;</span><br><span class="line">        // 当c.toArray返回的不是object类型的数组时，进行下面转化。</span><br><span class="line">        if (elementData.getClass() != Object[].class)</span><br><span class="line">            elementData = Arrays.copyOf(elementData, size, Object[].class);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>   ArrayList初始化会生成一个长度为10的数组，随着元素的增加自动扩容。</p>
+<p></p><h2>add(E e)方法 </h2><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">//1-----------------------</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">        ensureCapacityInternal(size + 1);  // 加入元素前检查数组的容量是否足够</span><br><span class="line">        elementData[size++] = e;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">//2----------------------- </span><br><span class="line">private void ensureCapacityInternal(int minCapacity) &#123;</span><br><span class="line">        modCount++;</span><br><span class="line">        // 如果添加元素后大于当前数组的长度，则进行扩容</span><br><span class="line">        if (minCapacity - elementData.length &gt; 0)</span><br><span class="line">            grow(minCapacity);</span><br><span class="line">    &#125; </span><br><span class="line">//3-----------------------  </span><br><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">        // overflow-conscious code</span><br><span class="line">        int oldCapacity = elementData.length;</span><br><span class="line">        //将数组的长度增加原来数组的一半。</span><br><span class="line">        int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">        if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">            newCapacity = minCapacity;</span><br><span class="line">            //如果扩充一半后仍然不够，则 newCapacity = minCapacity;minCapacity实际元素的个数。</span><br><span class="line">        if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">            newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">            //数组最大位2^32</span><br><span class="line">        // minCapacity is usually close to size, so this is a win:</span><br><span class="line">        elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p></p>
+<p>add方法比较复杂，涉及到扩充数组容量的问题。其中要弄清楚size和elementData.length的区别，size指的是数组中存放元素的个数，elementData.length表示数组的长度，<br>当new一个ArrayList系统默认产生一个长度为10的elementData数组，elementData.length=10，但是由于elementData中还未放任何元素所有size=0。<br>如果加入元素后数组大小不够会先进行扩容，每次扩容都将数组大小增大一半比如数组大小为10一次扩容后的大小为10+5=10;ArrayList的最大长度为 2^32 .</p>
+<p></p><h2>LinkedList</h2><p></p>
+<p></p><h3>LinkedList 双向链表结构,内置Node节点 节点属性item 存放element prev上个节点 next下个节点</h3><br>LinkedList 是线程不安全的，允许元素为null的双向链表。  没有实现RandomAccess所以其以下标，随机访问元素速度较慢。<br>因其底层数据结构是链表，所以可想而知，它的增删只需要移动指针即可，故时间效率较高。不需要批量扩容，也不需要预留空间，所以空间效率比ArrayList高。<br>缺点就是需要随机访问元素时，时间效率很低，虽然底层在根据下标查询Node的时候，会根据index判断目标Node在前半段还是后半段，然后决定是顺序还是逆序查询，以提升时间效率。不过随着n的增大，总体时间效率依然很低。<br>当每次增、删时，都会修改modCount。<p></p>
+<p></p><h2>ArrayList的方法使用和源码解析</h2><p></p>
+<p></p><h3>add(E e) 方法</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    linkLast(e); //从链表尾部添加元素</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line">     * Links e as last element.</span><br><span class="line">     */</span><br><span class="line">    void linkLast(E e) &#123;</span><br><span class="line">        final Node&lt;E&gt; l = last;</span><br><span class="line">        final Node&lt;E&gt; newNode = new Node&lt;&gt;(l, e, null);</span><br><span class="line">        last = newNode;//将新添元素设置为末尾元素 将上个末尾设置为当前的prev</span><br><span class="line">        if (l == null)</span><br><span class="line">            first = newNode;</span><br><span class="line">        else</span><br><span class="line">            l.next = newNode;//将上个末尾元素next设置为当前末尾元素</span><br><span class="line">        size++;</span><br><span class="line">        modCount++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>push(E e) 方法</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public void push(E e) &#123;</span><br><span class="line">        addFirst(e);</span><br><span class="line">    &#125;</span><br><span class="line">public void addFirst(E e) &#123;</span><br><span class="line">        linkFirst(e);</span><br><span class="line">    &#125;</span><br><span class="line">/**</span><br><span class="line">     * Links e as first element.</span><br><span class="line">     */</span><br><span class="line">    private void linkFirst(E e) &#123;//从头部添加元素</span><br><span class="line">        final Node&lt;E&gt; f = first;//之前头部元素</span><br><span class="line">        final Node&lt;E&gt; newNode = new Node&lt;&gt;(null, e, f);//新添头部元素</span><br><span class="line">        first = newNode;</span><br><span class="line">        //更改指针指向</span><br><span class="line">        if (f == null)</span><br><span class="line">            last = newNode;</span><br><span class="line">        else</span><br><span class="line">            f.prev = newNode;</span><br><span class="line">        size++;</span><br><span class="line">        modCount++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>get(int index)  获取角标的元素</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">    public E get(int index) &#123;</span><br><span class="line">        checkElementIndex(index);//检查索引有效性</span><br><span class="line">        return node(index).item;</span><br><span class="line">    &#125;</span><br><span class="line">/**</span><br><span class="line">     * Returns the (non-null) Node at the specified element index.</span><br><span class="line">     */</span><br><span class="line">    Node&lt;E&gt; node(int index) &#123;</span><br><span class="line">        // assert isElementIndex(index);</span><br><span class="line">        //先判断index角标处于整个链表的前半部分还是后半部分 然后决定是从头找还是从末尾找 提高查找效率 类似二分</span><br><span class="line">        if (index &lt; (size &gt;&gt; 1)) &#123;</span><br><span class="line">            Node&lt;E&gt; x = first;</span><br><span class="line">            for (int i = 0; i &lt; index; i++)</span><br><span class="line">                x = x.next;</span><br><span class="line">            return x;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            Node&lt;E&gt; x = last;</span><br><span class="line">            for (int i = size - 1; i &gt; index; i--)</span><br><span class="line">                x = x.prev;</span><br><span class="line">            return x;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h2>ArrayList与LinkedList对比</h2><br>   因为ArrayList是线性数组结构所以 元素有序以及查询效率较高。<br>LinkedList是双向链表 内部维持指针以及modcount  查询需要遍历Node节点  但是插入与删除只需要修改Node指针指向就可以所以 相对Array 增删效率更高 查询效率偏低。<p></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/09/2018-07-09-排序算法的小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/09/2018-07-09-排序算法的小结/" itemprop="url">排序算法总结 JDK1.8双轴快排分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T05:00:08+08:00">
+                2018-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p></p><h1>插入排序</h1><p></p>
+<p></p><h3>思路</h3><br>遍历数组将每个元素与前面元素一一对比 如果小于就换位<br>最好情况O(n)  最坏情况O(n<sup>2</sup>) 建议数组长度较小时使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">    * 插入排序</span><br><span class="line">    *</span><br><span class="line">    * @param arr</span><br><span class="line">    */</span><br><span class="line">   public static void insertionSort(int[] arr) &#123;</span><br><span class="line">       for (int i = 1; i &lt; arr.length; i++) &#123;</span><br><span class="line">           int j = i;</span><br><span class="line">           while (j &gt; 0 &amp;&amp; arr[j] &lt; arr[j - 1]) &#123;</span><br><span class="line">               swap(arr,j,j-1);</span><br><span class="line">               j--;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h1>快速排序</h1><p></p>
+<p></p><h2>思路</h2><br>取一基准值 将小于该基准值放在数组左侧 大于基准值放于右侧 递归左右区间<p></p>
+<p>传统单轴快排缺陷 对于有序集合排序很慢属于不稳定排序算法  最坏情况O(n<sup>2</sup>) 最好情况O(n) 平均情况log<sub>2</sub>n</p>
+<p></p><h2>优化方法</h2><p></p>
+<p></p><h3>快速排序算法主要取决于基准值选取</h3><br>1.simple以数组首元素或者尾元素为基准不稳定  对于有序数据会大大延长排序速度  对于相对打散集合效果相对较好<p></p>
+<p>2.rand 随机选取数组内元素为基准值  绝对安全  但是当数据量比较大时 频繁的调用rand产生随机数 浪费性能 适得其反 适用于小数据量集</p>
+<p>3.mid  三值取中法 相对稳定  排序表现良好  建议采取</p>
+<p>1000以内 500w 密集形数据<br> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/qs1.png" alt="成果1"><br> 1000000以内 500w 松散形数据<br> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/qs2.png" alt="成果1"></p>
+<p></p><h1>归并排序</h1><p></p>
+<p></p><h2>思路</h2><br>归并排序（MERGE-SORT）是利用归并的思想实现的排序方法，该算法采用经典的分治（divide-and-conquer）策略（分治法将问题分(divide)成一些小的问题然后递归求解，而治(conquer)的阶段则将分的阶段得到的各答案”修补”在一起，即分而治之)。<p></p>
+<p> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/guibing1.png" alt="成果1"><br> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/guibing2.png" alt="成果1"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">package sortdemo;</span><br><span class="line"></span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by chengxiao on 2016/12/8.</span><br><span class="line"> */</span><br><span class="line">public class MergeSort &#123;</span><br><span class="line">    public static void main(String []args)&#123;</span><br><span class="line">        int []arr = &#123;9,8,7,6,5,4,3,2,1&#125;;</span><br><span class="line">        sort(arr);</span><br><span class="line">        System.out.println(Arrays.toString(arr));</span><br><span class="line">    &#125;</span><br><span class="line">    public static void sort(int []arr)&#123;</span><br><span class="line">        int []temp = new int[arr.length];//在排序前，先建好一个长度等于原数组长度的临时数组，避免递归中频繁开辟空间</span><br><span class="line">        sort(arr,0,arr.length-1,temp);</span><br><span class="line">    &#125;</span><br><span class="line">    private static void sort(int[] arr,int left,int right,int []temp)&#123;</span><br><span class="line">        if(left&lt;right)&#123;</span><br><span class="line">            int mid = (left+right)/2;</span><br><span class="line">            sort(arr,left,mid,temp);//左边归并排序，使得左子序列有序</span><br><span class="line">            sort(arr,mid+1,right,temp);//右边归并排序，使得右子序列有序</span><br><span class="line">            merge(arr,left,mid,right,temp);//将两个有序子数组合并操作</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private static void merge(int[] arr,int left,int mid,int right,int[] temp)&#123;</span><br><span class="line">        int i = left;//左序列指针</span><br><span class="line">        int j = mid+1;//右序列指针</span><br><span class="line">        int t = 0;//临时数组指针</span><br><span class="line">        while (i&lt;=mid &amp;&amp; j&lt;=right)&#123;</span><br><span class="line">            if(arr[i]&lt;=arr[j])&#123;</span><br><span class="line">                temp[t++] = arr[i++];</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                temp[t++] = arr[j++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while(i&lt;=mid)&#123;//将左边剩余元素填充进temp中</span><br><span class="line">            temp[t++] = arr[i++];</span><br><span class="line">        &#125;</span><br><span class="line">        while(j&lt;=right)&#123;//将右序列剩余元素填充进temp中</span><br><span class="line">            temp[t++] = arr[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        t = 0;</span><br><span class="line">        //将temp中的元素全部拷贝到原数组中</span><br><span class="line">        while(left &lt;= right)&#123;</span><br><span class="line">            arr[left++] = temp[t++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>归并排序是稳定排序，它也是一种十分高效的排序，能利用完全二叉树特性的排序一般性能都不会太差。java中Arrays.sort()采用了一种名为TimSort的排序算法，就是归并排序的优化版本。</p>
+<p>从上文的图中可看出，每次合并操作的平均时间复杂度为O(n)，而完全二叉树的深度为|log2n|。总的平均时间复杂度为O(nlogn)。而且，归并排序的最好，最坏，平均时间复杂度均为O(nlogn)。</p>
+<p>   从JDK7开始采用这种双Pivot的快速排序算法,首先会根据数组的长度选择对应的排序算法<br>1.需要排序的数组为a,判断数组的长度是否大于286，大于使用归并排序（merge sort），否则执行2。<br>2.判断数组长度是否小于47，小于则采用插入排序，否则执行3。<br>3.双轴快排<br>采用近似算法计算数组长度的1/7<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int seventh = (length &gt;&gt; 3) + (length &gt;&gt; 6) + 1;</span><br></pre></td></tr></table></figure></p>
+<p>取出5个点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int e3 = (left + right) &gt;&gt;&gt; 1; // 中位数</span><br><span class="line">int e2 = e3 - seventh;</span><br><span class="line">int e1 = e2 - seventh;</span><br><span class="line">int e4 = e3 + seventh;</span><br><span class="line">int e5 = e4 + seventh;</span><br></pre></td></tr></table></figure></p>
+<p>5.将这5个元素进行插入排序 </p>
+<p>6.选取a[e2],a[e4]分别作为pivot1，pivot2。由于步骤5进行了排序，所以必有pivot1 &lt; pivot2。</p>
+<p>7.接下来定义3个指针，分别是less,k,great。先说一下最终结果，less和great将数组分为3个部分，分别是小于less的，大于less小于great的元素和大于great的元素。<br>如何达到这个结果呢，初始时，less和great分别指向数组起始的元素和结束的元素。此时，所有的元素在less和great之间，即待处理的元素。随着程序的进行，小于less的元素逐步移动到less左边，大于great的元素移动到great右边。<br>另外有一个指针k表示处理到哪个元素了，初始值为less，结束值为great（这里的great是会动态改变的，但是大于great的元素一定是处理过的） </p>
+<p>8.将a[k]分别与pivot1，pivot2比较。如果小于pivot1，则将a[k]与a[less]对调，同时k++。如果大于pivot2，则执行9；否则执行10。<br>9.将a[great]分别与pivot1，pivot2比较。如果a[great]大于pivot2，则递减great，直到大于pivot2的条件不满足或者k==great。如果a[great]小于pivot1，则将a[great]换到小于less的区域。如果a[great]大于pivot1，则说明位于中间区域，将a[great]与a[k]对调。great–。<br>10.k++，如果k&gt;great,说明处理完成，则执行11，否则继续执行8；<br>11.由于前面的操作，还未将pivot1，pivot2这2个元素放对位置，所以还需要将a[less - 1]移动到队头，pivot1移动到（less - 1）的位置，将a[great +1]移动到队尾，pivot2移动到（great +1）的位置。<br>12.至此，已经达到步骤7描述的最终结果，将数组分为了3个区域。对较小的区域和较大的区域递归执行步骤2。判断中间的区域是否过大，如果是，则执行13，否则递归执行步骤2。<br>13.将等于pivot1或者pivot2的元素移动到两边，然后递归执行步骤2。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/07/2018-07-07-Android反编译趣事/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/07/2018-07-07-Android反编译趣事/" itemprop="url">Android反编译趣事</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-07T05:00:08+08:00">
+                2018-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>   今日因为工作需要，要求钉钉远程打卡，第一想法是通过修改手机的虚拟定位来实现，但是因为阿里严格的审查，市面上大部分定位软件不可用。需求底层系统不太现实，</p>
+<p>然后同事发来了一款巨山寨的软件，进去一个显眼的某卡发平台网站的注册码来了，与APP界面的风格设计简直格格不入，使用了一天是没问题的，ps:软件是开发者平台下载的</p>
+<p>没有上架，所以我感觉这个软件应该是山寨盗版，临下班找到了软件的正主大牛助手。大牛助手的功能做的还是不错的，后来陆陆续续发现了N个同版盗版，卖的还是挺贵的，</p>
+<p>于是我想通过反编译来实现软件的破解，之前有过一次反编译的第三方短信推送平台的经历，很不幸全部加密了，需要反编译安卓的伙伴可以参考这个博客</p>
+<p><a href="https://blog.csdn.net/s13383754499/article/details/78914592" target="_blank" rel="noopener">https://blog.csdn.net/s13383754499/article/details/78914592</a></p>
+<p>最终将盗版与正版大牛反编译完后 不出意外，全部加密了，而且内部实现调用的是C语言类库，原谅博主的菜逼，对于c++，c比较无知，内部还发现360雅虎的包，初步猜测应该是</p>
+<p>用的360加密工具进行加密的。最后还是老老实实购买了大牛助手的会员来解决问题。不过学会了安卓的APK反编译，以后可以制裁一些流氓软件了，不过挺不幸的是博主手机刚来上海在</p>
+<p>外滩被偷了，只能用之前不要的三星了，委屈。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/04/2018-07-04-数据结构Tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/04/2018-07-04-数据结构Tree/" itemprop="url">数据结构Tree</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T03:00:08+08:00">
+                2018-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>   tree树是一种常见的数据结构，我这里我们只讨论BST(二叉搜索树)，AVL(平衡树),RBT(红黑树)。 BST与AVL是学习红黑树的基础，这里推荐学习七月子空</p>
+<p> 的讲解，很详细。</p>
+<p> 二叉搜索树</p>
+<p> 左子节点值总是小于当前节点，右子节点值总是大于当前节点，所以寻找节点时根据寻找节点的值大于还是小于当前节点</p>
+<p> 一次递归下去直到null值 所以整个查找过程就是从根节点开始一直向下的一条路径，若假设树的高度是h，那么查找过程的时间复杂度就是O(h)。</p>
+<p>   AVL平衡树，相对于BST的特点就是 左右两边树的高度是平衡的，也就是任意子树高度不会高过另一子树1 ,这样的优点就是大大增加了查询的效率，例如BST遇到这样的树</p>
+<p> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree0.JPG" alt="成果1"><br> 左为平衡树  右为非平衡树查询效率就会相对低，那AVL树是如何保证树总是平衡呢，这里就到了树旋转的操作，分为左旋和右旋，语言表达能力有限，可以自行百度左旋右旋的操作<br>当有节点插入或者删除时AVL树就会有一个平衡适应的操作通过不断旋转，保持树的平衡因子不超过1，树的平衡因子也就是左右子树高度差值。</p>
+<p>   RBT红黑树，一种高级数据结构，很多linux源码中使用，以及很多语言都有相关的实现<br>RBT 树是相对平衡的  查询效率高 插入删除高于AVL树<br>每次插入新节点必为红色  因为如果为黑色无形的打破了  从根节点到子节点黑色节点个数相同的规则  黑高<br>若经过调整新节点为根节点最后会将根节点染黑<br>RBT 插入调整旋转 最多旋转2次<br>插入调整情况(fixAfterInsertion)<br>1.插入X为根节点 直接将X由红染黑 简称rootover<br>2.父节点P为黑色，BlackParentOver 简称bpOver<br>所以只需要考虑父节点为P为红色的情况，由于相邻两个节点不能为红色所以爷爷一定为黑色 分为三种情况</p>
+<p>case1.Y 为红色,X可以为左孩子或者右孩子:<br>P,Y染黑  G染红  X回溯至G</p>
+<p> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree1.png" alt="成果1"><br> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree2.png" alt="成果1"></p>
+<p>case2. Y为黑色 X为右孩子:<br> 左旋P X指向P 转化为case3</p>
+<p> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree3.png" alt="成果1"><br> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree4.png" alt="成果1"></p>
+<p>case3.Y为黑色，X为左孩子：P染黑 G染红 右旋G 结束<br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree5.png" alt="成果1"><br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree6.png" alt="成果1"></p>
+<p>AVL与RBT 插入调整对比<br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree7.png" alt="成果1"></p>
+<p>RBT 删除调整<br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree8.png" alt="成果1"><br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree9.png" alt="成果1"></p>
+<p>删除调整(fixAfterDeletion)<br>case1.兄弟节点S为红色  兄弟节点染黑 父节点染红 左旋P<br>case2.兄弟节点S为黑色  黑LN，黑RN ； S染红 X回溯P<br>case3.兄弟节点S为黑色   红LN  黑RN  ； LN染黑 S染红 ，右旋S<br>case4.黑S兄弟节点  LN随意，红RN ； S变P颜色    P和RN染黑，左旋P</p>
+<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree10.png" alt="成果1"><br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/tree11.png" alt="成果1"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/02/2018-07-02-成都 I am coming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/02/2018-07-02-成都 I am coming/" itemprop="url">成都 I am coming</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-02T03:00:08+08:00">
+                2018-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Life/" itemprop="url" rel="index">
+                    <span itemprop="name">Life</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>  2018年6月30日一早便起身 收拾好一些随身衣物，跟着一起比赛的小伙伴奔往机场，还是人生中第一次坐飞机，刚落成都，还下着毛毛小雨，</p>
+<p>刚到酒店，还没来得及吃中饭就赶往了成都职业技术学院参加比赛开幕式，因为毕竟是专科组的比赛，水平还是有些较低的，以及环境的很多问题，</p>
+<p>因为是第一次举办，感觉很多机制没有完善，就比如连搭建环境配置文件都要自己背下来的！这是我万万无法接受的，幸好的是我把这个烂摊子丢给了</p>
+<p>辉哥，辉哥是一个网络安全渗透大佬，刚到学校就入侵了学校教务系统，学习平台，整个数据库都拿下来了。。。 所以我把他拉入了大数据的坑，让他</p>
+<p>也可以多拓展一下各个方方面面，比赛前一天晚上背函数名背到了2点多，说实话挺心酸的。拿了个二等奖，有点小遗憾吧。可惜的是好不容易来一趟成都，</p>
+<p>竟然下暴雨，可怜没有多出去玩玩 第三天就准备飞回无锡，因为学校当时已经放假了。当天晚上11点多回到宿舍，就定了第二天到上海的票，打算去魔都闯一闯。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/06/20/2018-06-20-第一次的大数据面试经历/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/20/2018-06-20-第一次的大数据面试经历/" itemprop="url">第一次的大数据面试经历</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-20T09:00:08+08:00">
+                2018-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Life/" itemprop="url" rel="index">
+                    <span itemprop="name">Life</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>  最近在忙着6.30 四川成都的一个大数据比赛，因为暑假又要来了，并且大三学校允许实习了，肯定不能放过这个增加经验的好机会，</p>
+<p>无锡是一个物联网城市，企业倾向与软硬件结合的形式，经过一星期的摸索，发现找大数据的公司少之又少，加上博主这专科的学历，</p>
+<p>在无锡找到大数据相关的工作基本不太可能于是我想到了上海，经过几天的摸索，也试投了几家，终于有一家kyligence的公司有了回应，</p>
+<p>第一次听到<code>kyligence</code>还不是太了解，经过一番百度，发现<code>kyligence</code>的核心项目 <code>apache Kylin</code> 是apache 顶级基金会项目。并且</p>
+<p>技术含金量特别高，因为不在上海的原因，公司想先电话面试了解情况。昨天中午收到 <code>kyligence</code> 的一个员工电话，问了自己的一些项目经验，</p>
+<p>然后是一些基础的 数据结构，网络协议，webscoket请求断连机制，我回答的还不错，对我也比较满意所以绝对进行二面，交代了时间，</p>
+<p>二面的是kyligence的架构师，当天晚上激动的睡不着觉，第二天的晚上8点左右和 架构师微信语音二面，简单聊了一些自己的项目，然后就进入笔试</p>
+<p>阶段，接下来是博主最惨的一次经历了，由于一直在学框架的原因，很少写底层基础的代码了，很多知识也都忘了，并且加上没有准备，以及专科院校学习</p>
+<p>的局限性。两题都做得不是很好，所以我在他眼里应该是成了只会理论吹牛的代码没写几个的<code>小白</code> 。就这样我错过了我认为最好的实习机会，很可惜，</p>
+<p>也算是给自己上了一课，打牢基础才是关键。现在想到那次的经历还是觉得很可惜，要是再有一次机会就好了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/04/05/2018-04-05-My First Article/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/05/2018-04-05-My First Article/" itemprop="url">第一次写博客,记录自己的学习历程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-05T03:00:08+08:00">
+                2018-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>   经过自己一段时间的学习,感受到知识回顾的重要性。所以决定开始写博客来记录自己的学习历程，以及踩过的坑。身为一名专科生，深刻认识到只有通过努力才能改变自己。</p>
+<p>直到今年，我已经学习编程的两年多时间了，简单介绍一下自己学习的整个过程吧,高三时开始接触编程，还记得当时正处于高三下学期的紧张复习阶段，我刚接触代码，就喜爱上了它。</p>
+<p>上课时可以偷偷的把手机放在桌子书上后看教学视频。高考结束，因为自己的疏忽，以及天天逃课上网的经历（ps:博主，高中特别坏学生，经常晚上出去通宵上网之类的）分数惨不忍睹，</p>
+<p>在暑假里，我粗略的学习java 的简单语法基础。然后开学，进入了一所无锡的专科院校就读。刚到大学，抱着我那一本厚厚的编程思想，学姐看到了第一反应：呦，这么刻苦啊。刚到这就开始学习了。</p>
+<p>讲一些我个人对于编程的理解吧，现在正处于互联网发展顶峰期，市场对于软件工程师的需求量也非常大，虽然需求量大，但是目前学习的人也很多，市场初级人才接近饱和，高级人才需求很大，但是人才却很多，</p>
+<p>所以出现了一种情况，初级的小白无法入门(ps:博主刚找工作可是被培训搞得烦死了)。高级的人才招不到。</p>
+<p>   大一的时候算是比较用功的时候吧，因为从各种贴吧，论坛了解到要学计算机，一定要跟上时代，很多的技术更新换代很快。不学习的话很快就会被淘汰。而且如果想要以后能达到高的层次，需要学习很多的东西。</p>
+<p>基本平时除了无聊的时候会和舍友打打游戏以外，剩下的时间都会看教学视频，写Demo(我基础看的时毕向东老师的视频，感觉对于初学者来说 乐趣很多，可以很好的入门) 然后如果要达到工作水平的话，我建议可以看一些</p>
+<p>比较新的培训班的视频，涉及面广，讲解也不错。（ps:建议自学去看，不建议去报培训班。个人感觉如果想学得好肯定是要边学边理解，很多东西刚学理解了，其实是很皮毛的，需要很长时间的消化）</p>
+<p>大一快到暑假，我基本学习完了 javaEE就业班资料，并且做过一些CRUD的小项目。当时因为暑假考驾照的人太多没报上名的原因，我毅然的选择了出去拼一拼找个实习的工作。接近期末考试，因为专科院校管理比较松散的问题，</p>
+<p>加上跟专业老师的关系比较老，经常请假出去面试找工作。这里给刚找工作的一些朋友一些建议吧。如果感觉自己学的没问题的，可以去找一些外包之类的小公司，累点苦点没事，对于初学者来说外包的水平学习肯定是没问题了。</p>
+<p>（好一点的本科院校以及名校的小伙伴请当我在讲废话…）外面还有特别多打着招实习生的名义，拉人去培训的，只要感觉到一点他要找你培训的意思，直接要回简历走人。（刚找工作一个大三学长跟我一起传授的我经验） 他当时去了</p>
+<p>一家很老很老的传统外包小公司，最近也没联系了，不知道他怎么样了。我最初面了3.4家左右 全是培训，当时整个人都很郁闷，我个人觉得我还是挺拼的吧，有一次去了一个比较老的软件园，无锡震泽路附近。一过去直接就是培训，我背包就走了</p>
+<p>出去做马路牙子旁边，不想回去，好不容易跑来一趟，连正式面试还没就回去。心里一万个不愿意，之前看到贴吧一个老哥也是找不到工作直接杀到人家的公司。我也萌生了这个想法，真是初生牛犊不怕虎，我在那边转了一圈进了一家NIIT的企业，</p>
+<p>一进去我就问你们这边招不招实习生我是来面试的。说实话现在想想当时也是挺虎的，虽然没有任何的预约，他们公司还是让项目经理给我面试了。虽然这次的面试没能成功，但是我还是非常感谢那位项目经理，可以说是我人生的一个转折点吧，</p>
+<p>经过1个多小时的面试，我回的都很好，那个项目经历人特别好，她很直白的跟我说:”我直接这么和你说吧，以你现在的水平找到一份工作肯定没问题，但是我们这边比较也是做培训的有自己的学习，有项目肯定是优先让我们的学生参加，所以不能录用你。”</p>
+<p>还跟我说了一些以后的方向问题。从那次之后我就找回了信心，之后找到了一家公司，项目比较多，加班也比较严重，当时老板跟我谈入职的时候还在抱怨：”唉，现在的年轻人真的矫情啊，加点班都不行了。” 我直接说:”没关系，我加班随便加。” 这里提到加班的问题</p>
+<p>我感觉向互联网行业加班真的是很正常的事情，但是长时间的习惯的加班也会很压抑。刚到公司，2天后进项目组。公司属于不能干活直接就辞掉的，没有实习不实习，不能干就走人。刚工作一星期压力特别大，后来就渐渐的熟悉了业务，这个真的觉得我还是挺幸运的，大一就</p>
+<p>接触了一个电商直播的项目，这也是我们公司第一次接这种项目。基本两个月，我感觉学的东西比我半年在学校都多，我也了解到了很多开源的社区，码云，githup。因为学校不允许大二实习的问题，我只能被迫大二回到学校上课，但是因为这次的经历我找到了很多学习的方向。</p>
+<p>大二开始第一学期，我学习了当时微服务刚火的dubbo，(ps:讲道理当时国内都是比较排斥国外，所以没学springcloud ，没想到后来我就发现我错了。至于为什么，大家应该知道了….)  也学了springboot 。 学完这些东西的时候我觉得我需要做一点实在的东西了，于是</p>
+<p>我找了很多学前端，安卓，ios的人 想自己做一个项目，但是由于学生的能力有限的问题，我一直没找到人。社会上的大佬不给钱也不会免费给做，当时找了很多本科的人，说实话很多本科生在校生实际的工作能力也很有限，最后之和一个安卓的学长完成了通讯，推送部分(ps：不是用的 第三方</p>
+<p>提供的推送服务，是用netty nio 做的websocket实时通信，心跳机制，重连机制) ，然后因为安卓做的真的是太慢了，最后项目阉割了。当时的大数据也是非常厉害的了，当时以我对大数据的了解就是—-牛逼，一般人玩不来。我犹豫了很久要不要在学校直接学，还是以后工作一两年在学。</p>
+<p>最后还是决定试一把，一股脑就是干。百度一搜Hadoop生态圈，我滴的妈妈，那族谱太吓人，对我来说就是一堆的英文，所有的组件里面，唯一我接触过了就是zookeeper了。。。  当时整个人都不好了，摸不着头脑，不知道从哪下手。</p>
+<p>这里我还是认为对于培训，系统化的过程，方向还是很好的。在网上找了传智播客的大数据资料，就开始学。 说实话很多东西你不会的时候你觉得很高端很厉害，其实你了解了之后也就那样 just so so吧。从刚接触大数据开始，我发现我能学的懂，当时那段时间就像打了鸡血一样。</p>
+<p>从17年的9.10月份一直怼到18年5月份。整个人的状态基本是 除了吃饭，其他的都在学习，搭环境。写demo, 整个一整套学习下来以后，迫切想自己做一点大数据相关的项目，第一个项目 拉钩网APP的用户信息分析，因为大一的工作经历，我对于后台系统的接口，网络都有了一定的了解，所以用代理拦截拉钩网APP的内置</p>
+<p>请求接口，然后模拟请求去遍历所有用户列表，拿到整个拉钩网的用户信息，因为对python不是太会，所以用java httpclient 写的爬虫，15个线程，阿里云学生服务器大概跑了7天左右全部抓下来，3000W+条数据，15G的文件，从阿里云传到我本地也传了好久(ps:学生服务器的带宽有限，200kb+/s)</p>
+<p>刚开始用sparksql跑 将数据分析存储mysql  然后前台 springboot+etcharts 做了一个分析展示的系统，这里给大家贴一些图片。</p>
+<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/chengguo1.png" alt="成果1"></p>
+<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/chengguo2.png" alt="成果2"></p>
+<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/cg3.png" alt="成果2"></p>
+<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/cg4.png" alt="成果2"></p>
+<p>   记得当时跑这个项目一共是花了45min左右，博主当时的是笔记本搭建的三台伪分布式spark集群通过的sparksql。随后就像在实时分析找点东西，因为博主没事的时候喜欢看看直播，便打起了直播弹幕实时分析的想法，说实话实时的话相对于离线要难得多了，很多东西要考虑，在做自己的项目的时候很多东西不会考虑，</p>
+<p>面试被问到才知道实时计算很多需要考虑的东西，消息的可靠性，消费的完整性。斗鱼TV的弹幕分析是这样的，说到直播，博主还搞过nginx+rtmp的推流服务器，也学习了一点相关直播的知识。通过Wireshark工具，一款网络分析工具可以拦截所有的网络请求，工具很强大，好用，建议想学习网络的朋友去用用，还有一个我一个特别厉害的安全渗透(俗称黑客)告诉我的工具</p>
+<p>Burp Suite Free Edition 很厉害一款工具 java实现。回来讲重点，通过抓包，抓到本地线程与斗鱼tv弹幕服务器的请求过程，与心跳线程，于是开始模拟客户端实现，首先发送登陆请求 然后启动心跳线程保活，持续收取弹幕 发送到kafka。这里生产者到此完毕。消费者 sparkstreaming从kafka 拉取数据进行分析 将每个批次的分析结果</p>
+<p>实时的存储到redis(k，v日志型缓存数据库) 前端的echarts ajax轮询请求刷新前台的数据。 这里说到kafka 不得不说的是 sparkstreaming连接的两种方式 官方高级API push 从kafka集群推到spark集群的方式 和 direct直连 poll 去kafka拉取的两种方式，direct直连 相对底层，自己可以控制偏移量，在高级场景下，可以增强业务拓展，</p>
+<p>比如每个批次消费的完整性，有一次面试被问得特别明细，kafka的整个消费流程，所以恶补了一下kafka。当中还有一个kafka数据实时用logstash导入到es 进行全文检索的操作 下面贴图。</p>
+<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/cg9.png" alt="成果1"></p>
+<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/cg10.png" alt="成果1"></p>
+<p>   接下来由于感受到用sparksql太简单，想用原生RDD进行操作分析，接下来于是 抓取了拉钩网的职位与公司数据,讲道理 拉钩网的数据真的是够脏，各种中英文杂糅 我清洗了好久，拉勾网数据相对于超级课程表的数据量小了很多了，</p>
+<p>对于这次的分析，我学习到了很多spark的优化方面，印象最深刻的就是一个groupbykey的问题，所有的数据通过groupby完之后发现任务跑的非常非常慢，经过长时间的排查发现了问题主要出现在了Shuffle阶段，经过查询资料发现groupby不会在本地进行聚合 也就是combiner的过程，这个算子不会管任何的聚合直接进行全局的shuffle ，数据量全部走网络IO 会大大的</p>
+<p>拖长任务的执行时间所以我采用了 map+reducebykey 代替了guroupbykey 任务的执行时间优化了近4倍。可想而知shuffle 的关键重要性，对于spark 的优化，我个人的理解 核心就在于shuffle是否可以控制好，尽可能的避免大量数据进行全局shuffle是关键的。关于shuffle的优化后续会写一些相关的博客。</p>
+<p>   最后的一个waf实时分析的项目是做安全渗透的朋友给我推荐的，现在很多的网络安全与大数据的结合例如 态势感知，网络攻击实时防护。关于waf web防火墙的搭建也是他给我出多的主意，主要是使用openresty（一款很功能强大的自动集成lua脚本的nginx 扩展版）春哥 开源，通过lua model模块对http请求进行拦截，正则匹配参数识别攻击类型，用户UA，ip然后保存到本地日志文件，</p>
+<p>由logstash监听文件实时的发送kafka 后续 sparkstreaming进行分析，将可疑ip放入redis 黑名单，lua有redis相关模块，根据黑名单进行拦截，主要包含了 sql注入，xss攻击，远程代码执行，cc攻击，扫描器扫描  最后的展示是使用的阿里云的datav（非常有逼格 这里给大家贴个图）</p>
+<p>地址<a href="https://datav.aliyun.com/share/b860dcbf2c71467c54964b773f184410" target="_blank" rel="noopener">https://datav.aliyun.com/share/b860dcbf2c71467c54964b773f184410</a>  （lua这个语言是真的坑，感觉语法很严格并且比较。。不讲道理，语法错误报错位置也不对，甚至有的不报错，当时因为一个file 文件写入的功能被搞了一个下午）</p>
+<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/cg11.png" alt="成果1"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DaiLe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MrDLontheway" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:726575153@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005055405104110/home" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DaiLe</span>
+
+  
 </div>
 
 
-<!-- Footer -->
-<div class="bg-1 ph2 ph5-ns pv5">
-        <div class="mv8">
-            <div class="center tc">
-                
-                    <div class="dib mh3">
-                        <a class="f3 f2-ns white dim" href="https://twitter.com/?lang=en" target="_blank">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                    </div>
-                
-                    <div class="dib mh3">
-                        <a class="f3 f2-ns white dim" href="https://www.facebook.com/" target="_blank">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                    </div>
-                
-                    <div class="dib mh3">
-                        <a class="f3 f2-ns white dim" href="https://dribbble.com/" target="_blank">
-                            <i class="fa fa-dribbble"></i>
-                        </a>
-                    </div>
-                
-                    <div class="dib mh3">
-                        <a class="f3 f2-ns white dim" href="https://github.com/MrDLontheway" target="_blank">
-                            <i class="fa fa-github"></i>
-                        </a>
-                    </div>
-                
-                    <div class="dib mh3">
-                        <a class="f3 f2-ns white dim" href="https://plus.google.com/" target="_blank">
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                    </div>
-                
-                    <div class="dib mh3">
-                        <a class="f3 f2-ns white dim" href="https://www.behance.net/" target="_blank">
-                            <i class="fa fa-behance"></i>
-                        </a>
-                    </div>
-                
-                    <div class="dib mh3">
-                        <a class="f3 f2-ns white dim" href="https://500px.com/" target="_blank">
-                            <i class="fa fa-500px"></i>
-                        </a>
-                    </div>
-                
-                    <div class="dib mh3">
-                        <a class="f3 f2-ns white dim" href="mailto:726575153@qq.com" target="_blank">
-                            <i class="fa fa-envelope"></i>
-                        </a>
-                    </div>
-                
-                    <div class="dib mh3">
-                        <a class="f3 f2-ns white dim" href="/#" target="_blank">
-                            <i class="fa fa-rss"></i>
-                        </a>
-                    </div>
-                
-            </div>
-            <div class="f6 f5-ns center tc white pt5 fw3">
-                @Untitled. All right reserved | Design & Hexo <a class="link dim white" href="http://www.codeblocq.com/">Jonathan Klughertz</a>
-            </div>
-        </div>
-    </div>
-
-<!-- After Footer -->
-<!-- Disqus Comments -->
 
 
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
-
 </html>
