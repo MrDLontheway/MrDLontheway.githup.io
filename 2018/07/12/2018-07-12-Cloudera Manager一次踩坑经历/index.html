@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="日常生活,学习历程," />
+  <meta name="keywords" content="学习历程," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="最近在忙着6.30 四川成都的一个大数据比赛，因为暑假又要来了，并且大三学校允许实习了，肯定不能放过这个增加经验的好机会， 无锡是一个物联网城市，企业倾向与软硬件结合的形式，经过一星期的摸索，发现找大数据的公司少之又少，加上博主这专科的学历， 在无锡找到大数据相关的工作基本不太可能于是我想到了上海，经过几天的摸索，也试投了几家，终于有一家kyligence的公司有了回应， 第一次听到kylig">
-<meta name="keywords" content="日常生活,学习历程">
+<meta name="description" content="Cloudera Manager 安装kafka   目前大数据生态圈的集群管理平台 目前主流的两个 Cloudera Manager，Ambari  Cloudera Manager商业化,平台扩展性强，功能性多。 Ambari 保留原生态，对hadoop 系统入侵性底 ,公司刚搭建的CDH集群，只部署了一些基本组件 hdfs，yarn，spark，hbase 因为目前项目遇到实时性数据的问题，">
+<meta name="keywords" content="学习历程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第一次的大数据面试经历">
-<meta property="og:url" content="https://mrdlontheway.github.io/2018/06/20/2018-06-20-第一次的大数据面试经历/index.html">
+<meta property="og:title" content="Cloudera Manager一次踩坑经历">
+<meta property="og:url" content="https://mrdlontheway.github.io/2018/07/12/2018-07-12-Cloudera Manager一次踩坑经历/index.html">
 <meta property="og:site_name" content="DaiLe&#39;s blog">
-<meta property="og:description" content="最近在忙着6.30 四川成都的一个大数据比赛，因为暑假又要来了，并且大三学校允许实习了，肯定不能放过这个增加经验的好机会， 无锡是一个物联网城市，企业倾向与软硬件结合的形式，经过一星期的摸索，发现找大数据的公司少之又少，加上博主这专科的学历， 在无锡找到大数据相关的工作基本不太可能于是我想到了上海，经过几天的摸索，也试投了几家，终于有一家kyligence的公司有了回应， 第一次听到kylig">
+<meta property="og:description" content="Cloudera Manager 安装kafka   目前大数据生态圈的集群管理平台 目前主流的两个 Cloudera Manager，Ambari  Cloudera Manager商业化,平台扩展性强，功能性多。 Ambari 保留原生态，对hadoop 系统入侵性底 ,公司刚搭建的CDH集群，只部署了一些基本组件 hdfs，yarn，spark，hbase 因为目前项目遇到实时性数据的问题，">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-28T10:02:19.369Z">
+<meta property="og:updated_time" content="2018-08-29T07:15:21.664Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第一次的大数据面试经历">
-<meta name="twitter:description" content="最近在忙着6.30 四川成都的一个大数据比赛，因为暑假又要来了，并且大三学校允许实习了，肯定不能放过这个增加经验的好机会， 无锡是一个物联网城市，企业倾向与软硬件结合的形式，经过一星期的摸索，发现找大数据的公司少之又少，加上博主这专科的学历， 在无锡找到大数据相关的工作基本不太可能于是我想到了上海，经过几天的摸索，也试投了几家，终于有一家kyligence的公司有了回应， 第一次听到kylig">
+<meta name="twitter:title" content="Cloudera Manager一次踩坑经历">
+<meta name="twitter:description" content="Cloudera Manager 安装kafka   目前大数据生态圈的集群管理平台 目前主流的两个 Cloudera Manager，Ambari  Cloudera Manager商业化,平台扩展性强，功能性多。 Ambari 保留原生态，对hadoop 系统入侵性底 ,公司刚搭建的CDH集群，只部署了一些基本组件 hdfs，yarn，spark，hbase 因为目前项目遇到实时性数据的问题，">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://mrdlontheway.github.io/2018/06/20/2018-06-20-第一次的大数据面试经历/"/>
+  <link rel="canonical" href="https://mrdlontheway.github.io/2018/07/12/2018-07-12-Cloudera Manager一次踩坑经历/"/>
 
 
 
 
 
-  <title>第一次的大数据面试经历 | DaiLe's blog</title>
+  <title>Cloudera Manager一次踩坑经历 | DaiLe's blog</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/06/20/2018-06-20-第一次的大数据面试经历/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/12/2018-07-12-Cloudera Manager一次踩坑经历/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">第一次的大数据面试经历</h1>
+          <h1 class="post-title" itemprop="name headline">Cloudera Manager一次踩坑经历</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-20T09:00:08+08:00">
-                2018-06-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T10:00:08+08:00">
+                2018-07-12
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Life/" itemprop="url" rel="index">
-                    <span itemprop="name">Life</span>
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
                   </a>
                 </span>
 
@@ -352,16 +352,13 @@
       
 
       
-        <p>  最近在忙着6.30 四川成都的一个大数据比赛，因为暑假又要来了，并且大三学校允许实习了，肯定不能放过这个增加经验的好机会，</p>
-<p>无锡是一个物联网城市，企业倾向与软硬件结合的形式，经过一星期的摸索，发现找大数据的公司少之又少，加上博主这专科的学历，</p>
-<p>在无锡找到大数据相关的工作基本不太可能于是我想到了上海，经过几天的摸索，也试投了几家，终于有一家kyligence的公司有了回应，</p>
-<p>第一次听到<code>kyligence</code>还不是太了解，经过一番百度，发现<code>kyligence</code>的核心项目 <code>apache Kylin</code> 是apache 顶级基金会项目。并且</p>
-<p>技术含金量特别高，因为不在上海的原因，公司想先电话面试了解情况。昨天中午收到 <code>kyligence</code> 的一个员工电话，问了自己的一些项目经验，</p>
-<p>然后是一些基础的 数据结构，网络协议，webscoket请求断连机制，我回答的还不错，对我也比较满意所以绝对进行二面，交代了时间，</p>
-<p>二面的是kyligence的架构师，当天晚上激动的睡不着觉，第二天的晚上8点左右和 架构师微信语音二面，简单聊了一些自己的项目，然后就进入笔试</p>
-<p>阶段，接下来是博主最惨的一次经历了，由于一直在学框架的原因，很少写底层基础的代码了，很多知识也都忘了，并且加上没有准备，以及专科院校学习</p>
-<p>的局限性。两题都做得不是很好，所以我在他眼里应该是成了只会理论吹牛的代码没写几个的<code>小白</code> 。就这样我错过了我认为最好的实习机会，很可惜，</p>
-<p>也算是给自己上了一课，打牢基础才是关键。现在想到那次的经历还是觉得很可惜，要是再有一次机会就好了。</p>
+        <p></p><h1>Cloudera Manager 安装kafka</h1><br>   目前大数据生态圈的集群管理平台 目前主流的两个 Cloudera Manager，Ambari <p></p>
+<p>Cloudera Manager商业化,平台扩展性强，功能性多。 Ambari 保留原生态，对hadoop 系统入侵性底 ,公司刚搭建的CDH集群，只部署了<br>一些基本组件 hdfs，yarn，spark，hbase 因为目前项目遇到实时性数据的问题，讨论到kafka消息队列，因为对kafka 不是非常了解，所以想<br>在集群内加入kafka，之前用的cdh忘记了版本，我记得当时是不支持添加kafka服务的，看到当前系统cm5 cdh5.11 有对kafka的支持，但是有<br>红字警告,描述如下:<code>Apache Kafka is publish-subscribe messaging rethought as a distributed commit log. Before adding this service, ensure that either the Kafka parcel is activated or the Kafka package is installed.</code><br>大体的意思是需要确保激活kafka组件 再添加服务，不是很懂，经过一番百度，大多都是使用手动使用Parcel 安装激活的方式，这里提示一定要版本对应，<br>首先公司的CDH是通过在线安装的，所有服务通过在线rpm安装方式，CDH5.11 对应kafka为kafka2.1.x  下载对应的parcel包后按照流程，分配，激活，没有问题<br>激活完毕后 奇怪的事情发生了，在服务添加后，初始化服务启动时，报了cdh 以及各种hdfs spark hive服务未激活，直接傻眼了。wtf 在转眼看cdh的时候 之前安装的服务全部挂掉，<br>再看cdh的版本 什么情况自动从cdh5.11 降到了cdh5.0 这时候又出了一个问题，集群内一台节点无响应，对任何命令全部响应超时，刚开始没有发现…然后这时候我赶紧想通过cdh集群<br>升级的方式将 环境重新升级到5.11 之后的结果可想而知，一台机器无响应，加上服务的问题， 集群被搞得爆炸…  最终只能通过重装cdh的方式来解决问题(幸好还没有数据介入)<br>目前的方式只能手动安装kafka 自己管理，这样可以避免影响cdh的工作。</p>
+<p>在公司大数据交流会上，提到kafka的数据丢失问题，提到某金融公司一年能丢近20w的订单量，这是非常恐怖的。。还有公司的爬虫组爬取数据也经常丢失，就连ack配置-1 都没有解决问题，<br>初步问题定位可能在jvm gc  以及集群稳定性问题上，还有之前的一次面试提到的kafka消费完整性，可用性上的问题自己也搞得不是非常透彻，后续会通过学习一一解决这些问题。</p>
+<p>这里附上kafka 以及cdh对应安装文档地址</p>
+<p><a href="https://www.cloudera.com/documentation/enterprise/release-notes/topics/rn_consolidated_pcm.html#pcm_kafka" target="_blank" rel="noopener">https://www.cloudera.com/documentation/enterprise/release-notes/topics/rn_consolidated_pcm.html#pcm_kafka</a></p>
+<p>kafka中文文档地址</p>
+<p><a href="http://kafka.apachecn.org/documentation.html" target="_blank" rel="noopener">http://kafka.apachecn.org/documentation.html</a></p>
 
       
     </div>
@@ -379,8 +376,6 @@
       
         <div class="post-tags">
           
-            <a href="/tags/日常生活/" rel="tag"># 日常生活</a>
-          
             <a href="/tags/学习历程/" rel="tag"># 学习历程</a>
           
         </div>
@@ -394,8 +389,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/05/2018-04-05-My First Article/" rel="next" title="第一次写博客,记录自己的学习历程">
-                <i class="fa fa-chevron-left"></i> 第一次写博客,记录自己的学习历程
+              <a href="/2018/07/10/2018-07-10-数据结构List 总结/" rel="next" title="数据结构List 总结">
+                <i class="fa fa-chevron-left"></i> 数据结构List 总结
               </a>
             
           </div>
@@ -404,8 +399,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/02/2018-07-02-成都 I am coming/" rel="prev" title="成都 I am coming">
-                成都 I am coming <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/12/2018-07-13-kafka环境搭建/" rel="prev" title="kafka环境搭建">
+                kafka环境搭建 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -458,8 +453,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -583,6 +587,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Cloudera Manager 安装kafka</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="日常生活,学习历程," />
+  <meta name="keywords" content="学习历程," />
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="最近在忙着6.30 四川成都的一个大数据比赛，因为暑假又要来了，并且大三学校允许实习了，肯定不能放过这个增加经验的好机会， 无锡是一个物联网城市，企业倾向与软硬件结合的形式，经过一星期的摸索，发现找大数据的公司少之又少，加上博主这专科的学历， 在无锡找到大数据相关的工作基本不太可能于是我想到了上海，经过几天的摸索，也试投了几家，终于有一家kyligence的公司有了回应， 第一次听到kylig">
-<meta name="keywords" content="日常生活,学习历程">
+<meta name="description" content="kafka环境搭建  再深入了解kafka之前，已经翻阅了公司的kafka权威指南一书，但是毕竟书上的理论知识与真实环境还是有一些差距，这时候联想到之前一部电视剧哈，七国争霸 赵国的某位将领，这里就不深入diss了大家都懂的。话不多说进入正题， 1.下载安装包  首先选择的是kafka 0.10 版本至于各个版本的升级优化，大家可自行百度，据说是对安全方面以及增加了自动 机架感知。下载地址:htt">
+<meta name="keywords" content="学习历程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第一次的大数据面试经历">
-<meta property="og:url" content="https://mrdlontheway.github.io/2018/06/20/2018-06-20-第一次的大数据面试经历/index.html">
+<meta property="og:title" content="kafka环境搭建">
+<meta property="og:url" content="https://mrdlontheway.github.io/2018/07/12/2018-07-13-kafka环境搭建/index.html">
 <meta property="og:site_name" content="DaiLe&#39;s blog">
-<meta property="og:description" content="最近在忙着6.30 四川成都的一个大数据比赛，因为暑假又要来了，并且大三学校允许实习了，肯定不能放过这个增加经验的好机会， 无锡是一个物联网城市，企业倾向与软硬件结合的形式，经过一星期的摸索，发现找大数据的公司少之又少，加上博主这专科的学历， 在无锡找到大数据相关的工作基本不太可能于是我想到了上海，经过几天的摸索，也试投了几家，终于有一家kyligence的公司有了回应， 第一次听到kylig">
+<meta property="og:description" content="kafka环境搭建  再深入了解kafka之前，已经翻阅了公司的kafka权威指南一书，但是毕竟书上的理论知识与真实环境还是有一些差距，这时候联想到之前一部电视剧哈，七国争霸 赵国的某位将领，这里就不深入diss了大家都懂的。话不多说进入正题， 1.下载安装包  首先选择的是kafka 0.10 版本至于各个版本的升级优化，大家可自行百度，据说是对安全方面以及增加了自动 机架感知。下载地址:htt">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-28T10:02:19.369Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/kafkamanage.png">
+<meta property="og:updated_time" content="2018-08-29T08:05:07.740Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第一次的大数据面试经历">
-<meta name="twitter:description" content="最近在忙着6.30 四川成都的一个大数据比赛，因为暑假又要来了，并且大三学校允许实习了，肯定不能放过这个增加经验的好机会， 无锡是一个物联网城市，企业倾向与软硬件结合的形式，经过一星期的摸索，发现找大数据的公司少之又少，加上博主这专科的学历， 在无锡找到大数据相关的工作基本不太可能于是我想到了上海，经过几天的摸索，也试投了几家，终于有一家kyligence的公司有了回应， 第一次听到kylig">
+<meta name="twitter:title" content="kafka环境搭建">
+<meta name="twitter:description" content="kafka环境搭建  再深入了解kafka之前，已经翻阅了公司的kafka权威指南一书，但是毕竟书上的理论知识与真实环境还是有一些差距，这时候联想到之前一部电视剧哈，七国争霸 赵国的某位将领，这里就不深入diss了大家都懂的。话不多说进入正题， 1.下载安装包  首先选择的是kafka 0.10 版本至于各个版本的升级优化，大家可自行百度，据说是对安全方面以及增加了自动 机架感知。下载地址:htt">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/kafkamanage.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://mrdlontheway.github.io/2018/06/20/2018-06-20-第一次的大数据面试经历/"/>
+  <link rel="canonical" href="https://mrdlontheway.github.io/2018/07/12/2018-07-13-kafka环境搭建/"/>
 
 
 
 
 
-  <title>第一次的大数据面试经历 | DaiLe's blog</title>
+  <title>kafka环境搭建 | DaiLe's blog</title>
   
 
 
@@ -263,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/06/20/2018-06-20-第一次的大数据面试经历/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/12/2018-07-13-kafka环境搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -280,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">第一次的大数据面试经历</h1>
+          <h1 class="post-title" itemprop="name headline">kafka环境搭建</h1>
         
 
         <div class="post-meta">
@@ -292,8 +294,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-20T09:00:08+08:00">
-                2018-06-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T10:00:08+08:00">
+                2018-07-12
               </time>
             
 
@@ -315,8 +317,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Life/" itemprop="url" rel="index">
-                    <span itemprop="name">Life</span>
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
                   </a>
                 </span>
 
@@ -352,16 +354,12 @@
       
 
       
-        <p>  最近在忙着6.30 四川成都的一个大数据比赛，因为暑假又要来了，并且大三学校允许实习了，肯定不能放过这个增加经验的好机会，</p>
-<p>无锡是一个物联网城市，企业倾向与软硬件结合的形式，经过一星期的摸索，发现找大数据的公司少之又少，加上博主这专科的学历，</p>
-<p>在无锡找到大数据相关的工作基本不太可能于是我想到了上海，经过几天的摸索，也试投了几家，终于有一家kyligence的公司有了回应，</p>
-<p>第一次听到<code>kyligence</code>还不是太了解，经过一番百度，发现<code>kyligence</code>的核心项目 <code>apache Kylin</code> 是apache 顶级基金会项目。并且</p>
-<p>技术含金量特别高，因为不在上海的原因，公司想先电话面试了解情况。昨天中午收到 <code>kyligence</code> 的一个员工电话，问了自己的一些项目经验，</p>
-<p>然后是一些基础的 数据结构，网络协议，webscoket请求断连机制，我回答的还不错，对我也比较满意所以绝对进行二面，交代了时间，</p>
-<p>二面的是kyligence的架构师，当天晚上激动的睡不着觉，第二天的晚上8点左右和 架构师微信语音二面，简单聊了一些自己的项目，然后就进入笔试</p>
-<p>阶段，接下来是博主最惨的一次经历了，由于一直在学框架的原因，很少写底层基础的代码了，很多知识也都忘了，并且加上没有准备，以及专科院校学习</p>
-<p>的局限性。两题都做得不是很好，所以我在他眼里应该是成了只会理论吹牛的代码没写几个的<code>小白</code> 。就这样我错过了我认为最好的实习机会，很可惜，</p>
-<p>也算是给自己上了一课，打牢基础才是关键。现在想到那次的经历还是觉得很可惜，要是再有一次机会就好了。</p>
+        <p></p><h1>kafka环境搭建</h1><br>  再深入了解kafka之前，已经翻阅了公司的kafka权威指南一书，但是毕竟书上的理论知识与真实环境还是有一些差距，这时候联想到之前一部电视剧哈，七国争霸 赵国的某位将领，这里就不深入diss了<br>大家都懂的。话不多说进入正题，<p></p>
+<p></p><h2>1.下载安装包</h2><br>  首先选择的是kafka 0.10 版本至于各个版本的升级优化，大家可自行百度，据说是对安全方面以及增加了自动 机架感知。下载地址:<a href="https://archive.apache.org/dist/kafka/0.10.0.0/kafka_2.10-0.10.0.0.tgz" target="_blank" rel="noopener">https://archive.apache.org/dist/kafka/0.10.0.0/kafka_2.10-0.10.0.0.tgz</a><br>然后将安装包部署到一台节点配置，其余节点通过scp 的方式分发配置。<p></p>
+<p></p><h2>2.环境配置</h2><br>   解压安装包，配置server.properties  主要就是host.name brokerid zookeeper连接  num.partitions 默认分区数量一些配置。这里提醒大家 注意brokerid一定要不同，<br> 因为brokerid对应是这个机器在kafka集群的唯一id标识。<p></p>
+<p></p><h2>3.kafka-manager的安装</h2><br>   这是一款开源的kafka web管理工具 方便查看kafka集群状态。这里下载kafka-manager安装包 解压到目录 配置application.conf 配置zk的连接地址<br>启动命令  /export/service/kafka-manager-1.3.3.16为安装目录<br>/export/service/kafka-manager-1.3.3.16/bin/kafka-manager -Dconfig.file=/export/service/kafka-manager-1.3.3.16/conf/application.conf -Dhttp.port=7080 -java-home /opt/jdk1.8.0_161 &amp;<p></p>
+<p>这里建议大家将所有启动命令写成shell  方便管理。</p>
+<p>第一次进入kafka管理页面需要配置kafka cluster的相关信息 配置完毕后界面如图 这里环境搭建到此完毕 后续学习相关会继续补充更新。<br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/kafkamanage.png" alt="kafka-manager"></p>
 
       
     </div>
@@ -379,8 +377,6 @@
       
         <div class="post-tags">
           
-            <a href="/tags/日常生活/" rel="tag"># 日常生活</a>
-          
             <a href="/tags/学习历程/" rel="tag"># 学习历程</a>
           
         </div>
@@ -394,8 +390,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/05/2018-04-05-My First Article/" rel="next" title="第一次写博客,记录自己的学习历程">
-                <i class="fa fa-chevron-left"></i> 第一次写博客,记录自己的学习历程
+              <a href="/2018/07/12/2018-07-12-Cloudera Manager一次踩坑经历/" rel="next" title="Cloudera Manager一次踩坑经历">
+                <i class="fa fa-chevron-left"></i> Cloudera Manager一次踩坑经历
               </a>
             
           </div>
@@ -403,10 +399,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/02/2018-07-02-成都 I am coming/" rel="prev" title="成都 I am coming">
-                成都 I am coming <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -458,8 +450,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -583,6 +584,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">kafka环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">1.下载安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">2.环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">3.kafka-manager的安装</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
