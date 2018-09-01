@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习历程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="kafka 0.10 版本探索首先，博主之前用的spark-streaming-kafka 1.6 scala 2.10的包，当时的kafka两种连接方式 高层封装  1.基于Receiver的方式   简单介绍一下，这种方式可能会因为底层的失败而丢失数据。如果要启用高可靠机制，让数据零丢失，就必须启用Spark Streaming的预写日志机制（Write Ahead Log，WAL）。俗称">
+<meta name="keywords" content="学习历程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kafka 0.10 版本探索 与spark streaming 2.x 整合">
+<meta property="og:url" content="https://mrdlontheway.github.io/2018/07/14/2018-07-14-kafka 0.10 版本探索 与spark streaming 2.x 整合/index.html">
+<meta property="og:site_name" content="DaiLe&#39;s blog">
+<meta property="og:description" content="kafka 0.10 版本探索首先，博主之前用的spark-streaming-kafka 1.6 scala 2.10的包，当时的kafka两种连接方式 高层封装  1.基于Receiver的方式   简单介绍一下，这种方式可能会因为底层的失败而丢失数据。如果要启用高可靠机制，让数据零丢失，就必须启用Spark Streaming的预写日志机制（Write Ahead Log，WAL）。俗称">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-01T03:55:35.464Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kafka 0.10 版本探索 与spark streaming 2.x 整合">
+<meta name="twitter:description" content="kafka 0.10 版本探索首先，博主之前用的spark-streaming-kafka 1.6 scala 2.10的包，当时的kafka两种连接方式 高层封装  1.基于Receiver的方式   简单介绍一下，这种方式可能会因为底层的失败而丢失数据。如果要启用高可靠机制，让数据零丢失，就必须启用Spark Streaming的预写日志机制（Write Ahead Log，WAL）。俗称">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mrdlontheway.github.io/2018/07/14/2018-07-14-kafka 0.10 版本探索 与spark streaming 2.x 整合/"/>
+
+
+
+
+
+  <title>kafka 0.10 版本探索 与spark streaming 2.x 整合 | DaiLe's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DaiLe's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/14/2018-07-14-kafka 0.10 版本探索 与spark streaming 2.x 整合/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">kafka 0.10 版本探索 与spark streaming 2.x 整合</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-14T05:00:08+08:00">
+                2018-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>  </p><h1>kafka 0.10 版本探索</h1><br>首先，博主之前用的spark-streaming-kafka 1.6 scala 2.10的包，当时的kafka两种连接方式 高层封装 <p></p>
+<p></p><h2>1.基于Receiver的方式</h2><br>   简单介绍一下，这种方式可能会因为底层的失败而丢失数据。如果要启用高可靠机制，让数据零丢失，就必须启用Spark Streaming的预写日志机制（Write Ahead Log，WAL）。<br>俗称WAL ，但是个人认为这是多余且不必要的操作 kafka以及做了很多的高可用，数据备份机制。那消费数据为何还需要开启WAL?  <p></p>
+<p>需要注意的要点</p>
+<p>1、Kafka中的topic的partition，与Spark中的RDD的partition是没有关系的。所以，在KafkaUtils.createStream()中，提高partition的数量，只会增加一个Receiver中，读取partition的线程的数量。不会增加Spark处理数据的并行度。</p>
+<p>2、可以创建多个Kafka输入DStream，使用不同的consumer group和topic，来通过多个receiver并行接收数据。</p>
+<p>3、如果基于容错的文件系统，比如HDFS，启用了预写日志机制，接收到的数据都会被复制一份到预写日志中。因此，在KafkaUtils.createStream()中，设置的持久化级别是StorageLevel.MEMORY_AND_DISK_SER。</p>
+<p>4、receiver是额外启动 相对消耗资源，总的来说 优点不多。</p>
+<p></p><h2>2.基于Direct的方式</h2><br>   用底层API直接连kafka spark partition与kafka 一一对应 增加并行度。<p></p>
+<p>1、简化并行读取：如果要读取多个partition，不需要创建多个输入DStream然后对它们进行union操作。Spark会创建跟Kafka partition一样多的RDD partition，并且会并行从Kafka中读取数据。所以在Kafka partition和RDD partition之间，有一个一对一的映射关系。</p>
+<p>2、高性能：如果要保证零数据丢失，在基于receiver的方式中，需要开启WAL机制。这种方式其实效率低下，因为数据实际上被复制了两份，Kafka自己本身就有高可靠的机制，会对数据复制一份，而这里又会复制一份到WAL中。而基于direct的方式，不依赖Receiver，不需要开启WAL机制，只要Kafka中作了数据的复制，那么就可以通过Kafka的副本进行恢复。</p>
+<p>3、一次且仅一次的事务机制：<br>基于direct的方式，使用kafka的简单api，Spark Streaming自己就负责追踪消费的offset，并保存在checkpoint中。Spark自己一定是同步的，因此可以保证数据是消费一次且仅消费一次。</p>
+<p>kafka 数据高可用 数据高可靠性 无丢失配置  ack=-1 消费采取direct 直连 消费数据做成事物 spark 自己维护偏移量信息</p>
+<p>之前博主采用的直连方式是写一个org.apache.spark.streaming.kafka 包下工具类 实例化KafkaCluster 然后自己封装增强 包装设计模式，后来kafka升级到0.10</p>
+<p>kafka新版生产者api以及消费者API<br>    个人觉得主要比较好的是消费者的修改，在之前版本kafka将kafka偏移量保存到ZK 这时候如果消费者如果进行消费的时候，消费者与kafka可以是同步的，但是<br>kafka还要与zk进行交互 ，这样就导致了可以数据消费的不一致，现在kafka新版消费者，将偏移量自己维护这样增强了数据消费的一致性，并且开放了kafkacluster的权限，<br>推荐了direct 直连底层api 的方式，保证了消费者消费数据的可靠性。这里生产者api Demo JAVA版</p>
+<p></p><h3>生产者Demo</h3><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.wxstc.dl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.producer.KafkaProducer;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.producer.ProducerRecord;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.producer.RecordMetadata;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.common.utils.Utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Future;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProducerDemo</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> KafkaProducer&lt;String, String&gt; producer;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String topic;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProducerDemo</span><span class="params">(String topicName)</span> </span>&#123;</span><br><span class="line">        Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">        props.put(<span class="string">"bootstrap.servers"</span>, <span class="string">"AnserInsight01:9092,AnserInsight02:9092,AnserInsight03:9092"</span>);<span class="comment">//连接kafka集群 broker 列表</span></span><br><span class="line"><span class="comment">//        props.put("bootstrap.servers", "192.168.0.16:9092");</span></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 此配置是 Producer 在确认一个请求发送完成之前需要收到的反馈信息的数量。 这个参数是为了保证发送请求的可靠性。以下配置方式是允许的：</span></span><br><span class="line"><span class="comment">         acks=0 如果设置为0，则 producer 不会等待服务器的反馈。该消息会被立刻添加到 socket buffer 中并认为已经发送完成。在这种情况下，服务器是否收到请求是没法保证的，并且参数retries也不会生效（因为客户端无法获得失败信息）。每个记录返回的 offset 总是被设置为-1。</span></span><br><span class="line"><span class="comment">         acks=1 如果设置为1，leader节点会将记录写入本地日志，并且在所有 follower 节点反馈之前就先确认成功。在这种情况下，如果 leader 节点在接收记录之后，并且在 follower 节点复制数据完成之前产生错误，则这条记录会丢失。</span></span><br><span class="line"><span class="comment">         acks=all 如果设置为all，这就意味着 leader 节点会等待所有同步中的副本确认之后再确认这条记录是否发送完成。只要至少有一个同步副本存在，记录就不会丢失。这种方式是对请求传递的最有效保证。acks=-1与acks=all是等效的。</span></span><br><span class="line"><span class="comment">         all 与 -1 等效的</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        props.put(<span class="string">"acks"</span>, <span class="string">"all"</span>);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 若设置大于0的值，则客户端会将发送失败的记录重新发送，尽管这些记录有可能是暂时性的错误。请注意，这种 retry 与客户端收到错误信息之后重新发送记录并无区别。允许 retries 并且没有设置max.in.flight.requests.per.connection 为1时，记录的顺序可能会被改变。比如：当两个批次都被发送到同一个 partition ，第一个批次发生错误并发生 retries 而第二个批次已经成功，则第二个批次的记录就会先于第一个批次出现。</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        props.put(<span class="string">"retries"</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 当将多个记录被发送到同一个分区时， Producer 将尝试将记录组合到更少的请求中。这有助于提升客户端和服务器端的性能。这个配置控制一个批次的默认大小（以字节为单位）。</span></span><br><span class="line"><span class="comment">         当记录的大小超过了配置的字节数， Producer 将不再尝试往批次增加记录。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">         发送到 broker 的请求会包含多个批次的数据，每个批次对应一个 partition 的可用数据</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">         小的 batch.size 将减少批处理，并且可能会降低吞吐量(如果 batch.size = 0的话将完全禁用批处理)。 很大的 batch.size 可能造成内存浪费，因为我们一般会在 batch.size 的基础上分配一部分缓存以应付额外的记录。</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        props.put(<span class="string">"batch.size"</span>, <span class="number">16384</span>);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * producer 会将两个请求发送时间间隔内到达的记录合并到一个单独的批处理请求中。通常只有当记录到达的速度超过了发送的速度时才会出现这种情况。然而，在某些场景下，即使处于可接受的负载下，客户端也希望能减少请求的数量。这个设置是通过添加少量的人为延迟来实现的&amp;mdash；即，与其立即发送记录， producer 将等待给定的延迟时间，以便将在等待过程中到达的其他记录能合并到本批次的处理中。这可以认为是与 TCP 中的 Nagle 算法类似。这个设置为批处理的延迟提供了上限:一旦我们接受到记录超过了分区的 batch.size ，Producer 会忽略这个参数，立刻发送数据。但是如果累积的字节数少于 batch.size ，那么我们将在指定的时间内“逗留”(linger)，以等待更多的记录出现。这个设置默认为0(即没有延迟)。例如：如果设置linger.ms=5 ，则发送的请求会减少并降低部分负载，但同时会增加5毫秒的延迟。</span></span><br><span class="line"><span class="comment">         * 增加请求延迟 降低负载</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        props.put(<span class="string">"linger.ms"</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Producer 用来缓冲等待被发送到服务器的记录的总字节数。如果记录发送的速度比发送到服务器的速度快， Producer 就会阻塞，如果阻塞的时间超过 max.block.ms 配置的时长，则会抛出一个异常。</span></span><br><span class="line"><span class="comment">         这个配置与 Producer 的可用总内存有一定的对应关系，但并不是完全等价的关系，因为 Producer 的可用内存并不是全部都用来缓存。一些额外的内存可能会用于压缩(如果启用了压缩)，以及维护正在运行的请求。</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        props.put(<span class="string">"buffer.memory"</span>, <span class="number">33554432</span>);</span><br><span class="line">        props.put(<span class="string">"key.serializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringSerializer"</span>);</span><br><span class="line">        props.put(<span class="string">"value.serializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringSerializer"</span>);</span><br><span class="line">        <span class="keyword">this</span>.producer = <span class="keyword">new</span> KafkaProducer&lt;String, String&gt;(props);</span><br><span class="line">        <span class="keyword">this</span>.topic = topicName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> messageNo = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">for</span>(;;) &#123;</span><br><span class="line">                String messageStr=<span class="string">"你好，这是第"</span>+messageNo+<span class="string">"条数据"</span>;</span><br><span class="line">                System.out.println(<span class="string">"成功发送了"</span>+messageNo+<span class="string">"条"</span>);</span><br><span class="line">                RecordMetadata metadata = producer.send(<span class="keyword">new</span> ProducerRecord&lt;String, String&gt;(topic, <span class="string">"Message"</span>, messageStr)).get();</span><br><span class="line">                <span class="comment">// 程序阻塞，直到该条消息发送成功返回元数据信息或者报错</span></span><br><span class="line">                StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">                sb.append(<span class="string">"record ["</span>).append(metadata.serializedKeySize()+<span class="string">":"</span>+metadata.serializedValueSize()).append(<span class="string">"] has been sent successfully!"</span>).append(<span class="string">"\n"</span>)</span><br><span class="line">                        .append(<span class="string">"send to partition "</span>).append(metadata.partition())</span><br><span class="line">                        .append(<span class="string">", offset = "</span>).append(metadata.offset());</span><br><span class="line">                System.out.println(sb.toString());</span><br><span class="line">                <span class="comment">//生产了10条就打印</span></span><br><span class="line"><span class="comment">//                if(messageNo%100==0)&#123;</span></span><br><span class="line"><span class="comment">//                    //System.out.println("发送的信息:" + messageStr);</span></span><br><span class="line"><span class="comment">//                &#125;</span></span><br><span class="line">                <span class="comment">//生产100条就退出</span></span><br><span class="line">                <span class="keyword">if</span>(messageNo%<span class="number">10</span>==<span class="number">0</span>)&#123;</span><br><span class="line">                    System.out.println(<span class="string">"成功发送了"</span>+messageNo+<span class="string">"条"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                messageNo++;</span><br><span class="line">				Utils.sleep(<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            producer.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ProducerDemo pd = <span class="keyword">new</span> ProducerDemo(<span class="string">"tstmessage"</span>);</span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(pd);</span><br><span class="line">        t1.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
+<p>spark升级到2.10后 发现之前博主的工具包报错了， 竟然连KafkaCluster KafkaManager 全部都没了，讲道理 kafka升级真的是有点小变态啊。。。。 看来<br>kafka也是发现了Receiver的弊端，新的包内 直接封装直连方式 自己维护偏移量 并且spark2.0 全面加入了 sql操作也就是 Structured Streaming 与Structured Data<br>个人认为Structured Data 目前已经比较完善了。并且我们公司大部分业务都是给予Structured Data ，但是Structured Streaming 据我初步的使用情况，好像很多的东西并不完善，<br>就连 kafka的消费group id都无法手动配置，相关配置非常局限，看以后的更新迭代 发展，毕竟sql是最大生产力 大家懂的~~ 下面贴上spark streaming 与Structured Streaming案例</p>
+<p></p><h3>spark streaming 连接kafka 消费流程</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line">package com.wxstc.dl.stream</span><br><span class="line"></span><br><span class="line">//import com.wxstc.util.LoggerLevels</span><br><span class="line">import kafka.serializer.StringDecoder</span><br><span class="line">import org.I0Itec.zkclient.ZkClient</span><br><span class="line">import org.apache.kafka.clients.consumer.ConsumerRecord</span><br><span class="line">import org.apache.kafka.common.TopicPartition</span><br><span class="line">import org.apache.kafka.common.serialization.StringDeserializer</span><br><span class="line">import org.apache.log4j.&#123;Level, Logger&#125;</span><br><span class="line">import org.apache.spark.rdd.RDD</span><br><span class="line">import org.apache.spark.storage.StorageLevel</span><br><span class="line">import org.apache.spark.streaming.dstream.InputDStream</span><br><span class="line">import org.apache.spark.streaming.kafka010.&#123;CanCommitOffsets, HasOffsetRanges, KafkaUtils, OffsetRange&#125;</span><br><span class="line">import org.apache.spark.streaming.&#123;Seconds, StreamingContext&#125;</span><br><span class="line">import org.apache.spark._</span><br><span class="line">import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent</span><br><span class="line">import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe</span><br><span class="line"></span><br><span class="line">object StreamingWordCount &#123;</span><br><span class="line">  val updateFunc = (iterator: Iterator[(String, Seq[Int], Option[Int])]) =&gt; &#123;</span><br><span class="line">    iterator.flatMap &#123; case (x, y, z) =&gt; Some(y.sum + z.getOrElse(0)).map(n =&gt; (x, n)) &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  //业务处理</span><br><span class="line">  def myDealService(rdd: RDD[ConsumerRecord[String, String]], offsetRanges: Array[OffsetRange]) = &#123;</span><br><span class="line">    rdd.foreachPartition(iter =&gt; &#123;</span><br><span class="line">      val o: OffsetRange = offsetRanges(TaskContext.get.partitionId)</span><br><span class="line">      println(s&quot;OffsetRange :$&#123;o.topic&#125; $&#123;o.partition&#125; $&#123;o.fromOffset&#125; $&#123;o.untilOffset&#125;&quot;)</span><br><span class="line">    &#125;)</span><br><span class="line">    val rdd1 = rdd.map(record =&gt; &#123;</span><br><span class="line">      (record.key(), record.value())</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  val myUpstate = (it: Iterator[(String, Seq[String], Option[String])]) =&gt;&#123;</span><br><span class="line">    it.map(x=&gt;&#123;</span><br><span class="line">      (x._1,x._3.getOrElse(&quot;&quot;))</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line">    //    LoggerLevels.setStreamingLogLevels(Level.WARN)</span><br><span class="line">    val conf = new SparkConf().setAppName(&quot;StreamingWordCount&quot;).setMaster(&quot;local[*]&quot;)</span><br><span class="line">    val sc = new SparkContext(conf)</span><br><span class="line">    val ssc = new StreamingContext(sc, Seconds(5))</span><br><span class="line">    ssc.checkpoint(&quot;D:\\_vm\\ck&quot;)</span><br><span class="line">    if (args.length &lt; 3) &#123;</span><br><span class="line">      System.err.println(</span><br><span class="line">        s&quot;&quot;&quot;</span><br><span class="line">           |Usage: DirectKafkaWordCount &lt;brokers&gt; &lt;topics&gt; &lt;groupid&gt;</span><br><span class="line">           |  &lt;brokers&gt; is a list of one or more Kafka brokers</span><br><span class="line">           |  &lt;topics&gt; is a list of one or more kafka topics to consume from</span><br><span class="line">           |  &lt;groupid&gt; is a consume group</span><br><span class="line">           |</span><br><span class="line">        &quot;&quot;&quot;.stripMargin)</span><br><span class="line">      System.exit(1)</span><br><span class="line">    &#125;</span><br><span class="line">    Logger.getLogger(&quot;org&quot;).setLevel(Level.WARN)</span><br><span class="line"></span><br><span class="line">    val Array(brokers, topics, groupId, zkQuorum) = args</span><br><span class="line">    val topicsSet = topics.split(&quot;,&quot;)</span><br><span class="line"></span><br><span class="line">    val kafkaParams = Map[String, Object](</span><br><span class="line">      &quot;bootstrap.servers&quot; -&gt; brokers, //&quot;115.159.93.95:9092,115.159.78.168:9092,115.159.222.161:9092&quot;,</span><br><span class="line">      &quot;key.deserializer&quot; -&gt; classOf[StringDeserializer],</span><br><span class="line">      &quot;value.deserializer&quot; -&gt; classOf[StringDeserializer],</span><br><span class="line">      &quot;group.id&quot; -&gt; groupId, //&quot;groupA&quot;,</span><br><span class="line">      &quot;auto.offset.reset&quot; -&gt; &quot;earliest&quot;,</span><br><span class="line">      &quot;enable.auto.commit&quot; -&gt; (false: java.lang.Boolean)</span><br><span class="line">    )</span><br><span class="line">    //直连方式接入kafka数据流</span><br><span class="line">    val messages = KafkaUtils.createDirectStream[String, String](</span><br><span class="line">      ssc,</span><br><span class="line">      PreferConsistent,</span><br><span class="line">      Subscribe[String, String](topicsSet, kafkaParams)</span><br><span class="line">    )</span><br><span class="line">    //拿到数据流内需要的数据 key value</span><br><span class="line">    val ds2 = messages.map(rec=&gt;&#123;</span><br><span class="line">      (rec.key(),rec.value())</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    val ds3 = ds2.updateStateByKey(myUpstate,new HashPartitioner(ssc.sparkContext.defaultParallelism), true)</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">      * 拿到数据流后对每个  微批次 也就是rdd进行业务流程操作 这里需要注意的偏移量的管理问题</span><br><span class="line">      * 1.通过kafka自动管理偏移量  (不推荐 不高可用，容易导致数据重复消费)</span><br><span class="line">      * 2.自己手动管理偏移量  (推荐，但是需要自己维护偏移量  可以保存zk，hdfs 多种途径)</span><br><span class="line">      * 3.自己手动提交偏移量   (推荐，可以保证数据消费可靠性，以及开发的简易型 )</span><br><span class="line">      * 这里我采用的是第三种  这里再次提醒一下消费者偏移量建议用kafka的方式 不要用老版zk的方式</span><br><span class="line">      */</span><br><span class="line">    messages.foreachRDD(rdd =&gt; &#123;</span><br><span class="line">      val offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges</span><br><span class="line">      myDealService(rdd,offsetRanges)</span><br><span class="line">      println(&quot;commit&quot;)</span><br><span class="line">      messages.asInstanceOf[CanCommitOffsets].commitAsync(offsetRanges)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    val ds1 = messages.map(record =&gt; (record.key, record.value))</span><br><span class="line">    ds1.foreachRDD(rdd =&gt; &#123;</span><br><span class="line">      println(rdd.count())</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    //    ds1.print(5)</span><br><span class="line">    ds1.print(5)</span><br><span class="line">    ssc.start()</span><br><span class="line">    ssc.awaitTermination()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h3>Structured Streaming 连接kafka 消费流程</h3><br>这里配置比较局限并且博主第一次接触  不是很了解就不加相关注释了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">package com.wxstc.dl.stream</span><br><span class="line"></span><br><span class="line">import org.apache.spark</span><br><span class="line">import org.apache.spark.SparkConf</span><br><span class="line">import org.apache.spark.sql.SparkSession</span><br><span class="line">import org.apache.spark.sql.streaming.ProcessingTime</span><br><span class="line">import org.apache.spark.sql.streaming.ProcessingTime</span><br><span class="line">object SparkStructuredStreaming &#123;</span><br><span class="line"></span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line">    val Array(brokers, topics, groupId, zkQuorum) = args</span><br><span class="line"></span><br><span class="line">    val spark = SparkSession.builder().config(new SparkConf().setMaster(&quot;local[*]&quot;))//.enableHiveSupport()</span><br><span class="line">      .getOrCreate()</span><br><span class="line">    import spark.implicits._</span><br><span class="line">    val df = spark</span><br><span class="line">      .readStream</span><br><span class="line">      .format(&quot;kafka&quot;)</span><br><span class="line">      .option(&quot;kafka.bootstrap.servers&quot;, brokers)</span><br><span class="line">      .option(&quot;group.id&quot;,groupId)</span><br><span class="line">      .option(&quot;startingoffset&quot;, &quot;earliest&quot;)//&quot;smallest&quot;)</span><br><span class="line">      .option(&quot;subscribe&quot;, topics)</span><br><span class="line">      .load()</span><br><span class="line"></span><br><span class="line">//    df.createOrReplaceTempView(&quot;kafkaTable&quot;)</span><br><span class="line">//    val kafkaQuery = spark.sql(</span><br><span class="line">//      &quot;&quot;&quot;</span><br><span class="line">//        |select * from kafkaTable</span><br><span class="line">//      &quot;&quot;&quot;.stripMargin)</span><br><span class="line">//      .writeStream</span><br><span class="line">//      .format(&quot;console&quot;)</span><br><span class="line">//      .trigger(ProcessingTime(2000L))</span><br><span class="line">//      .start()</span><br><span class="line">//    kafkaQuery.awaitTermination()</span><br><span class="line"></span><br><span class="line">    val kafka = df.selectExpr(&quot;CAST(key AS STRING)&quot;, &quot;CAST(value AS STRING)&quot;, &quot;topic&quot;, &quot;CAST(partition AS STRING)&quot;, &quot;CAST(offset AS STRING)&quot;)</span><br><span class="line">      .writeStream</span><br><span class="line">      .format(&quot;console&quot;)</span><br><span class="line">      .trigger(ProcessingTime(2000L))</span><br><span class="line">      .start()</span><br><span class="line"></span><br><span class="line">    kafka.awaitTermination()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
+<p>在调试集群的时候发现了一个问题目前还没找到问题的根本原因，首先博主将kafka绑定的是内网的端口，外网竟然可以访问~~ 好就算是我绑定错了 那是不是外网应该可以正常提供服务呢?<br>其实不然  根据调试 我用生产者从外网端口send message 的时候自动创建了topic好的 到这里都没问题 发送message的时候 竟然显示的是发送成功 没有抱任何的错误，kafka 集群也没有接收到消息，<br>这个问题就非常奇怪了，通过调试将jar提交到集群内跑是可以成功发送message的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习历程/" rel="tag"># 学习历程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/13/2018-07-13-kafka环境搭建/" rel="next" title="kafka环境搭建">
+                <i class="fa fa-chevron-left"></i> kafka环境搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DaiLe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MrDLontheway" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:726575153@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005055405104110/home" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">kafka 0.10 版本探索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">1.基于Receiver的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">2.基于Direct的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.1.</span> <span class="nav-text">生产者Demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.2.</span> <span class="nav-text">spark streaming 连接kafka 消费流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.3.</span> <span class="nav-text">Structured Streaming 连接kafka 消费流程</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DaiLe</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
