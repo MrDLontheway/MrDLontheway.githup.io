@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/09/2018-07-09-排序算法的小结/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/20/2018-07-20-初识 Apache Druid OLAP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/09/2018-07-09-排序算法的小结/" itemprop="url">排序算法总结 JDK1.8双轴快排分析</a></h1>
+                <a class="post-title-link" href="/2018/07/20/2018-07-20-初识 Apache Druid OLAP/" itemprop="url">Apache Druid</a></h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T05:00:08+08:00">
-                2018-07-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T15:00:08+08:00">
+                2018-07-20
               </time>
             
 
@@ -352,12 +352,24 @@
       
         
           
-          插入排序
-思路遍历数组将每个元素与前面元素一一对比 如果小于就换位最好情况O(n)  最坏情况O(n2) 建议数组长度较小时使用1234567891011121314/**    * 插入排序    *    * @param arr    */   public static void insertionSort(int[] arr) &#123;       for (int i = 1; i &lt; arr.length; i++) &#123;           int j = i;           while (j &gt; 0 &amp;&amp; arr[j] &lt; arr[j - 1]) &#123;               swap(arr,j,j-1); 
+          Apache Druid
+
+刚听到这个名字 我第一反应 这不是ali 特牛的那个数据库连接池嘛  后来才发现不对劲 原来是另一大数据组件 目前就我初步的认识 暂时定位为单表高效率的OLAP 框架
+下面是官方对于 Apache Druid 的介绍
+Driud
+一个高性能，面向列的分布式存储系统。
+亚秒级查询
+Druid支持快速的聚合和亚秒级的OLAP查询。Druid设计初衷就是为了多租户和面向用户的分析应用程序。
+实时流
+Druid支持实时数据的摄取，在事件产生后能够立即提供有关事件的洞察。能够永久保存事件，并统一了实时和历史视图。
+PB级扩展支持
+当前Druid集群已经发展到PB级数据、万亿级事件，每秒新数百万的事件。即使是在这种大规模情况下，Druid也是极具成本效益的。
+随处部署
+Dru
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/09/2018-07-09-排序算法的小结/#more" rel="contents">
+            <a class="btn" href="/2018/07/20/2018-07-20-初识 Apache Druid OLAP/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -408,7 +420,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/07/2018-07-07-Android反编译趣事/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/18/2018-07-18-Alibaba Java诊断利器Arthas/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -427,7 +439,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/07/2018-07-07-Android反编译趣事/" itemprop="url">Android反编译趣事</a></h1>
+                <a class="post-title-link" href="/2018/07/18/2018-07-18-Alibaba Java诊断利器Arthas/" itemprop="url">Alibaba Java诊断利器Arthas</a></h1>
         
 
         <div class="post-meta">
@@ -439,8 +451,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-07T05:00:08+08:00">
-                2018-07-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-18T15:00:08+08:00">
+                2018-07-18
               </time>
             
 
@@ -501,15 +513,16 @@
       
         
           
-             今日因为工作需要，要求钉钉远程打卡，第一想法是通过修改手机的虚拟定位来实现，但是因为阿里严格的审查，市面上大部分定位软件不可用。需求底层系统不太现实，
-然后同事发来了一款巨山寨的软件，进去一个显眼的某卡发平台网站的注册码来了，与APP界面的风格设计简直格格不入，使用了一天是没问题的，ps:软件是开发者平台下载的
-没有上架，所以我感觉这个软件应该是山寨盗版，临下班找到了软件的正主大牛助手。大牛助手的功能做的还是不错的，后来陆陆续续发现了N个同版盗版，卖的还是挺贵的，
-于是我想通过反编译来实现软件的破解，之前有过一次反编译的第三方短信推送平台的经历，很不幸全部加密了，需要反编译安卓的伙伴可以参考这个博客
-https://blog.csdn.net/s13383754499/article/
+            Alibaba Java诊断利器Arthas今天无意间发现了一个alibaba的开源jvm分析利器
+刚刚开源的阿里内部广泛使用的Java在线诊断工具Arthas，今天来到了Github trending榜首，相当于程序员的微博热搜榜首！欢迎大家关注、试用和反馈：https://github.com/alibaba/arthas
+Arthas 能为你做什么？
+
+当你遇到以下类似问题而束手无策时，Arthas可以帮助你解决：
+这个类从哪个 jar 包加载的？为什么会报各种类相关的 Exception？我改的代码为什么没有执行到？难道是我没 commit？分支搞错了？遇到问题无法在线上 debug，难道只能通过加日志再重新发布吗？线上遇到某个用户的数据处理有问题，但线上同样无法 debug，线
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/07/2018-07-07-Android反编译趣事/#more" rel="contents">
+            <a class="btn" href="/2018/07/18/2018-07-18-Alibaba Java诊断利器Arthas/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -560,7 +573,7 @@ https://blog.csdn.net/s13383754499/article/
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/04/2018-07-04-数据结构Tree/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/14/2018-07-14-kafka 0.10 版本探索 与spark streaming 2.x 整合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -579,7 +592,7 @@ https://blog.csdn.net/s13383754499/article/
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/2018-07-04-数据结构Tree/" itemprop="url">数据结构Tree</a></h1>
+                <a class="post-title-link" href="/2018/07/14/2018-07-14-kafka 0.10 版本探索 与spark streaming 2.x 整合/" itemprop="url">kafka 0.10 版本探索 与spark streaming 2.x 整合</a></h1>
         
 
         <div class="post-meta">
@@ -591,8 +604,8 @@ https://blog.csdn.net/s13383754499/article/
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T03:00:08+08:00">
-                2018-07-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-14T05:00:08+08:00">
+                2018-07-14
               </time>
             
 
@@ -653,17 +666,14 @@ https://blog.csdn.net/s13383754499/article/
       
         
           
-             tree树是一种常见的数据结构，我这里我们只讨论BST(二叉搜索树)，AVL(平衡树),RBT(红黑树)。 BST与AVL是学习红黑树的基础，这里推荐学习七月子空
- 的讲解，很详细。
- 二叉搜索树
- 左子节点值总是小于当前节点，右子节点值总是大于当前节点，所以寻找节点时根据寻找节点的值大于还是小于当前节点
- 一次递归下去直到null值 所以整个查找过程就是从根节点开始一直向下的一条路径，若假设树的高度是h，那么查找过程的时间复杂度就是O(h)。
-   AVL平衡树，相对于BST的特点就是 左右两边树的高度是平衡的，也就是任意子树高度不会高过另一子树1 ,这样的优点就是大大增加了查询的效率，例如BST遇到这样的树
-  左为平衡树  右为非平衡树查询效率就会相对低，那AVL树是如何保证树总
+            kafka 0.10 版本探索首先，博主之前用的spark-streaming-kafka 1.6 scala 2.10的包，当时的kafka两种连接方式 高层封装 
+1.基于Receiver的方式   简单介绍一下，这种方式可能会因为底层的失败而丢失数据。如果要启用高可靠机制，让数据零丢失，就必须启用Spark Streaming的预写日志机制（Write Ahead Log，WAL）。俗称WAL ，但是个人认为这是多余且不必要的操作 kafka以及做了很多的高可用，数据备份机制。那消费数据为何还需要开启WAL?  
+需要注意的要点
+1、Kafka中的topic的partition，与Spark中的RDD的partition是没有关系的。所以，在KafkaUtils.createStr
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/04/2018-07-04-数据结构Tree/#more" rel="contents">
+            <a class="btn" href="/2018/07/14/2018-07-14-kafka 0.10 版本探索 与spark streaming 2.x 整合/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -714,7 +724,7 @@ https://blog.csdn.net/s13383754499/article/
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/02/2018-07-02-成都 I am coming/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/13/2018-07-13-kafka环境搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -733,7 +743,7 @@ https://blog.csdn.net/s13383754499/article/
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/02/2018-07-02-成都 I am coming/" itemprop="url">成都 I am coming</a></h1>
+                <a class="post-title-link" href="/2018/07/13/2018-07-13-kafka环境搭建/" itemprop="url">kafka环境搭建</a></h1>
         
 
         <div class="post-meta">
@@ -745,8 +755,8 @@ https://blog.csdn.net/s13383754499/article/
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-02T03:00:08+08:00">
-                2018-07-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-13T10:00:08+08:00">
+                2018-07-13
               </time>
             
 
@@ -768,8 +778,8 @@ https://blog.csdn.net/s13383754499/article/
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Life/" itemprop="url" rel="index">
-                    <span itemprop="name">Life</span>
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
                   </a>
                 </span>
 
@@ -807,16 +817,13 @@ https://blog.csdn.net/s13383754499/article/
       
         
           
-            2018年6月30日一早便起身 收拾好一些随身衣物，跟着一起比赛的小伙伴奔往机场，还是人生中第一次坐飞机，刚落成都，还下着毛毛小雨，
-刚到酒店，还没来得及吃中饭就赶往了成都职业技术学院参加比赛开幕式，因为毕竟是专科组的比赛，水平还是有些较低的，以及环境的很多问题，
-因为是第一次举办，感觉很多机制没有完善，就比如连搭建环境配置文件都要自己背下来的！这是我万万无法接受的，幸好的是我把这个烂摊子丢给了
-辉哥，辉哥是一个网络安全渗透大佬，刚到学校就入侵了学校教务系统，学习平台，整个数据库都拿下来了。。。 所以我把他拉入了大数据的坑，让他
-也可以多拓展一下各个方方面面，比赛前一天晚上背函数名背到了2点多，说实话挺心酸的。拿了个二等奖，有点小遗憾吧。可惜的是好不容易来一趟成都，
-竟然下暴雨，可怜没有
+          kafka环境搭建  再深入了解kafka之前，已经翻阅了公司的kafka权威指南一书，但是毕竟书上的理论知识与真实环境还是有一些差距，这时候联想到之前一部电视剧哈，七国争霸 赵国的某位将领，这里就不深入diss了大家都懂的。话不多说进入正题，
+1.下载安装包  首先选择的是kafka 0.10 版本至于各个版本的升级优化，大家可自行百度，据说是对安全方面以及增加了自动 机架感知。下载地址:https://archive.apache.org/dist/kafka/0.10.0.0/kafka_2.10-0.10.0.0.tgz然后将安装包部署到一台节点配置，其余节点通过scp 的方式分发配置。
+2.环境配置   解压安装包，配置server.properties  主要就是host.nam
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/02/2018-07-02-成都 I am coming/#more" rel="contents">
+            <a class="btn" href="/2018/07/13/2018-07-13-kafka环境搭建/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -867,7 +874,7 @@ https://blog.csdn.net/s13383754499/article/
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/06/20/2018-06-20-第一次的大数据面试经历/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/12/2018-07-12-Cloudera Manager一次踩坑经历/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -886,7 +893,7 @@ https://blog.csdn.net/s13383754499/article/
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/20/2018-06-20-第一次的大数据面试经历/" itemprop="url">第一次的大数据面试经历</a></h1>
+                <a class="post-title-link" href="/2018/07/12/2018-07-12-Cloudera Manager一次踩坑经历/" itemprop="url">Cloudera Manager一次踩坑经历</a></h1>
         
 
         <div class="post-meta">
@@ -898,8 +905,8 @@ https://blog.csdn.net/s13383754499/article/
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-20T09:00:08+08:00">
-                2018-06-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T10:00:08+08:00">
+                2018-07-12
               </time>
             
 
@@ -921,8 +928,8 @@ https://blog.csdn.net/s13383754499/article/
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Life/" itemprop="url" rel="index">
-                    <span itemprop="name">Life</span>
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
                   </a>
                 </span>
 
@@ -960,16 +967,12 @@ https://blog.csdn.net/s13383754499/article/
       
         
           
-            最近在忙着6.30 四川成都的一个大数据比赛，因为暑假又要来了，并且大三学校允许实习了，肯定不能放过这个增加经验的好机会，
-无锡是一个物联网城市，企业倾向与软硬件结合的形式，经过一星期的摸索，发现找大数据的公司少之又少，加上博主这专科的学历，
-在无锡找到大数据相关的工作基本不太可能于是我想到了上海，经过几天的摸索，也试投了几家，终于有一家kyligence的公司有了回应，
-第一次听到kyligence还不是太了解，经过一番百度，发现kyligence的核心项目 apache Kylin 是apache 顶级基金会项目。并且
-技术含金量特别高，因为不在上海的原因，公司想先电话面试了解情况。昨天中午收到 kyligence 的一个员工电话，问了自己的一些项目经验，
-然后是一些基础的 数据结构
+          Cloudera Manager 安装kafka   目前大数据生态圈的集群管理平台 目前主流的两个 Cloudera Manager，Ambari 
+Cloudera Manager商业化,平台扩展性强，功能性多。 Ambari 保留原生态，对hadoop 系统入侵性底 ,公司刚搭建的CDH集群，只部署了一些基本组件 hdfs，yarn，spark，hbase 因为目前项目遇到实时性数据的问题，讨论到kafka消息队列，因为对kafka 不是非常了解，所以想在集群内加入kafka，之前用的cdh忘记了版本，我记得当时是不支持添加kafka服务的，看到当前系统cm5 cdh5.11 有对kafka的支持，但是有红字警告,描述如下:Apache Kafka is publish-subscri
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/06/20/2018-06-20-第一次的大数据面试经历/#more" rel="contents">
+            <a class="btn" href="/2018/07/12/2018-07-12-Cloudera Manager一次踩坑经历/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1011,7 +1014,7 @@ https://blog.csdn.net/s13383754499/article/
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1057,7 +1060,7 @@ https://blog.csdn.net/s13383754499/article/
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1079,7 +1082,7 @@ https://blog.csdn.net/s13383754499/article/
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
