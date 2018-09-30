@@ -88,7 +88,7 @@
 <meta property="og:description" content="Sqoop 实现数据库数据增量导入更新HDFS     首先我们来讨论一下增量同步需要注意的那些问题: 1.数据既然是增量同步当然是只同步变化的数据 不是全量拉取覆盖操作 时间以及资源浪费问题 2.有新数据insert 需要同步 当然update 更新的数据也需要同步 需要注意的是更新的数据同步问题 3.并发控制问题 目前大部分的mysql数据同步都是通过监听bin/log 实现 现在我们使用sq">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/sqoop1.png">
-<meta property="og:updated_time" content="2018-09-29T07:11:29.352Z">
+<meta property="og:updated_time" content="2018-09-30T02:48:26.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sqoop 实现数据库数据增量导入更新HDFS">
 <meta name="twitter:description" content="Sqoop 实现数据库数据增量导入更新HDFS     首先我们来讨论一下增量同步需要注意的那些问题: 1.数据既然是增量同步当然是只同步变化的数据 不是全量拉取覆盖操作 时间以及资源浪费问题 2.有新数据insert 需要同步 当然update 更新的数据也需要同步 需要注意的是更新的数据同步问题 3.并发控制问题 目前大部分的mysql数据同步都是通过监听bin/log 实现 现在我们使用sq">
@@ -382,7 +382,7 @@
 <p>到这里问题又来了  我第一次设置last-value 时间阈值 那后续时间一直推进以往的数据都已经同步过了 我还要动态去更改last-value 吗?<br>这里 网上的各种资料表明 时间会自动更新  经过验证 的确会自动更新last-value 时间阈值 前提是使用job的方式！</p>
 <p>如何创建job 命令自行百度  这里需要提醒的是 启动job输入的是数据库密码 不是linux账户密码。。。</p>
 <p>到这里解释一下为什么同步的只能是hdfs 不能是hive  因为sqoop目前不支持hive 以后会不会更新还不知道</p>
-<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/sqoop1.png" alt="成果1"></p>
+<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/sqoop1.png" alt="sqoop"></p>
 <p></p><h3>3.并发控制</h3><br>我们知道通过 -m 参数能够设置导入数据的 map 任务数量，即指定了 -m 即表示导入方式为并发导入，这时我们必须同时指定 –split-by 参数指定根据哪一列来实现哈希分片，从而将不同分片的数据分发到不同 map 任务上去跑，避免数据倾斜。<p></p>
 <p>ps:</p>
 <ul>
@@ -435,6 +435,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/25/2018-09-25-Apache Pulsar 最佳开源数据库和分析平台奖，成功踢掉了kafka/" rel="prev" title="Apache Pulsar 最佳开源数据库和分析平台奖，成功踢掉了kafka">
+                Apache Pulsar 最佳开源数据库和分析平台奖，成功踢掉了kafka <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -511,7 +515,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -533,7 +537,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
