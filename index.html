@@ -507,7 +507,13 @@ Pulsar简介 Apache Pulsar是一个企业级的分布式消息系统，最初由
 1.环境搭建
 
 https://flink.apache.org/ 到flink 官网下载flink 安装包  这里下载的是1.6 binaries 依赖库
-解压至windows 任意目录  直接运行 bin 目录下的 这里对flink的初步印象 环境方面 local方式简单 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394
+解压至windows 任意目录  直接运行 bin 目录下的 start-cluster.bat
+这里对flink的初步印象 环境方面 local方式简单无需配置 比较人性化  然后 webui 是8081端口 http://localhost:8081 web端页面比较友好可以直接通过web端提交任务 任务的各个运行步骤解析也比较全
+
+这里 环境搭建就结束了
+2.本地开发
+
+这里我使用的是scala api 开发 首先idea 创建maven 项目 在pom 加入依赖包 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1018,7 +1024,7 @@ https://blog.csdn.net/love_lixr/article/details/81454548
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1064,7 +1070,7 @@ https://blog.csdn.net/love_lixr/article/details/81454548
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
