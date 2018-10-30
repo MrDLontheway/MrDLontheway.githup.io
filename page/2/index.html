@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/08/06/2018-08-06-Sqoop 实现数据库数据增量导入更新HDFS/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/20/2018-07-25-kafka 实现原理以及知识点小结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/06/2018-08-06-Sqoop 实现数据库数据增量导入更新HDFS/" itemprop="url">Sqoop 实现数据库数据增量导入更新HDFS</a></h1>
+                <a class="post-title-link" href="/2018/07/20/2018-07-25-kafka 实现原理以及知识点小结/" itemprop="url">kafka 实现原理以及知识点小结</a></h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-06T15:00:08+08:00">
-                2018-08-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T15:00:08+08:00">
+                2018-07-20
               </time>
             
 
@@ -352,23 +352,26 @@
       
         
           
-          Sqoop 实现数据库数据增量导入更新HDFS
+          kafka 实现原理以及知识点小结
 
-   首先我们来讨论一下增量同步需要注意的那些问题:
-1.数据既然是增量同步当然是只同步变化的数据 不是全量拉取覆盖操作 时间以及资源浪费问题
-2.有新数据insert 需要同步 当然update 更新的数据也需要同步 需要注意的是更新的数据同步问题
-3.并发控制问题
-目前大部分的mysql数据同步都是通过监听bin/log 实现 现在我们使用sqoop 来实现mysql增量同步hdfs
+Kafka的特性:
 
 
-1.安装sqoop 这里比较简单 就不多说了  我使用的是CDH 直接添加服务即可 下一步下一步就完成，如果是手动安装需要到sqoop官网下载对应tar包解压配置这里就不 多说了  自行百度2.sqoop的配置解释
+高吞吐量、低延迟：kafka每秒可以处理几十万条消息，它的延迟最低只有几毫秒，每个topic可以分多个partition, consumer group 对partition进行consume操作。
+可扩展性：kafka集群支持热扩展
+持久性、可靠性：消息被持久化到本地磁盘，并且支持数据备份防止数据丢失
+容错性：允许集群中节点失败（若副本数量为n,则允许n-1个节点失败）
+高并发：支持数千个客户端同时读写
 
- 先直接贴出命令example 
-1
+Kafka的使用场景：
+
+
+日志收集：一个公司可以用Kafka可以收集各种服务的log，通过kafka以统一接口服务的方式开放给各种consumer，例如hadoop、Hbase、Solr等。
+消息系统：解耦和生产者和消费者、
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/06/2018-08-06-Sqoop 实现数据库数据增量导入更新HDFS/#more" rel="contents">
+            <a class="btn" href="/2018/07/20/2018-07-25-kafka 实现原理以及知识点小结/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -419,7 +422,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/08/04/2018-08-04-JDK1.7 与 JDK1.8 ConcurrentHashMap 实现方式总结 对比/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/20/2018-07-30-Elasticsearch 实现原理以及知识点小结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -438,7 +441,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/04/2018-08-04-JDK1.7 与 JDK1.8 ConcurrentHashMap 实现方式总结 对比/" itemprop="url">JDK1.7 与 JDK1.8 ConcurrentHashMap 实现方式总结 对比</a></h1>
+                <a class="post-title-link" href="/2018/07/20/2018-07-30-Elasticsearch 实现原理以及知识点小结/" itemprop="url">Elasticsearch 实现原理以及知识点小结</a></h1>
         
 
         <div class="post-meta">
@@ -450,8 +453,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-04T15:00:08+08:00">
-                2018-08-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T15:00:08+08:00">
+                2018-07-20
               </time>
             
 
@@ -512,13 +515,15 @@
       
         
           
-          JDK1.7 与 JDK1.8 ConcurrentHashMap 实现方式总结 对比
+          Elasticsearch
 
-JDK1.7 ConcurrentHashMapConcurrentHashMap是Java 5中支持高并发、高吞吐量的线程安全HashMap实现。简单表述一下 jdk7 的 ConcurrentHashMap segment 分段 HashEntry&lt;K,V&gt;[] table 所以只要并发操作不在同一个segment 上 就可以并发执行ConcurrentHashMap是一个支持高并发的高性能的HashMap实现，它支持完全并发的读以及一定程度并发的写。123456789101112131415161718192021public class ConcurrentHashMap&lt;K,
+ES的核心机制
+
+主备机制（1）index包含多个shard（2）每个shard都是一个最小工作单元，承载部分数据，lucene实例，完整的建立索引和处理请求的能力（3）增减节点时，shard会自动在nodes中负载均衡（4）primary shard和replica shard，每个document肯定只存在于某一个primary shard以及其对应的replica shard中，不可能存在于多个primary shard（5）replica shard是primary shard的副本，负责容错，以及承担读请求负载（6）primary shard的数量在创建索引的时候就固定了，replica shard的数量可以随时修改（7）primary shard的默
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/04/2018-08-04-JDK1.7 与 JDK1.8 ConcurrentHashMap 实现方式总结 对比/#more" rel="contents">
+            <a class="btn" href="/2018/07/20/2018-07-30-Elasticsearch 实现原理以及知识点小结/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -569,7 +574,7 @@ JDK1.7 ConcurrentHashMapConcurrentHashMap是Java 5中支持高并发、高吞吐
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/08/02/2018-08-02-hadoop 挖矿 问题解决/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/20/2018-07-20-初识 Apache Druid OLAP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -588,7 +593,7 @@ JDK1.7 ConcurrentHashMapConcurrentHashMap是Java 5中支持高并发、高吞吐
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/02/2018-08-02-hadoop 挖矿 问题解决/" itemprop="url">hadoop 挖矿 问题解决</a></h1>
+                <a class="post-title-link" href="/2018/07/20/2018-07-20-初识 Apache Druid OLAP/" itemprop="url">Apache Druid</a></h1>
         
 
         <div class="post-meta">
@@ -600,8 +605,8 @@ JDK1.7 ConcurrentHashMapConcurrentHashMap是Java 5中支持高并发、高吞吐
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-02T15:00:08+08:00">
-                2018-08-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T15:00:08+08:00">
+                2018-07-20
               </time>
             
 
@@ -662,18 +667,24 @@ JDK1.7 ConcurrentHashMapConcurrentHashMap是Java 5中支持高并发、高吞吐
       
         
           
-          hadoop 挖矿 问题解决
+          Apache Druid
 
-之前一个搞网络安全的大佬就跟我说过hadoop http service 漏洞的问题 通过暴露的 hadoop 8088 yarn application 提交任务 挖矿
-直到最近公司集群遇到这种情况 下面写下解决的相关办法 可以参考博客
-https://blog.csdn.net/love_lixr/article/details/81454548 
-1.首先yarn的 cpu会直接飙满  然后一直提交小任务 一般的挖矿程序无非是 定时器远程 下载挖矿程序 定时器执行 
-2.第一步 查询yarn 的相关程序信息 ps -ef | grep yarn
- yarn 46185 1 99 May03 ?  4 - 19 : 04 : 28 / tmp / java
+刚听到这个名字 我第一反应 这不是ali 特牛的那个数据库连接池嘛  后来才发现不对劲 原来是另一大数据组件 目前就我初步的认识 暂时定位为单表高效率的OLAP 框架
+下面是官方对于 Apache Druid 的介绍
+Driud
+一个高性能，面向列的分布式存储系统。
+亚秒级查询
+Druid支持快速的聚合和亚秒级的OLAP查询。Druid设计初衷就是为了多租户和面向用户的分析应用程序。
+实时流
+Druid支持实时数据的摄取，在事件产生后能够立即提供有关事件的洞察。能够永久保存事件，并统一了实时和历史视图。
+PB级扩展支持
+当前Druid集群已经发展到PB级数据、万亿级事件，每秒新数百万的事件。即使是在这种大规模情况下，Druid也是极具成本效益的。
+随处部署
+Dru
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/02/2018-08-02-hadoop 挖矿 问题解决/#more" rel="contents">
+            <a class="btn" href="/2018/07/20/2018-07-20-初识 Apache Druid OLAP/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -724,7 +735,7 @@ https://blog.csdn.net/love_lixr/article/details/81454548
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/08/01/2018-08-01-分布式锁/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/18/2018-07-18-Alibaba Java诊断利器Arthas/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -743,7 +754,7 @@ https://blog.csdn.net/love_lixr/article/details/81454548
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/01/2018-08-01-分布式锁/" itemprop="url">分布式锁</a></h1>
+                <a class="post-title-link" href="/2018/07/18/2018-07-18-Alibaba Java诊断利器Arthas/" itemprop="url">Alibaba Java诊断利器Arthas</a></h1>
         
 
         <div class="post-meta">
@@ -755,8 +766,8 @@ https://blog.csdn.net/love_lixr/article/details/81454548
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-01T15:00:08+08:00">
-                2018-08-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-18T15:00:08+08:00">
+                2018-07-18
               </time>
             
 
@@ -817,28 +828,16 @@ https://blog.csdn.net/love_lixr/article/details/81454548
       
         
           
-          分布式锁
+            Alibaba Java诊断利器Arthas今天无意间发现了一个alibaba的开源jvm分析利器
+刚刚开源的阿里内部广泛使用的Java在线诊断工具Arthas，今天来到了Github trending榜首，相当于程序员的微博热搜榜首！欢迎大家关注、试用和反馈：https://github.com/alibaba/arthas
+Arthas 能为你做什么？
 
-分布式锁最简单的理解 在多个系统中 同一时间点同一方法只能被一台机器执行, 并未java 进程运行在不同机器上 所以实现方式需要通过第三方介质
-因为并发 以及锁的性质问题  要求第三方介质需要有以下特性
-
-高可用性 
-高性能 
-锁超时 释放的灵活性
-
-目前实现分布式锁有三种方式:
-1.传统型数据库
-2.缓存型nosql 日志数据库
-3.zookeeper 高可用协调中心
-这里数据库不做介绍 因为个人觉得没有优势。
-Redis实现分布式锁的原理：
-
-1.通过setnx(lock_timeout)实现，如果设置了锁返回1， 已经有值没有设置成功返回0
-2.死锁问题：通过实践来判断是否过期，如果已经过期，获取到过期时间get(lockKey)，然后getset(lock_timeout
+当你遇到以下类似问题而束手无策时，Arthas可以帮助你解决：
+这个类从哪个 jar 包加载的？为什么会报各种类相关的 Exception？我改的代码为什么没有执行到？难道是我没 commit？分支搞错了？遇到问题无法在线上 debug，难道只能通过加日志再重新发布吗？线上遇到某个用户的数据处理有问题，但线上同样无法 debug，线
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/01/2018-08-01-分布式锁/#more" rel="contents">
+            <a class="btn" href="/2018/07/18/2018-07-18-Alibaba Java诊断利器Arthas/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -889,7 +888,7 @@ Redis实现分布式锁的原理：
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/08/01/2018-08-01-JAVA 高并发锁/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/14/2018-07-14-kafka 0.10 版本探索 与spark streaming 2.x 整合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -908,7 +907,7 @@ Redis实现分布式锁的原理：
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/01/2018-08-01-JAVA 高并发锁/" itemprop="url">JAVA 高并发锁</a></h1>
+                <a class="post-title-link" href="/2018/07/14/2018-07-14-kafka 0.10 版本探索 与spark streaming 2.x 整合/" itemprop="url">kafka 0.10 版本探索 与spark streaming 2.x 整合</a></h1>
         
 
         <div class="post-meta">
@@ -920,8 +919,8 @@ Redis实现分布式锁的原理：
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-01T15:00:08+08:00">
-                2018-08-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-14T05:00:08+08:00">
+                2018-07-14
               </time>
             
 
@@ -982,20 +981,763 @@ Redis实现分布式锁的原理：
       
         
           
-          公平锁/非公平锁
-
-公平锁是指多个线程按照申请锁的顺序来获取锁。
-非公平锁是指多个线程获取锁的顺序并不是按照申请锁的顺序，有可能后申请的线程比先申请的线程优先获取锁。有可能，会造成优先级反转或者饥饿现象。
-对于Java ReentrantLock而言，通过构造函数指定该锁是否是公平锁，默认是非公平锁。非公平锁的优点在于吞吐量比公平锁大。
-对于Synchronized而言，也是一种非公平锁。由于其并不像ReentrantLock是通过AQS的来实现线程调度，所以并没有任何办法使其变成公平锁。
-可重入锁
-
-可重入锁又名递归锁，是指在同一个线程在外层方法获取锁的时候，在进入内层方法会自动获取锁。说的有点抽象，下面会有一个代码的示例。
-对于Java ReentrantLock而言, 他的名字就可以看
+            kafka 0.10 版本探索首先，博主之前用的spark-streaming-kafka 1.6 scala 2.10的包，当时的kafka两种连接方式 高层封装 
+1.基于Receiver的方式   简单介绍一下，这种方式可能会因为底层的失败而丢失数据。如果要启用高可靠机制，让数据零丢失，就必须启用Spark Streaming的预写日志机制（Write Ahead Log，WAL）。俗称WAL ，但是个人认为这是多余且不必要的操作 kafka以及做了很多的高可用，数据备份机制。那消费数据为何还需要开启WAL?  
+需要注意的要点
+1、Kafka中的topic的partition，与Spark中的RDD的partition是没有关系的。所以，在KafkaUtils.createStr
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/01/2018-08-01-JAVA 高并发锁/#more" rel="contents">
+            <a class="btn" href="/2018/07/14/2018-07-14-kafka 0.10 版本探索 与spark streaming 2.x 整合/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/13/2018-07-13-kafka环境搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/13/2018-07-13-kafka环境搭建/" itemprop="url">kafka环境搭建</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-13T10:00:08+08:00">
+                2018-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          kafka环境搭建  再深入了解kafka之前，已经翻阅了公司的kafka权威指南一书，但是毕竟书上的理论知识与真实环境还是有一些差距，这时候联想到之前一部电视剧哈，七国争霸 赵国的某位将领，这里就不深入diss了大家都懂的。话不多说进入正题，
+1.下载安装包  首先选择的是kafka 0.10 版本至于各个版本的升级优化，大家可自行百度，据说是对安全方面以及增加了自动 机架感知。下载地址:https://archive.apache.org/dist/kafka/0.10.0.0/kafka_2.10-0.10.0.0.tgz然后将安装包部署到一台节点配置，其余节点通过scp 的方式分发配置。
+2.环境配置   解压安装包，配置server.properties  主要就是host.nam
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/13/2018-07-13-kafka环境搭建/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/12/2018-07-12-Cloudera Manager一次踩坑经历/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/12/2018-07-12-Cloudera Manager一次踩坑经历/" itemprop="url">Cloudera Manager一次踩坑经历</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T10:00:08+08:00">
+                2018-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Cloudera Manager 安装kafka   目前大数据生态圈的集群管理平台 目前主流的两个 Cloudera Manager，Ambari 
+Cloudera Manager商业化,平台扩展性强，功能性多。 Ambari 保留原生态，对hadoop 系统入侵性底 ,公司刚搭建的CDH集群，只部署了一些基本组件 hdfs，yarn，spark，hbase 因为目前项目遇到实时性数据的问题，讨论到kafka消息队列，因为对kafka 不是非常了解，所以想在集群内加入kafka，之前用的cdh忘记了版本，我记得当时是不支持添加kafka服务的，看到当前系统cm5 cdh5.11 有对kafka的支持，但是有红字警告,描述如下:Apache Kafka is publish-subscri
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/12/2018-07-12-Cloudera Manager一次踩坑经历/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/10/2018-07-11-数据结构Map 总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/10/2018-07-11-数据结构Map 总结/" itemprop="url">数据结构Map 总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T10:00:08+08:00">
+                2018-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Map这里只对常用Map集合进行分析HashMap   hashmap 底层是entry的一个数组 每个数组内又是一个entry维护的单向链表(至于为何还需要一个单向链表后续解释) 每个entry 存储 k v hash值因为插入的位置是 hash值与table长度取模 所以无序 为什么entry数组内还要维护一个单向链表呢?  哈希冲突哈希冲突通过哈希函数得出的实际存储地址相同怎么办？也就是说，当我们对某个元素进行哈希运算，得到一个存储地址，然后要进行插入的时候，发现已经被其他元素占用了，其实这就是所谓的哈希冲突，也叫哈希碰撞。前面我们提到过，哈希函数的设计至关重要，好的哈希函数会尽可能地保证 计算简单和散列地址分布均匀,但是，我们需要清楚的是，数组是一块连续的固定长度的内存空间，再好的哈
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/10/2018-07-11-数据结构Map 总结/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/10/2018-07-10-数据结构List 总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/10/2018-07-10-数据结构List 总结/" itemprop="url">数据结构List 总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T10:00:08+08:00">
+                2018-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          List
+这里只对常用list集合进行分析
+ArrayList    标准的线性数组结构封装实现了Collection和List接口，可以灵活的设置数组的大小。要注意的是ArrayList并不是线程安全的，因此一般建议在单线程中使用ArrayList。
+##ArrayList的方法使用和源码解析
+###构造方法
+1234567891011121314151617181920212223//1-----------------------public ArrayList() &#123;        this(10);        //调用ArrayList(10) 默认初始化一个大小为10的object数组。    &#125;//2-------------------------pu
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/10/2018-07-10-数据结构List 总结/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/09/2018-07-09-排序算法的小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/09/2018-07-09-排序算法的小结/" itemprop="url">排序算法总结 JDK1.8双轴快排分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T05:00:08+08:00">
+                2018-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          插入排序
+思路遍历数组将每个元素与前面元素一一对比 如果小于就换位最好情况O(n)  最坏情况O(n2) 建议数组长度较小时使用1234567891011121314/**    * 插入排序    *    * @param arr    */   public static void insertionSort(int[] arr) &#123;       for (int i = 1; i &lt; arr.length; i++) &#123;           int j = i;           while (j &gt; 0 &amp;&amp; arr[j] &lt; arr[j - 1]) &#123;               swap(arr,j,j-1); 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/09/2018-07-09-排序算法的小结/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1037,7 +1779,7 @@ Redis实现分布式锁的原理：
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1094,7 +1836,7 @@ Redis实现分布式锁的原理：
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1105,7 +1847,7 @@ Redis实现分布式锁的原理：
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
