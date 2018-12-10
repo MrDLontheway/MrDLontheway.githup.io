@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/issue1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/issue2.png">
-<meta property="og:updated_time" content="2018-10-30T08:34:16.967Z">
+<meta property="og:updated_time" content="2018-11-07T05:44:00.797Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scala 引用Java 父类static methods and static variable not available 问题">
 <meta name="twitter:description" content="Scala 引用Java 父类static methods and static variable not available 问题    今天,在搞accumulo 与spark 整合的时候  在scala code中引用 java时发现了一个算是比较严重的问题, 情况是这样的,AccumuloOutputFormat 是一个类暂时不用管他是干嘛的,他继承了InputFormatBase 也就是">
@@ -371,6 +371,15 @@
 <p>最后我尝试了用scala的class 去集成 java的class  然后达到继承父类静态方法的目的</p>
 <p>结果依然是无法继承  所以总结出 因为scala 中是没有static关键字的  静态是通过object 伴生对象来实现(个人理解)  所以只要在scala中 引用了静态的方法或者变量 scala都会把引用类作为<br>object半生对象去解析 但是object是不支持继承的 所以无法获取到父类的静态方法 编译器无法通过  从语法的角度我觉得这对于scala来说应该算是一个问题  已经在scala 提交 issues.. </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">object AccumuloTest &#123;</span><br><span class="line">  <span class="function">def <span class="title">main</span><span class="params">(args: Array[String])</span>: Unit </span>= &#123;</span><br><span class="line">    <span class="comment">//无法引用 父类静态方法</span></span><br><span class="line">    Tjava.sayHello()</span><br><span class="line">    Tjava.TJavaSayHello()</span><br><span class="line"></span><br><span class="line">    <span class="comment">//无法引用继承的静态变量</span></span><br><span class="line">    val v = Tjava.v1</span><br><span class="line">    val v1 = <span class="keyword">new</span> Tjava</span><br><span class="line">    Test1.MysayHello()</span><br><span class="line">    <span class="comment">//无法引用 父类静态方法</span></span><br><span class="line">    Test1.sayHello()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String v1 = <span class="string">"haha"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object Test1 extends Test2&#123;</span><br><span class="line">  <span class="function">def <span class="title">MysayHello</span><span class="params">()</span>: Unit </span>= &#123;</span><br><span class="line">    System.out.println(<span class="string">"hello"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//object 不支持 继承object</span></span><br><span class="line">object Test3 extends Test4&#123;</span><br><span class="line">  <span class="function">def <span class="title">MysayHello</span><span class="params">()</span>: Unit </span>= &#123;</span><br><span class="line">    System.out.println(<span class="string">"hello"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object Test4 &#123;</span><br><span class="line">  <span class="function">def <span class="title">sayHello</span><span class="params">()</span>: Unit </span>= &#123;</span><br><span class="line">    System.out.println(<span class="string">"hello"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tjava</span> <span class="keyword">extends</span> <span class="title">Father</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">TJavaSayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"tjava hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Tjava.sayHello();</span><br><span class="line">        Tjava.TJavaSayHello();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>Scala issues</h1>
+
+<p><a href="https://github.com/scala/bug/issues/11230" target="_blank" rel="noopener">https://github.com/scala/bug/issues/11230</a></p>
+<p>目前针对这个问题的讨论</p>
+<p><a href="https://github.com/scala/bug/issues/11230" target="_blank" rel="noopener">https://github.com/scala/bug/issues/11230</a></p>
+<p>设计者的目前想法是 因为语言的特性导致了scala 与 java的不兼容  但是scala并不需要全部去 模仿 适应 java 也提到如果有人有完整设计解决思路的话 会考虑pull request</p>
+<p>就我目前个人的解决方案 scala中引用java 的父类继承静态方法时 可以在引用静态方法层使用java操作  也就是将这个操作使用java中转  注意要使用非静态方法中转 因为只要是静态方法</p>
+<p>在scala中还是会以object方式去解析  然后在scala中 通过 new java实例去调用方法执行java内的静态继承方法</p>
+
       
     </div>
     
@@ -411,6 +420,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/10/2018-12-10-关于JAVA内如何优雅的修改 依赖框架源码/" rel="prev" title="关于JAVA内如何优雅的修改 依赖框架源码">
+                关于JAVA内如何优雅的修改 依赖框架源码 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -487,7 +500,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -509,7 +522,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -541,13 +554,13 @@
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                    <a href="https://twitter.com/726575153Mr" target="_blank" title="Twitter">
                       
                         <i class="fa fa-fw fa-twitter"></i>Twitter</a>
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                    <a href="https://www.facebook.com/people/Le-Dai/100023921135287" target="_blank" title="FB Page">
                       
                         <i class="fa fa-fw fa-facebook"></i>FB Page</a>
                   </span>
@@ -606,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Scala 引用Java 父类static methods and static variable not available 问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Scala 引用Java 父类static methods and static variable not available 问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Scala issues</span></a></li></ol></div>
             
 
           </div>

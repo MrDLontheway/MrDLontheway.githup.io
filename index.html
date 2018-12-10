@@ -259,6 +259,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/12/10/2018-12-10-关于JAVA内如何优雅的修改 依赖框架源码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/10/2018-12-10-关于JAVA内如何优雅的修改 依赖框架源码/" itemprop="url">关于JAVA内如何优雅的修改 依赖框架源码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-10T11:40:08+08:00">
+                2018-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          关于JAVA内如何优雅的修改 依赖框架源码  在JAVA内往往经常会遇到 框架内方法实现高度封装 并且私有不对外公开,无法通过调用底层API 实现自己的复杂,或者框架的内部实现逻辑对于现有需求不能有很好的扩展需要修改源码的时候, 首先 java jvm虚拟机运行时是通过加载 编译后的class文件运行相应字节码指令的,如果我们通过最底层的 拿到源代码进行反编译修改后在重新编译覆盖到classpath中替换原先的class文件 这样的方式当然是可以的。但是这样操作过于繁琐,并且不好调试 下面举例maven项目中 如何做到优雅的修改框架源码作者是从spark 1.6 集成kafka的时候开始接触这方面的,知道老版本kafka的小伙伴一定知道 老版本的kafka-spark streaming 默
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/10/2018-12-10-关于JAVA内如何优雅的修改 依赖框架源码/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/10/30/2018-10-30-Scala 引用Java 父类static methods and static variable not available 问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1487,171 +1635,6 @@ https://blog.csdn.net/love_lixr/article/details/81454548
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/08/01/2018-08-01-分布式锁/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiLe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiLe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/01/2018-08-01-分布式锁/" itemprop="url">分布式锁</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-01T15:00:08+08:00">
-                2018-08-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
-                    <span itemprop="name">Learning process</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          分布式锁
-
-分布式锁最简单的理解 在多个系统中 同一时间点同一方法只能被一台机器执行, 并未java 进程运行在不同机器上 所以实现方式需要通过第三方介质
-因为并发 以及锁的性质问题  要求第三方介质需要有以下特性
-
-高可用性 
-高性能 
-锁超时 释放的灵活性
-
-目前实现分布式锁有三种方式:
-1.传统型数据库
-2.缓存型nosql 日志数据库
-3.zookeeper 高可用协调中心
-这里数据库不做介绍 因为个人觉得没有优势。
-Redis实现分布式锁的原理：
-
-1.通过setnx(lock_timeout)实现，如果设置了锁返回1， 已经有值没有设置成功返回0
-2.死锁问题：通过实践来判断是否过期，如果已经过期，获取到过期时间get(lockKey)，然后getset(lock_timeout
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/01/2018-08-01-分布式锁/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/08/01/2018-08-01-JAVA 高并发锁/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1846,7 +1829,7 @@ Redis实现分布式锁的原理：
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1868,7 +1851,7 @@ Redis实现分布式锁的原理：
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1900,13 +1883,13 @@ Redis实现分布式锁的原理：
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                    <a href="https://twitter.com/726575153Mr" target="_blank" title="Twitter">
                       
                         <i class="fa fa-fw fa-twitter"></i>Twitter</a>
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                    <a href="https://www.facebook.com/people/Le-Dai/100023921135287" target="_blank" title="FB Page">
                       
                         <i class="fa fa-fw fa-facebook"></i>FB Page</a>
                   </span>

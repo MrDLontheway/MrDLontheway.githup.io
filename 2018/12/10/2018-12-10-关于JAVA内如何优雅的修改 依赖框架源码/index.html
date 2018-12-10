@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="DaiLe" />
+  <meta name="keywords" content="源码修改," />
 
 
 
@@ -79,13 +79,22 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="DaiLe&#39;s blog">
-<meta property="og:url" content="https://mrdlontheway.github.io/tags/sqoop/index.html">
+<meta name="description" content="关于JAVA内如何优雅的修改 依赖框架源码  在JAVA内往往经常会遇到 框架内方法实现高度封装 并且私有不对外公开,无法通过调用底层API 实现自己的复杂,或者框架的内部实现逻辑对于现有需求不能有很好的扩展需要修改源码的时候, 首先 java jvm虚拟机运行时是通过加载 编译后的class文件运行相应字节码指令的,如果我们通过最底层的 拿到源代码进行反编译修改后在重新编译覆盖到classpat">
+<meta name="keywords" content="源码修改">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于JAVA内如何优雅的修改 依赖框架源码">
+<meta property="og:url" content="https://mrdlontheway.github.io/2018/12/10/2018-12-10-关于JAVA内如何优雅的修改 依赖框架源码/index.html">
 <meta property="og:site_name" content="DaiLe&#39;s blog">
+<meta property="og:description" content="关于JAVA内如何优雅的修改 依赖框架源码  在JAVA内往往经常会遇到 框架内方法实现高度封装 并且私有不对外公开,无法通过调用底层API 实现自己的复杂,或者框架的内部实现逻辑对于现有需求不能有很好的扩展需要修改源码的时候, 首先 java jvm虚拟机运行时是通过加载 编译后的class文件运行相应字节码指令的,如果我们通过最底层的 拿到源代码进行反编译修改后在重新编译覆盖到classpat">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/yuanma1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/yuanma2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/yuanma3.png">
+<meta property="og:updated_time" content="2018-12-10T05:57:46.542Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DaiLe&#39;s blog">
+<meta name="twitter:title" content="关于JAVA内如何优雅的修改 依赖框架源码">
+<meta name="twitter:description" content="关于JAVA内如何优雅的修改 依赖框架源码  在JAVA内往往经常会遇到 框架内方法实现高度封装 并且私有不对外公开,无法通过调用底层API 实现自己的复杂,或者框架的内部实现逻辑对于现有需求不能有很好的扩展需要修改源码的时候, 首先 java jvm虚拟机运行时是通过加载 编译后的class文件运行相应字节码指令的,如果我们通过最底层的 拿到源代码进行反编译修改后在重新编译覆盖到classpat">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/yuanma1.png">
 
 
 
@@ -115,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://mrdlontheway.github.io/tags/sqoop/"/>
+  <link rel="canonical" href="https://mrdlontheway.github.io/2018/12/10/2018-12-10-关于JAVA内如何优雅的修改 依赖框架源码/"/>
 
 
 
 
 
-  <title>Tag: sqoop | DaiLe's blog</title>
+  <title>关于JAVA内如何优雅的修改 依赖框架源码 | DaiLe's blog</title>
   
 
 
@@ -140,7 +149,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,54 +253,175 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>sqoop<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/12/10/2018-12-10-关于JAVA内如何优雅的修改 依赖框架源码/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/08/06/2018-08-06-Sqoop 实现数据库数据增量导入更新HDFS/" itemprop="url">
-              
-                <span itemprop="name">Sqoop 实现数据库数据增量导入更新HDFS</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">关于JAVA内如何优雅的修改 依赖框架源码</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-06T15:00:08+08:00"
-              content="2018-08-06" >
-          08-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-10T11:40:08+08:00">
+                2018-12-10
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p></p><h1>关于JAVA内如何优雅的修改 依赖框架源码</h1><br>  在JAVA内往往经常会遇到 框架内方法实现高度封装 并且私有不对外公开,无法通过调用底层API 实现自己的复杂,或者框架的内部实现逻辑对于现有需求不能有很好<br>的扩展需要修改源码的时候, 首先 java jvm虚拟机运行时是通过加载 编译后的class文件运行相应字节码指令的,如果我们通过最底层的 拿到源代码进行反编译修改后<br>在重新编译覆盖到classpath中替换原先的class文件 这样的方式当然是可以的。但是这样操作过于繁琐,并且不好调试 下面举例maven项目中 如何做到优雅的修改框架源码<br>作者是从spark 1.6 集成kafka的时候开始接触这方面的,知道老版本kafka的小伙伴一定知道 老版本的kafka-spark streaming 默认是只有reciver 的方式<br>并没有开放redirect直连方式去拉取message 所以当时很多大佬就直接重写kafaka cluster 源码 开放私有方法 调用底层api 使用redirect 拉取消息。后续kafka官方也意识到<br>了redirect的必要性 并且增加了相关直连api, 方法如下: 首先在java maven项目中 项目编译会先将maven的第三方依赖加入 然后编译自己的java源文件 所以只要我们在自己项目<br>中写入相同包名 相同类名 源java文件 这样进行二次编译的时候就会将我们的java文件编译成class 替换原本的第三方依赖。 下面举一个实际中的应用实例<p></p>
+<p> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/yuanma1.png" alt="源码"></p>
+<p>图中 com.* 下面是自己代码  org下面为需要修改的源码  在实际业务中遇到了 再将数据插入es中的时候 需要将地理位置 类型 经纬度 geopoint 插入到es中  因为框架<br>对es 进行了二次封装,但是现有的业务逻辑还依赖框架 不能通过自己的方式实现, 在实际场景中 首先通过打断点的不断调试找到需要修改的片段(这个断点调试不断用 就很好上手)</p>
+<p> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/yuanma2.png" alt="源码"></p>
+<p>这里假如我们找到了  我们需要修改的源码部分  首先在src下建立一个相同包名路径下的java 类 文件 用maven下载源文件 源码 将源文件源码全部copy到 自己的java 文件中<br>然后就可以尽情修改了 建议再修改代码部分时打上 自己的change部分 跟源码区分出来 </p>
+<p>下面是 实际业务中 操作修改的部分<br> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/yuanma3.png" alt="源码"></p>
+<p>之前在修改源码时遇到了 字节码修改安全认证的策略  但是时间有点久 忘记了当时的情况 从而没有复现出 当时的情况 后续如果找到相关的复现情况会进行补充,<br>但是修改源码也有很多不好的地方 虽然增强了扩展性但是 随着依赖版本的更新 自己代码与更换版本的整合问题也是比较头疼的问题 ,所以建议在实际业务中除非没有别的解决办法不建议<br>修改依赖源代码。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/源码修改/" rel="tag"># 源码修改</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/30/2018-10-30-Scala 引用Java 父类static methods and static variable not available 问题/" rel="next" title="Scala 引用Java 父类static methods and static variable not available 问题">
+                <i class="fa fa-chevron-left"></i> Scala 引用Java 父类static methods and static variable not available 问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -299,6 +429,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -319,8 +453,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -444,6 +587,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">关于JAVA内如何优雅的修改 依赖框架源码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -578,6 +737,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

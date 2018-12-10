@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/20/2018-07-25-kafka 实现原理以及知识点小结/">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/08/01/2018-08-01-分布式锁/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DaiLe">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/20/2018-07-25-kafka 实现原理以及知识点小结/" itemprop="url">kafka 实现原理以及知识点小结</a></h1>
+                <a class="post-title-link" href="/2018/08/01/2018-08-01-分布式锁/" itemprop="url">分布式锁</a></h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T15:00:08+08:00">
-                2018-07-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-01T15:00:08+08:00">
+                2018-08-01
               </time>
             
 
@@ -352,26 +352,28 @@
       
         
           
-          kafka 实现原理以及知识点小结
+          分布式锁
 
-Kafka的特性:
+分布式锁最简单的理解 在多个系统中 同一时间点同一方法只能被一台机器执行, 并未java 进程运行在不同机器上 所以实现方式需要通过第三方介质
+因为并发 以及锁的性质问题  要求第三方介质需要有以下特性
 
+高可用性 
+高性能 
+锁超时 释放的灵活性
 
-高吞吐量、低延迟：kafka每秒可以处理几十万条消息，它的延迟最低只有几毫秒，每个topic可以分多个partition, consumer group 对partition进行consume操作。
-可扩展性：kafka集群支持热扩展
-持久性、可靠性：消息被持久化到本地磁盘，并且支持数据备份防止数据丢失
-容错性：允许集群中节点失败（若副本数量为n,则允许n-1个节点失败）
-高并发：支持数千个客户端同时读写
+目前实现分布式锁有三种方式:
+1.传统型数据库
+2.缓存型nosql 日志数据库
+3.zookeeper 高可用协调中心
+这里数据库不做介绍 因为个人觉得没有优势。
+Redis实现分布式锁的原理：
 
-Kafka的使用场景：
-
-
-日志收集：一个公司可以用Kafka可以收集各种服务的log，通过kafka以统一接口服务的方式开放给各种consumer，例如hadoop、Hbase、Solr等。
-消息系统：解耦和生产者和消费者、
+1.通过setnx(lock_timeout)实现，如果设置了锁返回1， 已经有值没有设置成功返回0
+2.死锁问题：通过实践来判断是否过期，如果已经过期，获取到过期时间get(lockKey)，然后getset(lock_timeout
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/20/2018-07-25-kafka 实现原理以及知识点小结/#more" rel="contents">
+            <a class="btn" href="/2018/08/01/2018-08-01-分布式锁/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -524,6 +526,169 @@ ES的核心机制
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/20/2018-07-30-Elasticsearch 实现原理以及知识点小结/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/20/2018-07-25-kafka 实现原理以及知识点小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/20/2018-07-25-kafka 实现原理以及知识点小结/" itemprop="url">kafka 实现原理以及知识点小结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T15:00:08+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          kafka 实现原理以及知识点小结
+
+Kafka的特性:
+
+
+高吞吐量、低延迟：kafka每秒可以处理几十万条消息，它的延迟最低只有几毫秒，每个topic可以分多个partition, consumer group 对partition进行consume操作。
+可扩展性：kafka集群支持热扩展
+持久性、可靠性：消息被持久化到本地磁盘，并且支持数据备份防止数据丢失
+容错性：允许集群中节点失败（若副本数量为n,则允许n-1个节点失败）
+高并发：支持数千个客户端同时读写
+
+Kafka的使用场景：
+
+
+日志收集：一个公司可以用Kafka可以收集各种服务的log，通过kafka以统一接口服务的方式开放给各种consumer，例如hadoop、Hbase、Solr等。
+消息系统：解耦和生产者和消费者、
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/20/2018-07-25-kafka 实现原理以及知识点小结/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1626,155 +1791,6 @@ ArrayList    标准的线性数组结构封装实现了Collection和List接口�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/07/09/2018-07-09-排序算法的小结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiLe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiLe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/09/2018-07-09-排序算法的小结/" itemprop="url">排序算法总结 JDK1.8双轴快排分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T05:00:08+08:00">
-                2018-07-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
-                    <span itemprop="name">Learning process</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          插入排序
-思路遍历数组将每个元素与前面元素一一对比 如果小于就换位最好情况O(n)  最坏情况O(n2) 建议数组长度较小时使用1234567891011121314/**    * 插入排序    *    * @param arr    */   public static void insertionSort(int[] arr) &#123;       for (int i = 1; i &lt; arr.length; i++) &#123;           int j = i;           while (j &gt; 0 &amp;&amp; arr[j] &lt; arr[j - 1]) &#123;               swap(arr,j,j-1); 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/09/2018-07-09-排序算法的小结/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1825,7 +1841,7 @@ ArrayList    标准的线性数组结构封装实现了Collection和List接口�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1847,7 +1863,7 @@ ArrayList    标准的线性数组结构封装实现了Collection和List接口�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1879,13 +1895,13 @@ ArrayList    标准的线性数组结构封装实现了Collection和List接口�
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                    <a href="https://twitter.com/726575153Mr" target="_blank" title="Twitter">
                       
                         <i class="fa fa-fw fa-twitter"></i>Twitter</a>
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                    <a href="https://www.facebook.com/people/Le-Dai/100023921135287" target="_blank" title="FB Page">
                       
                         <i class="fa fa-fw fa-facebook"></i>FB Page</a>
                   </span>
