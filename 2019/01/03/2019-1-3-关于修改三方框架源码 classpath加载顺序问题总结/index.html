@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="DaiLe" />
+  <meta name="keywords" content="源码修改,maven 加载机制," />
 
 
 
@@ -79,13 +79,20 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="DaiLe&#39;s blog">
-<meta property="og:url" content="https://mrdlontheway.github.io/archives/2018/07/page/2/index.html">
+<meta name="description" content="关于修改三方框架源码 classpath加载顺序问题总结  之前提到过如何优雅的修改第三方以来源码 实现自己流程控制的方法,今天在修改源码的时候遇到了一个问题,源码修改完后 没有生效 运行时加载了 源class文件, 首先解决这个问题要先了解jvm 的类加载机制,首先 运行时检测到class信息时 jvm会查看内部是否有该class 类加载信息 如果有是不会再次加载的,所以说class 只会加载一">
+<meta name="keywords" content="源码修改,maven 加载机制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于修改三方框架源码 classpath加载顺序问题总结">
+<meta property="og:url" content="https://mrdlontheway.github.io/2019/01/03/2019-1-3-关于修改三方框架源码 classpath加载顺序问题总结/index.html">
 <meta property="og:site_name" content="DaiLe&#39;s blog">
+<meta property="og:description" content="关于修改三方框架源码 classpath加载顺序问题总结  之前提到过如何优雅的修改第三方以来源码 实现自己流程控制的方法,今天在修改源码的时候遇到了一个问题,源码修改完后 没有生效 运行时加载了 源class文件, 首先解决这个问题要先了解jvm 的类加载机制,首先 运行时检测到class信息时 jvm会查看内部是否有该class 类加载信息 如果有是不会再次加载的,所以说class 只会加载一">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/mavenproject.png">
+<meta property="og:updated_time" content="2019-01-03T03:37:43.245Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DaiLe&#39;s blog">
+<meta name="twitter:title" content="关于修改三方框架源码 classpath加载顺序问题总结">
+<meta name="twitter:description" content="关于修改三方框架源码 classpath加载顺序问题总结  之前提到过如何优雅的修改第三方以来源码 实现自己流程控制的方法,今天在修改源码的时候遇到了一个问题,源码修改完后 没有生效 运行时加载了 源class文件, 首先解决这个问题要先了解jvm 的类加载机制,首先 运行时检测到class信息时 jvm会查看内部是否有该class 类加载信息 如果有是不会再次加载的,所以说class 只会加载一">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/mavenproject.png">
 
 
 
@@ -115,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://mrdlontheway.github.io/archives/2018/07/page/2/"/>
+  <link rel="canonical" href="https://mrdlontheway.github.io/2019/01/03/2019-1-3-关于修改三方框架源码 classpath加载顺序问题总结/"/>
 
 
 
 
 
-  <title>Archive | DaiLe's blog</title>
+  <title>关于修改三方框架源码 classpath加载顺序问题总结 | DaiLe's blog</title>
   
 
 
@@ -140,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,226 +251,185 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2019/01/03/2019-1-3-关于修改三方框架源码 classpath加载顺序问题总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">关于修改三方框架源码 classpath加载顺序问题总结</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-03T11:14:08+08:00">
+                2019-01-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 24 posts in total. Keep on posting.
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/13/2018-07-13-kafka环境搭建/" itemprop="url">
-              
-                <span itemprop="name">kafka环境搭建</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-13T10:00:08+08:00"
-              content="2018-07-13" >
-          07-13
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/12/2018-07-12-Cloudera Manager一次踩坑经历/" itemprop="url">
-              
-                <span itemprop="name">Cloudera Manager一次踩坑经历</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-12T10:00:08+08:00"
-              content="2018-07-12" >
-          07-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/10/2018-07-10-数据结构List 总结/" itemprop="url">
-              
-                <span itemprop="name">数据结构List 总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-10T10:00:08+08:00"
-              content="2018-07-10" >
-          07-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p></p><h1>关于修改三方框架源码 classpath加载顺序问题总结</h1><br>  之前提到过如何优雅的修改第三方以来源码 实现自己流程控制的方法,今天在修改源码的时候遇到了一个问题,源码修改完后 没有生效 运行时加载了 源class<br>文件, 首先解决这个问题要先了解jvm 的类加载机制,首先 运行时检测到class信息时 jvm会查看内部是否有该class 类加载信息 如果有是不会再次<br>加载的,所以说class 只会加载一次 也就是说在加载class的时候 源依赖加载的顺序优先于我们自己修改的源码 下面以idea 设置为例讲解 eclipse<br>同理只不过设置的地方不一样。<p></p>
+<p></p><h1>maven 项目的以来加载顺序</h1><br>  这里主要讲解maven project  因为目前java 项目maven 毕竟是主流 首先是maven的 依赖原则<p></p>
+<p>1.间接依赖路径最短优先</p>
+<p>一个项目test依赖了a和b两个jar包。其中a-b-c1.0 ， d-e-f-c1.1 。由于c1.0路径最短，所以项目test最后使用的是c1.0。</p>
+<p>2.pom文件中申明顺序优先</p>
+<p>有人就问了如果 a-b-c1.0 ， d-e-c1.1 这样路径都一样怎么办？其实maven的作者也没那么傻，会以在pom文件中申明的顺序那选，如果pom文件中先申明了d再申明了a，test项目最后依赖的会是c1.1</p>
+<p>所以maven依赖原则总结起来就两条：路径最短，申明顺序其次。</p>
+<p>根据上面的两大原则  则不难找到问题的原因  但是每次手动去找maven 依赖的顺序 还是比较蛋疼的  毕竟大项目里面pom文件的数量你懂的<br>下面以idea为例  下面是打开idea model 找到设置内 依赖设置的顺序  里面可以找到该依赖是由那个 model 引用 何时加载  这样就很好找到问题</p>
+<p> <img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/mavenproject.png" alt="源码"></p>
+<p>这里我具体的问题是因为  我的项目A 内 引用了 框架B 的源码   然后我的项目C 内也引用了B 并且复写了B的部分源码  比如我复写了B 的class Demo</p>
+<p>这时候 我的项目C 需要加载Demo类的时候 因为在pom引用的 A 在 C 的前面  所以先从A 项目中拿了 B框架中Demo的源码 到我复写C 项目的时候已经加载过了就不需要再次加载了</p>
+<p>所以解决方法就是把我的C 加载顺序 调整到A的前面 这里有以下解决方法 </p>
+<p>1.将C 顺序调整到A的前面（不建议 因为更改的pom顺序可能会引发其他的jar 冲突问题）</p>
+<p>2.也就是我这次解决方案  因为A项目中的 yilai.jar 优先加载了  我只需要在A 中将 yilai.jar这个model 排除掉 使用exclusion 标签<br>这样在加载依赖时候因为项目A内排除了框架源码  这样就会使用下面的 项目C的复写源码  </p>
+<p>经过这次的问题 也了解了maven的加载机制.</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/10/2018-07-11-数据结构Map 总结/" itemprop="url">
-              
-                <span itemprop="name">数据结构Map 总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-10T10:00:08+08:00"
-              content="2018-07-10" >
-          07-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/09/2018-07-09-排序算法的小结/" itemprop="url">
-              
-                <span itemprop="name">排序算法总结 JDK1.8双轴快排分析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-09T05:00:08+08:00"
-              content="2018-07-09" >
-          07-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/源码修改/" rel="tag"># 源码修改</a>
+          
+            <a href="/tags/maven-加载机制/" rel="tag"># maven 加载机制</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/10/2018-12-10-关于JAVA内如何优雅的修改 依赖框架源码/" rel="next" title="关于JAVA内如何优雅的修改 依赖框架的源码">
+                <i class="fa fa-chevron-left"></i> 关于JAVA内如何优雅的修改 依赖框架的源码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2018/07/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2018/07/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2018/07/page/3/">3</a><a class="extend next" rel="next" href="/archives/2018/07/page/3/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -471,6 +437,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -491,8 +461,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -616,6 +595,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">关于修改三方框架源码 classpath加载顺序问题总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">maven 项目的以来加载顺序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -750,6 +745,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
