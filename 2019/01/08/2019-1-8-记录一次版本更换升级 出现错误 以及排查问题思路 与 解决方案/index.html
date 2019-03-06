@@ -88,7 +88,7 @@
 <meta property="og:description" content="记录一次版本更换升级 出现错误 以及排查问题思路 与 解决方案  首先我们在使用各个组件整合的时候,版本更换时候 大部分时候会遇到问题. 今天cdh 环境从5.13 更换为6.0.1 这算是大的版本变动，hadoop基础版本也升级成为了3.0 但是由于我们使用的自定义组件 cdh内版本较久 bug较多 所以整合方式 自己管理 然后hdp的配置文件 以及 依赖 通过手动修改配置文件的方式由于之前cd">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/log4j1-8.png">
-<meta property="og:updated_time" content="2019-01-08T08:48:07.889Z">
+<meta property="og:updated_time" content="2019-02-26T06:55:12.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录一次版本更换升级 出现错误 以及排查问题思路 与 解决方案">
 <meta name="twitter:description" content="记录一次版本更换升级 出现错误 以及排查问题思路 与 解决方案  首先我们在使用各个组件整合的时候,版本更换时候 大部分时候会遇到问题. 今天cdh 环境从5.13 更换为6.0.1 这算是大的版本变动，hadoop基础版本也升级成为了3.0 但是由于我们使用的自定义组件 cdh内版本较久 bug较多 所以整合方式 自己管理 然后hdp的配置文件 以及 依赖 通过手动修改配置文件的方式由于之前cd">
@@ -373,6 +373,7 @@
 <p>有三个符合条件的 于是运行那条shell 结果</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find -H /opt/cloudera/parcels/CDH/lib/hadoop/lib /opt/cloudera/parcels/CDH/lib/hadoop/share/hadoop/common/lib -name &apos;log4j*.jar&apos; -print 2&gt;/dev/null | head -1</span><br><span class="line">/opt/cloudera/parcels/CDH/lib/hadoop/lib/log4j-core-2.8.2.jar</span><br></pre></td></tr></table></figure>
 <p>显而易见 因为数据库初始化脚本中的 shell 查找到的jar包不正常导致的 更改为 LOG4J_JAR=$(find -H “${HADOOP_PREFIX}/lib” “${HADOOP_PREFIX}”/share/hadoop/common/lib -name ‘log4j-1.*.jar’ -print 2&gt;/dev/null | head -1)<br>问题解决 </p>
+<p>已经在accumulo githup 提交patch 并且更新到1.9.3版本中</p>
 
       
     </div>
@@ -414,6 +415,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/15/2019-1-15-关于大数据量索引同步 解决方案/" rel="prev" title="关于大数据量索引同步 解决方案">
+                关于大数据量索引同步 解决方案 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -490,7 +495,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -512,7 +517,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
