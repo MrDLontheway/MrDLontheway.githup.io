@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="并行计算,spark," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="spark参数介绍1 spark on yarn常用属性介绍   属性名 默认值 属性说明     spark.yarn.am.memory 512m 在客户端模式（client mode）下，yarn应用master使用的内存数。在集群模式（cluster mode）下，使用spark.driver.memory代替。   spark.driver.cores 1 在集群模式（cluster m">
+<meta name="keywords" content="并行计算,spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spark 参数介绍">
+<meta property="og:url" content="https://mrdlontheway.github.io/2019/02/02/2019-2-2-spark 参数/index.html">
+<meta property="og:site_name" content="DaiLe&#39;s blog">
+<meta property="og:description" content="spark参数介绍1 spark on yarn常用属性介绍   属性名 默认值 属性说明     spark.yarn.am.memory 512m 在客户端模式（client mode）下，yarn应用master使用的内存数。在集群模式（cluster mode）下，使用spark.driver.memory代替。   spark.driver.cores 1 在集群模式（cluster m">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/1.1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/1.2.png">
+<meta property="og:updated_time" content="2019-03-13T06:24:04.029Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spark 参数介绍">
+<meta name="twitter:description" content="spark参数介绍1 spark on yarn常用属性介绍   属性名 默认值 属性说明     spark.yarn.am.memory 512m 在客户端模式（client mode）下，yarn应用master使用的内存数。在集群模式（cluster mode）下，使用spark.driver.memory代替。   spark.driver.cores 1 在集群模式（cluster m">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/1.1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mrdlontheway.github.io/2019/02/02/2019-2-2-spark 参数/"/>
+
+
+
+
+
+  <title>spark 参数介绍 | DaiLe's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DaiLe's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2019/02/02/2019-2-2-spark 参数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spark 参数介绍</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-02T10:09:08+08:00">
+                2019-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="spark参数介绍"><a href="#spark参数介绍" class="headerlink" title="spark参数介绍"></a>spark参数介绍</h1><h2 id="1-spark-on-yarn常用属性介绍"><a href="#1-spark-on-yarn常用属性介绍" class="headerlink" title="1 spark on yarn常用属性介绍"></a>1 spark on yarn常用属性介绍</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">属性名</th>
+<th style="text-align:center">默认值</th>
+<th style="text-align:left">属性说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>spark.yarn.am.memory</code></td>
+<td style="text-align:center">512m</td>
+<td style="text-align:left">在客户端模式（<code>client mode</code>）下，<code>yarn</code>应用<code>master</code>使用的内存数。在集群模式（<code>cluster mode</code>）下，使用<code>spark.driver.memory</code>代替。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.driver.cores</code></td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">在集群模式（<code>cluster mode</code>）下，<code>driver</code>程序使用的核数。在集群模式（<code>cluster mode</code>）下，<code>driver</code>程序和<code>master</code>运行在同一个<code>jvm</code>中，所以<code>master</code>控制这个核数。在客户端模式（<code>client mode</code>）下，使用<code>spark.yarn.am.cores</code>控制<code>master</code>使用的核。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.yarn.am.cores</code></td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">在客户端模式（<code>client mode</code>）下，<code>yarn</code>应用的<code>master</code>使用的核数。在集群模式下，使用<code>spark.driver.cores</code>代替。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.yarn.am.waitTime</code></td>
+<td style="text-align:center">100ms</td>
+<td style="text-align:left">在集群模式（cluster mode）下，<code>yarn</code>应用<code>master</code>等待<code>SparkContext</code>初始化的时间。在客户端模式（<code>client mode</code>）下，<code>master</code>等待<code>driver</code>连接到它的时间。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.yarn.submit.file.replication</code></td>
+<td style="text-align:center">3</td>
+<td style="text-align:left">文件上传到<code>hdfs</code>上去的<code>replication</code>次数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.yarn.preserve.staging.files</code></td>
+<td style="text-align:center"><code>false</code></td>
+<td style="text-align:left">设置为<code>true</code>时，在<code>job</code>结束时，保留<code>staged</code>文件；否则删掉这些文件。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.yarn.scheduler.heartbeat.interval-ms</code></td>
+<td style="text-align:center">3000</td>
+<td style="text-align:left"><code>Spark</code>应用<code>master</code>与<code>yarn resourcemanager</code>之间的心跳间隔</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.yarn.scheduler.initial-allocation.interval</code></td>
+<td style="text-align:center">200ms</td>
+<td style="text-align:left">当存在挂起的容器分配请求时，<code>spark</code>应用<code>master</code>发送心跳给<code>resourcemanager</code>的间隔时间。它的大小不能大于<code>spark.yarn.scheduler.heartbeat.interval-ms</code>，如果挂起的请求还存在，那么这个时间加倍，直到到达<code>spark.yarn.scheduler.heartbeat.interval-ms</code>大小。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.yarn.max.executor.failures</code></td>
+<td style="text-align:center"><code>numExecutors * 2</code>，并且不小于3</td>
+<td style="text-align:left">在失败应用程序之前，<code>executor</code>失败的最大次数。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.executor.instances</code></td>
+<td style="text-align:center">2</td>
+<td style="text-align:left"><code>Executors</code>的个数。这个配置和<code>spark.dynamicAllocation.enabled</code>不兼容。当同时配置这两个配置时，动态分配关闭，<code>spark.executor.instances</code>被使用</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.yarn.executor.memoryOverhead</code></td>
+<td style="text-align:center"><code>executorMemory * 0.10</code>，并且不小于<code>384m</code></td>
+<td style="text-align:left">每个<code>executor</code>分配的堆外内存。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.yarn.driver.memoryOverhead</code></td>
+<td style="text-align:center"><code>driverMemory * 0.10</code>，并且不小于<code>384m</code></td>
+<td style="text-align:left">在集群模式下，每个<code>driver</code>分配的堆外内存。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.yarn.am.memoryOverhead</code></td>
+<td style="text-align:center"><code>AM memory * 0.10</code>，并且不小于<code>384m</code></td>
+<td style="text-align:left">在客户端模式下，每个<code>driver</code>分配的堆外内存</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.yarn.am.port</code></td>
+<td style="text-align:center">随机</td>
+<td style="text-align:left"><code>Yarn</code> 应用<code>master</code>监听的端口。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.yarn.queue</code></td>
+<td style="text-align:center"><code>default</code></td>
+<td style="text-align:left">应用提交的<code>yarn</code>队列的名称</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>spark.yarn.jar</code></td>
+<td style="text-align:center"><code>none</code></td>
+<td style="text-align:left"><code>Jar</code>文件存放的地方。默认情况下，<code>spark jar</code>安装在本地，但是<code>jar</code>也可以放在<code>hdfs</code>上，其他机器也可以共享。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-客户端模式和集群模式的区别"><a href="#2-客户端模式和集群模式的区别" class="headerlink" title="2 客户端模式和集群模式的区别"></a>2 客户端模式和集群模式的区别</h2><p>&emsp;&emsp;这里我们要区分一下什么是客户端模式（<code>client mode</code>），什么是集群模式（<code>cluster mode</code>）。</p>
+<p>&emsp;&emsp;我们知道，当在<code>YARN</code>上运行<code>Spark</code>作业时，每个<code>Spark executor</code>作为一个<code>YARN</code>容器(<code>container</code>)运行。<code>Spark</code>可以使得多个<code>Tasks</code>在同一个容器(<code>container</code>)里面运行。<br><code>yarn-cluster</code>和<code>yarn-client</code>模式的区别其实就是<code>Application Master</code>进程的区别，在<code>yarn-cluster</code>模式下，<code>driver</code>运行在<code>AM</code>(<code>Application Master</code>)中，它负责向<code>YARN</code>申请资源，并监督作业的运行状况。当用户提交了作业之后，就可以关掉<code>Client</code>，作业会继续在<code>YARN</code>上运行。然而<code>yarn-cluster</code>模式不适合运行交互类型的作业。<br>在<code>yarn-client</code>模式下，<code>Application Master</code>仅仅向<code>YARN</code>请求<code>executor</code>，<code>client</code>会和请求的<code>container</code>通信来调度他们工作，也就是说<code>Client</code>不能离开。下面的图形象表示了两者的区别。</p>
+<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/1.1.png" alt="源码"></p>
+<p><img src="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/1.2.png" alt="源码"></p>
+<h3 id="2-1-Spark-on-YARN集群模式分析"><a href="#2-1-Spark-on-YARN集群模式分析" class="headerlink" title="2.1 Spark on YARN集群模式分析"></a>2.1 Spark on YARN集群模式分析</h3><h4 id="2-1-1-客户端操作"><a href="#2-1-1-客户端操作" class="headerlink" title="2.1.1 客户端操作"></a>2.1.1 客户端操作</h4><ul>
+<li><p>1、根据<code>yarnConf</code>来初始化<code>yarnClient</code>，并启动<code>yarnClient</code>；</p>
+</li>
+<li><p>2、创建客户端<code>Application</code>，并获取<code>Application</code>的<code>ID</code>，进一步判断集群中的资源是否满足<code>executor</code>和<code>ApplicationMaster</code>申请的资源，如果不满足则抛出<code>IllegalArgumentException</code>；</p>
+</li>
+<li><p>3、设置资源、环境变量：其中包括了设置<code>Application</code>的<code>Staging</code>目录、准备本地资源（<code>jar</code>文件、<code>log4j.properties</code>）、设置<code>Application</code>其中的环境变量、创建<code>Container</code>启动的<code>Context</code>等；</p>
+</li>
+<li><p>4、设置<code>Application</code>提交的<code>Context</code>，包括设置应用的名字、队列、<code>AM</code>的申请的<code>Container</code>、标记该作业的类型为<code>Spark</code>；</p>
+</li>
+<li><p>5、申请<code>Memory</code>，并最终通过<code>yarnClient.submitApplication</code>向<code>ResourceManager</code>提交该<code>Application</code>。</p>
+</li>
+</ul>
+<p>&emsp;&emsp;当作业提交到<code>YARN</code>上之后，客户端就没事了，甚至在终端关掉那个进程也没事，因为整个作业运行在<code>YARN</code>集群上进行，运行的结果将会保存到<code>HDFS</code>或者日志中。</p>
+<h4 id="2-1-2-提交到YARN集群，YARN操作"><a href="#2-1-2-提交到YARN集群，YARN操作" class="headerlink" title="2.1.2 提交到YARN集群，YARN操作"></a>2.1.2 提交到YARN集群，YARN操作</h4><ul>
+<li><p>1、运行<code>ApplicationMaster</code>的<code>run</code>方法；</p>
+</li>
+<li><p>2、设置好相关的环境变量。</p>
+</li>
+<li><p>3、创建<code>amClient</code>，并启动；</p>
+</li>
+<li><p>4、在<code>Spark UI</code>启动之前设置<code>Spark UI</code>的<code>AmIpFilter</code>；</p>
+</li>
+<li><p>5、在<code>startUserClass</code>函数专门启动了一个线程（名称为<code>Driver</code>的线程）来启动用户提交的<code>Application</code>，也就是启动了<code>Driver</code>。在<code>Driver</code>中将会初始化<code>SparkContext</code>；</p>
+</li>
+<li><p>6、等待<code>SparkContext</code>初始化完成，最多等待<code>spark.yarn.applicationMaster.waitTries</code>次数（默认为10），如果等待了的次数超过了配置的，程序将会退出；否则用<code>SparkContext</code>初始化<code>yarnAllocator</code>；</p>
+</li>
+<li><p>7、当<code>SparkContext、Driver</code>初始化完成的时候，通过<code>amClient</code>向<code>ResourceManager</code>注册<code>ApplicationMaster</code>;</p>
+</li>
+<li><p>8、分配并启动<code>Executeors</code>。在启动<code>Executeors</code>之前，先要通过<code>yarnAllocator</code>获取到<code>numExecutors</code>个<code>Container</code>，然后在<code>Container</code>中启动<code>Executeors</code>。<br>如果在启动<code>Executeors</code>的过程中失败的次数达到了<code>maxNumExecutorFailures</code>的次数，<code>maxNumExecutorFailures</code>的计算规则如下：</p>
+</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Default to numExecutors * 2, with minimum of 3</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> maxNumExecutorFailures = sparkConf.getInt(<span class="string">"spark.yarn.max.executor.failures"</span>,</span><br><span class="line">    sparkConf.getInt(<span class="string">"spark.yarn.max.worker.failures"</span>, math.max(args.numExecutors * <span class="number">2</span>, <span class="number">3</span>)))</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;那么这个<code>Application</code>将失败，将<code>Application Status</code>标明为<code>FAILED</code>，并将关闭<code>SparkContext</code>。其实，启动<code>Executeors</code>是通过<code>ExecutorRunnable</code>实现的，而<code>ExecutorRunnable</code>内部是启动<code>CoarseGrainedExecutorBackend</code>的。</p>
+<ul>
+<li>9、最后，<code>Task</code>将在<code>CoarseGrainedExecutorBackend</code>里面运行，然后运行状况会通过<code>Akka</code>通知<code>CoarseGrainedScheduler</code>，直到作业运行完成。</li>
+</ul>
+<h3 id="2-2-Spark-on-YARN客户端模式分析"><a href="#2-2-Spark-on-YARN客户端模式分析" class="headerlink" title="2.2 Spark on YARN客户端模式分析"></a>2.2 Spark on YARN客户端模式分析</h3><p>&emsp;&emsp;和<code>yarn-cluster</code>模式一样，整个程序也是通过<code>spark-submit</code>脚本提交的。但是<code>yarn-client</code>作业程序的运行不需要通过<code>Client</code>类来封装启动，而是直接通过反射机制调用作业的<code>main</code>函数。下面是流程。</p>
+<ul>
+<li><p>1、通过<code>SparkSubmit</code>类的<code>launch</code>的函数直接调用作业的<code>main</code>函数（通过反射机制实现），如果是集群模式就会调用<code>Client</code>的<code>main</code>函数。</p>
+</li>
+<li><p>2、而应用程序的<code>main</code>函数一定都有个<code>SparkContent</code>，并对其进行初始化；</p>
+</li>
+<li><p>3、在<code>SparkContent</code>初始化中将会依次做如下的事情：设置相关的配置、注册<code>MapOutputTracker、BlockManagerMaster、BlockManager</code>，创建<code>taskScheduler</code>和<code>dagScheduler</code>；</p>
+</li>
+<li><p>4、初始化完<code>taskScheduler</code>后，将创建<code>dagScheduler</code>，然后通过<code>taskScheduler.start()</code>启动<code>taskScheduler</code>，而在<code>taskScheduler</code>启动的过程中也会调用<code>SchedulerBackend</code>的<code>start</code>方法。<br>在<code>SchedulerBackend</code>启动的过程中将会初始化一些参数，封装在<code>ClientArguments</code>中，并将封装好的<code>ClientArguments</code>传进<code>Client</code>类中，并<code>client.runApp()</code>方法获取<code>Application ID</code>。</p>
+</li>
+<li><p>5、<code>client.runApp</code>里面的做的和上章客户端进行操作那节类似，不同的是在里面启动是<code>ExecutorLauncher</code>（<code>yarn-cluster</code>模式启动的是<code>ApplicationMaster</code>）。</p>
+</li>
+<li><p>6、在<code>ExecutorLauncher</code>里面会初始化并启动<code>amClient</code>，然后向<code>ApplicationMaster</code>注册该<code>Application</code>。注册完之后将会等待<code>driver</code>的启动，当<code>driver</code>启动完之后，会创建一个<code>MonitorActor</code>对象用于和<code>CoarseGrainedSchedulerBackend</code>进行通信（只有事件<code>AddWebUIFilter</code>他们之间才通信，<code>Task</code>的运行状况不是通过它和<code>CoarseGrainedSchedulerBackend</code>通信的）。<br>然后就是设置<code>addAmIpFilter</code>，当作业完成的时候，<code>ExecutorLauncher</code>将通过<code>amClient</code>设置<code>Application</code>的状态为<code>FinalApplicationStatus.SUCCEEDED</code>。</p>
+</li>
+<li><p>7、分配<code>Executors</code>，这里面的分配逻辑和<code>yarn-cluster</code>里面类似。</p>
+</li>
+<li><p>8、最后，<code>Task</code>将在<code>CoarseGrainedExecutorBackend</code>里面运行，然后运行状况会通过<code>Akka</code>通知<code>CoarseGrainedScheduler</code>，直到作业运行完成。</p>
+</li>
+<li><p>9、在作业运行的时候，<code>YarnClientSchedulerBackend</code>会每隔1秒通过<code>client</code>获取到作业的运行状况，并打印出相应的运行信息，当<code>Application</code>的状态是<code>FINISHED、FAILED</code>和<code>KILLED</code>中的一种，那么程序将退出等待。</p>
+</li>
+<li><p>10、最后有个线程会再次确认<code>Application</code>的状态，当<code>Application</code>的状态是<code>FINISHED、FAILED</code>和<code>KILLED</code>中的一种，程序就运行完成，并停止<code>SparkContext</code>。整个过程就结束了。</p>
+</li>
+</ul>
+<h2 id="3-spark-submit-和-spark-shell参数介绍"><a href="#3-spark-submit-和-spark-shell参数介绍" class="headerlink" title="3 spark submit 和 spark shell参数介绍"></a>3 spark submit 和 spark shell参数介绍</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">参数名</th>
+<th style="text-align:center">格式</th>
+<th style="text-align:left">参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">–master</td>
+<td style="text-align:center">MASTER_URL</td>
+<td style="text-align:left">如spark://host:port</td>
+</tr>
+<tr>
+<td style="text-align:center">–deploy-mode</td>
+<td style="text-align:center">DEPLOY_MODE</td>
+<td style="text-align:left">Client或者master，默认是client</td>
+</tr>
+<tr>
+<td style="text-align:center">–class</td>
+<td style="text-align:center">CLASS_NAME</td>
+<td style="text-align:left">应用程序的主类</td>
+</tr>
+<tr>
+<td style="text-align:center">–name</td>
+<td style="text-align:center">NAME</td>
+<td style="text-align:left">应用程序的名称</td>
+</tr>
+<tr>
+<td style="text-align:center">–jars</td>
+<td style="text-align:center">JARS</td>
+<td style="text-align:left">逗号分隔的本地jar包，包含在driver和executor的classpath下</td>
+</tr>
+<tr>
+<td style="text-align:center">–packages</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">包含在driver和executor的classpath下的jar包逗号分隔的”groupId:artifactId：version”列表</td>
+</tr>
+<tr>
+<td style="text-align:center">–exclude-packages</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">用逗号分隔的”groupId:artifactId”列表</td>
+</tr>
+<tr>
+<td style="text-align:center">–repositories</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">逗号分隔的远程仓库</td>
+</tr>
+<tr>
+<td style="text-align:center">–py-files</td>
+<td style="text-align:center">PY_FILES</td>
+<td style="text-align:left">逗号分隔的”.zip”,”.egg”或者“.py”文件，这些文件放在python app的PYTHONPATH下面</td>
+</tr>
+<tr>
+<td style="text-align:center">–files</td>
+<td style="text-align:center">FILES</td>
+<td style="text-align:left">逗号分隔的文件，这些文件放在每个executor的工作目录下面</td>
+</tr>
+<tr>
+<td style="text-align:center">–conf</td>
+<td style="text-align:center">PROP=VALUE</td>
+<td style="text-align:left">固定的spark配置属性</td>
+</tr>
+<tr>
+<td style="text-align:center">–properties-file</td>
+<td style="text-align:center">FILE</td>
+<td style="text-align:left">加载额外属性的文件</td>
+</tr>
+<tr>
+<td style="text-align:center">–driver-memory</td>
+<td style="text-align:center">MEM</td>
+<td style="text-align:left">Driver内存，默认1G</td>
+</tr>
+<tr>
+<td style="text-align:center">–driver-java-options</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">传给driver的额外的Java选项</td>
+</tr>
+<tr>
+<td style="text-align:center">–driver-library-path</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">传给driver的额外的库路径</td>
+</tr>
+<tr>
+<td style="text-align:center">–driver-class-path</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">传给driver的额外的类路径</td>
+</tr>
+<tr>
+<td style="text-align:center">–executor-memory</td>
+<td style="text-align:center">MEM</td>
+<td style="text-align:left">每个executor的内存，默认是1G</td>
+</tr>
+<tr>
+<td style="text-align:center">–proxy-user</td>
+<td style="text-align:center">NAME</td>
+<td style="text-align:left">模拟提交应用程序的用户</td>
+</tr>
+<tr>
+<td style="text-align:center">–driver-cores</td>
+<td style="text-align:center">NUM</td>
+<td style="text-align:left">Driver的核数，默认是1。这个参数<strong>仅仅在standalone集群deploy模式下使用</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">–supervise</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Driver失败时，重启driver。<strong>在mesos或者standalone下使用</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">–verbose</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">打印debug信息</td>
+</tr>
+<tr>
+<td style="text-align:center">–total-executor-cores</td>
+<td style="text-align:center">NUM</td>
+<td style="text-align:left">所有executor总共的核数。<strong>仅仅在mesos或者standalone下使用</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">–executor-core</td>
+<td style="text-align:center">NUM</td>
+<td style="text-align:left">每个executor的核数。<strong>在yarn或者standalone下使用</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">–driver-cores</td>
+<td style="text-align:center">NUM</td>
+<td style="text-align:left">Driver的核数，默认是1。<strong>在yarn集群模式下使用</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">–queue</td>
+<td style="text-align:center">QUEUE_NAME</td>
+<td style="text-align:left">队列名称。<strong>在yarn下使用</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">–num-executors</td>
+<td style="text-align:center">NUM</td>
+<td style="text-align:left">启动的executor数量。默认为2。<strong>在yarn下使用</strong></td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;你可以通过<code>spark-submit --help</code>或者<code>spark-shell --help</code>来查看这些参数。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/并行计算/" rel="tag"># 并行计算</a>
+          
+            <a href="/tags/spark/" rel="tag"># spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/28/2019-1-28-spark 数据本地性级别/" rel="next" title="spark 数据本地性级别">
+                <i class="fa fa-chevron-left"></i> spark 数据本地性级别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DaiLe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MrDLontheway" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:726575153@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005055405104110/home" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/726575153Mr" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/people/Le-Dai/100023921135287" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#spark参数介绍"><span class="nav-number">1.</span> <span class="nav-text">spark参数介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-spark-on-yarn常用属性介绍"><span class="nav-number">1.1.</span> <span class="nav-text">1 spark on yarn常用属性介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-客户端模式和集群模式的区别"><span class="nav-number">1.2.</span> <span class="nav-text">2 客户端模式和集群模式的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Spark-on-YARN集群模式分析"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 Spark on YARN集群模式分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-客户端操作"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">2.1.1 客户端操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-提交到YARN集群，YARN操作"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">2.1.2 提交到YARN集群，YARN操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Spark-on-YARN客户端模式分析"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 Spark on YARN客户端模式分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-spark-submit-和-spark-shell参数介绍"><span class="nav-number">1.3.</span> <span class="nav-text">3 spark submit 和 spark shell参数介绍</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DaiLe</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
