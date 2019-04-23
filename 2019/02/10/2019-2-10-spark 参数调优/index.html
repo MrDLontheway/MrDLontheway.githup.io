@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="并行计算,spark," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="spark参数调优1 Shuffle Behavior—conf &amp;quot;spark.shuffle.compress=false&amp;quot;默认true  设置shuffle 网络io 是否压缩 若网络io成为瓶颈建议true 若为cpu计算密集型 建议false 如果下游的Task通过网络获取上游Shuffle Map Task的结果的网络IO成为瓶颈，那么就需要考虑将它设置为true：通">
+<meta name="keywords" content="并行计算,spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spark 参数调优(version 2.2.0) 持续更新...">
+<meta property="og:url" content="https://mrdlontheway.github.io/2019/02/10/2019-2-10-spark 参数调优/index.html">
+<meta property="og:site_name" content="DaiLe&#39;s blog">
+<meta property="og:description" content="spark参数调优1 Shuffle Behavior—conf &amp;quot;spark.shuffle.compress=false&amp;quot;默认true  设置shuffle 网络io 是否压缩 若网络io成为瓶颈建议true 若为cpu计算密集型 建议false 如果下游的Task通过网络获取上游Shuffle Map Task的结果的网络IO成为瓶颈，那么就需要考虑将它设置为true：通">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-23T08:28:35.983Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spark 参数调优(version 2.2.0) 持续更新...">
+<meta name="twitter:description" content="spark参数调优1 Shuffle Behavior—conf &amp;quot;spark.shuffle.compress=false&amp;quot;默认true  设置shuffle 网络io 是否压缩 若网络io成为瓶颈建议true 若为cpu计算密集型 建议false 如果下游的Task通过网络获取上游Shuffle Map Task的结果的网络IO成为瓶颈，那么就需要考虑将它设置为true：通">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mrdlontheway.github.io/2019/02/10/2019-2-10-spark 参数调优/"/>
+
+
+
+
+
+  <title>spark 参数调优(version 2.2.0) 持续更新... | DaiLe's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DaiLe's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2019/02/10/2019-2-10-spark 参数调优/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spark 参数调优(version 2.2.0) 持续更新...</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-10T10:09:08+08:00">
+                2019-02-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="spark参数调优"><a href="#spark参数调优" class="headerlink" title="spark参数调优"></a>spark参数调优</h1><h2 id="1-Shuffle-Behavior"><a href="#1-Shuffle-Behavior" class="headerlink" title="1 Shuffle Behavior"></a>1 Shuffle Behavior</h2><h3 id="—conf-quot-spark-shuffle-compress-false-quot"><a href="#—conf-quot-spark-shuffle-compress-false-quot" class="headerlink" title="—conf &quot;spark.shuffle.compress=false&quot;"></a><code>—conf &quot;spark.shuffle.compress=false&quot;</code></h3><p>默认true  设置shuffle 网络io 是否压缩 若网络io成为瓶颈建议true 若为cpu计算密集型 建议false</p>
+<p>如果下游的Task通过网络获取上游Shuffle Map Task的结果的网络IO成为瓶颈，那么就需要考虑将它设置为true：通过压缩数<br>据来减少网络IO。由于上游Shuffle Map Task和下游的Task现阶段是不会并行处理的，即上游Shuffle Map Task处理完成，<br>然后下游的Task才会开始执行。因此如果需要压缩的时间消耗就是Shuffle MapTask压缩数据的时间 + 网络传输的时间 +<br>下游Task解压的时间；而不需要压缩的时间消耗仅仅是网络传输的时间。因此需要评估压缩解压时间带来的时间消耗和因为数据<br>压缩带来的时间节省。如果网络成为瓶颈，比如集群普遍使用的是千兆网络，那么可能将这个选项设置为true是合理的；<br>如果计算是CPU密集型的，那么可能将这个选项设置为false才更好。</p>
+<h3 id="conf-quot-spark-shuffle-spill-compress-false-quot"><a href="#conf-quot-spark-shuffle-spill-compress-false-quot" class="headerlink" title="--conf &quot;spark.shuffle.spill.compress=false&quot;"></a><code>--conf &quot;spark.shuffle.spill.compress=false&quot;</code></h3><p>默认true  设置磁盘 disk io 是否压缩  若磁盘io成为瓶颈则建议设置true </p>
+<p>如果设置为true，代表处理的中间结果在spill到本地硬盘时都会进行压缩，在将中间结果取回进行merge的时候，要进行解压。<br>因此要综合考虑CPU由于引入压缩解压的消耗时间和Disk IO因为压缩带来的节省时间的比较。在Disk IO成为瓶颈的场景下，<br>这个被设置为true可能比较合适；如果本地硬盘是SSD，那么这个设置为false可能比较合适。</p>
+<h2 id="2-Spark-UI"><a href="#2-Spark-UI" class="headerlink" title="2 Spark UI"></a>2 Spark UI</h2><h3 id="conf-quot-spark-ui-retainedJobs-20-quot"><a href="#conf-quot-spark-ui-retainedJobs-20-quot" class="headerlink" title="--conf &quot;spark.ui.retainedJobs=20&quot;"></a><code>--conf &quot;spark.ui.retainedJobs=20&quot;</code></h3><p>ui上保存的job总数 默认为1000</p>
+<h3 id="conf-quot-spark-ui-retainedStages-40-quot"><a href="#conf-quot-spark-ui-retainedStages-40-quot" class="headerlink" title="--conf &quot;spark.ui.retainedStages=40&quot;"></a><code>--conf &quot;spark.ui.retainedStages=40&quot;</code></h3><p>ui上保存的stages总数 默认为1000</p>
+<h3 id="conf-quot-spark-sql-ui-retainedExecutions-0-quot"><a href="#conf-quot-spark-sql-ui-retainedExecutions-0-quot" class="headerlink" title="--conf &quot;spark.sql.ui.retainedExecutions=0&quot;"></a><code>--conf &quot;spark.sql.ui.retainedExecutions=0&quot;</code></h3><p>ui sql tab上保存的sql记录数，如果不需要调优平时可以直接关掉</p>
+<h3 id="conf-quot-spark-streaming-ui-retainedBatches-40-quot"><a href="#conf-quot-spark-streaming-ui-retainedBatches-40-quot" class="headerlink" title="--conf &quot;spark.streaming.ui.retainedBatches=40&quot;"></a><code>--conf &quot;spark.streaming.ui.retainedBatches=40&quot;</code></h3><p>ui streaming tab上保存的批处理日志数，默认为1000</p>
+<h3 id="conf-quot-spark-ui-retainedStages-40-quot-1"><a href="#conf-quot-spark-ui-retainedStages-40-quot-1" class="headerlink" title="--conf &quot;spark.ui.retainedStages=40&quot;"></a><code>--conf &quot;spark.ui.retainedStages=40&quot;</code></h3><p>ui上保存的stages总数 默认为1000</p>
+<p>全部调低大概可以节省几百M左右内存</p>
+<h2 id="3-Compression-and-Serialization"><a href="#3-Compression-and-Serialization" class="headerlink" title="3 Compression and Serialization"></a>3 Compression and Serialization</h2><h3 id="conf-quot-spark-io-compression-codec-org-apache-spark-io-SnappyCompressionCodec-quot"><a href="#conf-quot-spark-io-compression-codec-org-apache-spark-io-SnappyCompressionCodec-quot" class="headerlink" title="--conf &quot;spark.io.compression.codec=org.apache.spark.io.SnappyCompressionCodec&quot;"></a><code>--conf &quot;spark.io.compression.codec=org.apache.spark.io.SnappyCompressionCodec&quot;</code></h3><p>默认lz4</p>
+<p>用于压缩内部数据的编解码器，例如RDD分区，事件日志，广播变量和随机输出。默认情况下，<br>Spark提供三种编解码器：lz4，lzf和snappy。还可以使用完全限定的类名来指定编解码器，</p>
+<p>org.apache.spark.io.LZ4CompressionCodec （非常快速的压缩算法）</p>
+<p>org.apache.spark.io.LZFCompressionCodec</p>
+<p>org.apache.spark.io.SnappyCompressionCodec （快速压缩和解压缩）</p>
+<ul>
+<li><p>snappy 从各个方面是相对均衡的压缩算法，使用场景比较多</p>
+</li>
+<li><p>lz4 是了解到各方面都比较优越的算法，但是hbase 由于许可证的原因，至少目前用不了这个东西</p>
+</li>
+</ul>
+<h2 id="4-Spark-Streaming"><a href="#4-Spark-Streaming" class="headerlink" title="4 Spark Streaming"></a>4 Spark Streaming</h2><h3 id="conf-quot-spark-streaming-stopGracefullyOnShutdown-true-quot"><a href="#conf-quot-spark-streaming-stopGracefullyOnShutdown-true-quot" class="headerlink" title="--conf &quot;spark.streaming.stopGracefullyOnShutdown=true&quot;"></a><code>--conf &quot;spark.streaming.stopGracefullyOnShutdown=true&quot;</code></h3><p>优雅的关闭spark streaming 任务  这样可以在diver 退出之前处理完所有已经已经接收的数据</p>
+<h3 id="conf-quot-spark-streaming-kafka-consumer-cache-enabled-false-quot"><a href="#conf-quot-spark-streaming-kafka-consumer-cache-enabled-false-quot" class="headerlink" title="--conf &quot;spark.streaming.kafka.consumer.cache.enabled=false&quot;"></a><code>--conf &quot;spark.streaming.kafka.consumer.cache.enabled=false&quot;</code></h3><p>如果spark的批次时间batchTime超过了kafka的心跳时间（30s），需要增加hearbeat.interval.ms以及<br>session.timeout.ms。加入batchTime是5min，那么就需要调整group.max.session.timeout.ms。<br>消费者缓存默认为最大64条，如果希望处理超过（64*executor数量）kafka的分区，<br>可以调节spark.streaming.kafka.consumer.cache.maxCapacity 这个参数。<br>另外，可以调节spark.streaming.kafka.consumer.cache.enable=false来禁止缓存，可以解决Spark-19185的bug。</p>
+<h3 id="conf-quot-spark-streaming-backpressure-enabled-true-quot-Spark-Streaming-Back-Pressure-（反压）-spark-1-5-引入"><a href="#conf-quot-spark-streaming-backpressure-enabled-true-quot-Spark-Streaming-Back-Pressure-（反压）-spark-1-5-引入" class="headerlink" title="--conf &quot;spark.streaming.backpressure.enabled=true&quot; Spark Streaming Back Pressure （反压） spark 1.5 引入"></a><code>--conf &quot;spark.streaming.backpressure.enabled=true&quot;</code> Spark Streaming Back Pressure （反压） spark 1.5 引入</h3><ul>
+<li>spark.streaming.backpressure.initialRate： 启用反压机制时每个接收器接收第一批数据的初始最大速率。默认值没有设置。</li>
+<li>spark.streaming.backpressure.rateEstimator：速率估算器类，默认值为 pid ，目前 Spark 只支持这个，大家可以根据自己的需要实现。</li>
+<li>spark.streaming.backpressure.pid.proportional：用于响应错误的权重（最后批次和当前批次之间的更改）。默认值为1，只能设置成非负值。</li>
+<li>spark.streaming.backpressure.pid.integral：错误积累的响应权重，具有抑制作用（有效阻尼）。默认值为 0.2 ，只能设置成非负值。</li>
+<li>spark.streaming.backpressure.pid.derived：对错误趋势的响应权重。 这可能会引起 batch size 的波动，可以帮助快速增加/减少容量。默认值为0，只能设置成非负值。</li>
+<li>spark.streaming.backpressure.pid.minRate：可以估算的最低费率是多少。默认值为 100，只能设置成非负值。</li>
+</ul>
+<h2 id="5-Memory-Management-内存管理"><a href="#5-Memory-Management-内存管理" class="headerlink" title="5 Memory Management 内存管理"></a>5 Memory Management 内存管理</h2><h3 id="堆外内存-Spark-2-0-引入"><a href="#堆外内存-Spark-2-0-引入" class="headerlink" title="堆外内存 Spark 2.0 引入"></a>堆外内存 Spark 2.0 引入</h3><p>spark 2.0 后 加入了堆外内存 也就是jvm以外的操作 避免了gc问题 以及jvm 内的类型转换 所以在spark 数据类型设置的时候<br>最好初始化就配置好尽量不要更改 列入 string format date , int to string 这种类型转换操作 因为所有的算子操作都是基于<br>堆外内存二进制数据执行计算的</p>
+<p>在默认情况下堆外内存并不启用，可通过配置 spark.memory.offHeap.enabled 参数启用，并由<br>spark.memory.offHeap.size 参数设定堆外空间的大小。除了没有 other 空间，堆外内存与堆内内存的划分方式相同，<br>所有运行中的并发任务共享存储内存和执行内存。</p>
+<h3 id="动态内存分配-spark-1-6-引入"><a href="#动态内存分配-spark-1-6-引入" class="headerlink" title="动态内存分配 spark 1.6 引入"></a>动态内存分配 spark 1.6 引入</h3><p>Spark中内存主要用于两类目的：执行计算和数据存储。执行计算的内存主要用于Shuffle、关联（join）、排序（sort）以及聚合（aggregation），而数据存储的内存主要用于缓存和集群内部数据传播。Spark中执行计算和数据存储都是共享同一个内存区域（M）。 如果执行计算没有占用内存，那么数据存储可以申请占用所有可用的内存，反之亦然。执行计算可能会抢占数据存储使用的内存，并将存储于内存的数据逐出内存，直到数据存储占用的内存比例降低到一个指定的比例（R）。 换句话说，R是M基础上的一个子区域，这个区域的内存数据永远不会被逐出内存。然而，数据存储不会抢占执行计算的内存。</p>
+<p>这样设计主要有这么几个需要考虑的点。首先，不需要缓存数据的应用可以把整个空间用来执行计算，从而避免频繁地把数据吐到磁盘上。其次，需要缓存数据的应用能够有一个数据存储比例（R）的最低保证，也避免这部分缓存数据被全部逐出内存。最后，这个实现方式能够在默认情况下，为大多数使用场景提供合理的性能，而不需要专家级用户来设置内存使用如何划分。</p>
+<p>虽然有两个内存划分相关的配置参数，但一般来说，用户不需要设置，因为默认值已经能够适用于绝大部分的使用场景：</p>
+<p>spark.memory.fraction:表示上面M的大小，其值为相对于JVM堆内存的比例（默认0.75）。剩余的25%是为其他用户的数据结构、Spark内部元数据以及避免OOM错误的安全预留空间。<br>spark.memory.storageFraction:表示上面R的大小，其值为相对于M的一个比例（默认0.5）。R是M中专门用于缓存数据块的部分，这部分数据块永远不会因执行计算任务而逐出内存。</p>
+<h2 id="last-疑难杂症解决"><a href="#last-疑难杂症解决" class="headerlink" title="last 疑难杂症解决"></a>last 疑难杂症解决</h2><p>spark on yarn cluster ==&gt;file.encoding 字符集是 ANSI_X3.4-1968</p>
+<p><code>--conf &#39;spark.executor.extraJavaOptions=-Dfile.encoding=UTF-8&#39;</code></p>
+<p><code>--conf &#39;spark.driver.extraJavaOptions=-Dfile.encoding=utf-8&#39;</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/并行计算/" rel="tag"># 并行计算</a>
+          
+            <a href="/tags/spark/" rel="tag"># spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/02/2019-2-2-spark 参数/" rel="next" title="spark 参数介绍">
+                <i class="fa fa-chevron-left"></i> spark 参数介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DaiLe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MrDLontheway" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:726575153@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005055405104110/home" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/726575153Mr" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/people/Le-Dai/100023921135287" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#spark参数调优"><span class="nav-number">1.</span> <span class="nav-text">spark参数调优</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Shuffle-Behavior"><span class="nav-number">1.1.</span> <span class="nav-text">1 Shuffle Behavior</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#—conf-quot-spark-shuffle-compress-false-quot"><span class="nav-number">1.1.1.</span> <span class="nav-text">—conf &quot;spark.shuffle.compress=false&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conf-quot-spark-shuffle-spill-compress-false-quot"><span class="nav-number">1.1.2.</span> <span class="nav-text">--conf &quot;spark.shuffle.spill.compress=false&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Spark-UI"><span class="nav-number">1.2.</span> <span class="nav-text">2 Spark UI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#conf-quot-spark-ui-retainedJobs-20-quot"><span class="nav-number">1.2.1.</span> <span class="nav-text">--conf &quot;spark.ui.retainedJobs=20&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conf-quot-spark-ui-retainedStages-40-quot"><span class="nav-number">1.2.2.</span> <span class="nav-text">--conf &quot;spark.ui.retainedStages=40&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conf-quot-spark-sql-ui-retainedExecutions-0-quot"><span class="nav-number">1.2.3.</span> <span class="nav-text">--conf &quot;spark.sql.ui.retainedExecutions=0&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conf-quot-spark-streaming-ui-retainedBatches-40-quot"><span class="nav-number">1.2.4.</span> <span class="nav-text">--conf &quot;spark.streaming.ui.retainedBatches=40&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conf-quot-spark-ui-retainedStages-40-quot-1"><span class="nav-number">1.2.5.</span> <span class="nav-text">--conf &quot;spark.ui.retainedStages=40&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Compression-and-Serialization"><span class="nav-number">1.3.</span> <span class="nav-text">3 Compression and Serialization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#conf-quot-spark-io-compression-codec-org-apache-spark-io-SnappyCompressionCodec-quot"><span class="nav-number">1.3.1.</span> <span class="nav-text">--conf &quot;spark.io.compression.codec=org.apache.spark.io.SnappyCompressionCodec&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Spark-Streaming"><span class="nav-number">1.4.</span> <span class="nav-text">4 Spark Streaming</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#conf-quot-spark-streaming-stopGracefullyOnShutdown-true-quot"><span class="nav-number">1.4.1.</span> <span class="nav-text">--conf &quot;spark.streaming.stopGracefullyOnShutdown=true&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conf-quot-spark-streaming-kafka-consumer-cache-enabled-false-quot"><span class="nav-number">1.4.2.</span> <span class="nav-text">--conf &quot;spark.streaming.kafka.consumer.cache.enabled=false&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conf-quot-spark-streaming-backpressure-enabled-true-quot-Spark-Streaming-Back-Pressure-（反压）-spark-1-5-引入"><span class="nav-number">1.4.3.</span> <span class="nav-text">--conf &quot;spark.streaming.backpressure.enabled=true&quot; Spark Streaming Back Pressure （反压） spark 1.5 引入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Memory-Management-内存管理"><span class="nav-number">1.5.</span> <span class="nav-text">5 Memory Management 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#堆外内存-Spark-2-0-引入"><span class="nav-number">1.5.1.</span> <span class="nav-text">堆外内存 Spark 2.0 引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态内存分配-spark-1-6-引入"><span class="nav-number">1.5.2.</span> <span class="nav-text">动态内存分配 spark 1.6 引入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#last-疑难杂症解决"><span class="nav-number">1.6.</span> <span class="nav-text">last 疑难杂症解决</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DaiLe</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
