@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="kafka 实现原理以及知识点小结  Kafka的特性:   高吞吐量、低延迟：kafka每秒可以处理几十万条消息，它的延迟最低只有几毫秒，每个topic可以分多个partition, consumer group 对partition进行consume操作。 可扩展性：kafka集群支持热扩展 持久性、可靠性：消息被持久化到本地磁盘，并且支持数据备份防止数据丢失 容错性：允许集群中节点失败（若副">
+<meta name="description" content="kafka 实现原理以及知识点小结 Kafka的特性:  高吞吐量、低延迟：kafka每秒可以处理几十万条消息，它的延迟最低只有几毫秒，每个topic可以分多个partition, consumer group 对partition进行consume操作。 可扩展性：kafka集群支持热扩展 持久性、可靠性：消息被持久化到本地磁盘，并且支持数据备份防止数据丢失 容错性：允许集群中节点失败（若副本数">
 <meta name="keywords" content="学习历程,kafka">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kafka 实现原理以及知识点小结">
 <meta property="og:url" content="https://mrdlontheway.github.io/2018/07/20/2018-07-25-kafka 实现原理以及知识点小结/index.html">
 <meta property="og:site_name" content="DaiLe&#39;s blog">
-<meta property="og:description" content="kafka 实现原理以及知识点小结  Kafka的特性:   高吞吐量、低延迟：kafka每秒可以处理几十万条消息，它的延迟最低只有几毫秒，每个topic可以分多个partition, consumer group 对partition进行consume操作。 可扩展性：kafka集群支持热扩展 持久性、可靠性：消息被持久化到本地磁盘，并且支持数据备份防止数据丢失 容错性：允许集群中节点失败（若副">
+<meta property="og:description" content="kafka 实现原理以及知识点小结 Kafka的特性:  高吞吐量、低延迟：kafka每秒可以处理几十万条消息，它的延迟最低只有几毫秒，每个topic可以分多个partition, consumer group 对partition进行consume操作。 可扩展性：kafka集群支持热扩展 持久性、可靠性：消息被持久化到本地磁盘，并且支持数据备份防止数据丢失 容错性：允许集群中节点失败（若副本数">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-19T06:54:02.000Z">
+<meta property="og:updated_time" content="2019-12-09T03:06:22.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kafka 实现原理以及知识点小结">
-<meta name="twitter:description" content="kafka 实现原理以及知识点小结  Kafka的特性:   高吞吐量、低延迟：kafka每秒可以处理几十万条消息，它的延迟最低只有几毫秒，每个topic可以分多个partition, consumer group 对partition进行consume操作。 可扩展性：kafka集群支持热扩展 持久性、可靠性：消息被持久化到本地磁盘，并且支持数据备份防止数据丢失 容错性：允许集群中节点失败（若副">
+<meta name="twitter:description" content="kafka 实现原理以及知识点小结 Kafka的特性:  高吞吐量、低延迟：kafka每秒可以处理几十万条消息，它的延迟最低只有几毫秒，每个topic可以分多个partition, consumer group 对partition进行consume操作。 可扩展性：kafka集群支持热扩展 持久性、可靠性：消息被持久化到本地磁盘，并且支持数据备份防止数据丢失 容错性：允许集群中节点失败（若副本数">
 
 
 
@@ -352,10 +352,8 @@
       
 
       
-        <h1>kafka 实现原理以及知识点小结</h1>
-
-<h2>Kafka的特性:</h2>
-
+        <p></p><h1>kafka 实现原理以及知识点小结</h1><p></p>
+<p></p><h2>Kafka的特性:</h2><p></p>
 <ul>
 <li>高吞吐量、低延迟：kafka每秒可以处理几十万条消息，它的延迟最低只有几毫秒，每个topic可以分多个partition, consumer group 对partition进行consume操作。</li>
 <li>可扩展性：kafka集群支持热扩展</li>
@@ -363,8 +361,7 @@
 <li>容错性：允许集群中节点失败（若副本数量为n,则允许n-1个节点失败）</li>
 <li>高并发：支持数千个客户端同时读写</li>
 </ul>
-<h2>Kafka的使用场景：</h2>
-
+<p></p><h2>Kafka的使用场景：</h2><p></p>
 <ul>
 <li>日志收集：一个公司可以用Kafka可以收集各种服务的log，通过kafka以统一接口服务的方式开放给各种consumer，例如hadoop、Hbase、Solr等。</li>
 <li>消息系统：解耦和生产者和消费者、缓存消息等。</li>
@@ -375,9 +372,7 @@
 </ul>
 <p>一般来说，（1）一个Topic的Partition数量大于等于Broker的数量，可以提高吞吐率。（2）同一个Partition的Replica尽量分散到不同的机器，高可用。<br>  当add a new partition的时候，partition里面的message不会重新进行分配，原来的partition里面的message数据不会变，新加的这个partition刚开始是空的，随后进入这个topic的message就会重新参与所有partition的load balance</p>
 <p>（replica副本数目不能大于kafka broker节点的数目，否则报错。这里的replica数其实就是partition的副本总数，其中包括一个leader，其他的就是copy副本）这样如果某个broker宕机，其实整个kafka内数据依然是完整的。但是，replica副本数越高，系统虽然越稳定，但是回来带资源和性能上的下降；replica副本少的话，也会造成系统丢数据的风险。</p>
-<h2>消息投递可靠性</h2>
-
-<p>一个消息如何算投递成功，Kafka提供了三种模式：</p>
+<p></p><h2>消息投递可靠性</h2><br>一个消息如何算投递成功，Kafka提供了三种模式：<p></p>
 <ul>
 <li>第一种是啥都不管，发送出去就当作成功，这种情况当然不能保证消息成功投递到broker；</li>
 <li>第二种是Master-Slave模型，只有当Master和所有Slave都接收到消息时，才算投递成功，这种模型提供了最高的投递可靠性，但是损伤了性能；</li>
@@ -388,21 +383,23 @@
 <li><p>Partition ack：当ack=1，表示producer写partition leader成功后，broker就返回成功，无论其他的partition follower是否写成功。当ack=2，表示producer写partition leader和其他一个follower成功的时候，broker就返回成功，无论其他的partition follower是否写成功。当ack=-1[parition的数量]的时候，表示只有producer全部写成功的时候，才算成功，kafka broker才返回成功信息。这里需要注意的是，如果ack=1的时候，一旦有个broker宕机导致partition的follower和leader切换，会导致丢数据。</p>
 </li>
 </ul>
-<h1>kafka源码分析</h1>
-
-<h2>核心组件</h2>
-
-<p>1。SocketServer ＋ KafkaApis 前者接收所有网络请求，后者处理请求 </p>
+<p></p><h1>kafka源码分析</h1><p></p>
+<p></p><h2>核心组件</h2><br>1。SocketServer ＋ KafkaApis 前者接收所有网络请求，后者处理请求 <p></p>
 <p>2。KafkaController 负责Controller选举 </p>
 <p>3。ConsumerCoordinator 前面在分析consumer的时候已经讲过，用于consumer group的负载均衡 </p>
 <p>4。ReplicaManager 机器的管理 </p>
 <p>5。KafkaSchedule</p>
-<h2>kafka controller 选举的机制</h2>
-
-<p>整个选举过程是通过zk上的一个临时节点来实现的：/controller节点，其data结构为：核心信息就是记录当前的controller的brokerId。<br>“version” -&gt; 1, “brokerid” -&gt; brokerId, “timestamp” -&gt; timestamp<br>1<br>当controller挂了，其它所有broker监听到此临时节点消失，然后争相创建此临时节点，谁创建成功，谁就成为新的Controller。<br>除了/controller节点，还有一个辅助的/controller_epoch，记录当前Controller的轮值数。<br>（1）KafkaController和ZookeeperLeaderElector内部各有1个Listener，一个监听session重连，1个监听/controller节点变化。<br>（2）当session重连，或者/controller节点被删除，则调用elect()函数，发起重新选举。在重新选举之前，先判断自己是否旧的Controller，如果是，则先调用onResignation退位。 </p>
-<h3>Failover(上任)与Resignation(退位)</h3><br>关键点：接管所有对broker/partition节点的监听<br><br>关键点：放弃对所有broker/partition的监听<br><br><h2>kafka ReplicaManager</h2><br><br>ReplicaManager：负责管理当前broker所有分区和副本的信息，会处理KafkaController发起的一些请求，副本状态的切换，添加/读取消息等<br>接收controller命令<br><br>1）接受LeaderAndISRCommand命令 2）接受StopReplicaCommand命令 3）开启定时线程maybeShrinkIsr<br><br>1）LeaderAndISRCommand命令 接受到LeaderAndIsrRequest指令时，会调用ReplicaManager的becomeLeaderOrFollower函数<br>主要是筛选出分配给该broker的partition的副本，并且根据lead是否为该brokerId区分为leader和follower，然后分别进入不同的流程<br><br>2）接受StopReplicaCommand命令<br>当broker stop或用户删除某replica时，KafkaServer会接受到StopReplicaRequest指令，此时会调用ReplicaManager的stopReplicas函数：<br><br>3）开启定时线程maybeShrinkIsr<br><br><h3>partition的leader定时副本过期检查:</h3><br>通过ReplicaManager启动时,定期调用maybeShrinkIsr函数来进行处理,<br>当follower的副本向leader的副本进行数据同步操作时，如果副本已经读取到leader的log的最后的offset部分时，表示这个副本同步达到最新的副本状态，会更新每一个副本的心跳时间，这个函数定期检查这个心跳时间是否超过了配置的时间，如果超过了，就会移出这个副本在isr上的选择。<br><br><br><h2>Coordinator</h2><br><br><h3>1.Broker端的Coordinator:</h3>
-
-<p>Kafka的group management protocol包括以下的动作序列：</p>
+<p></p><h2>kafka controller 选举的机制</h2><br>整个选举过程是通过zk上的一个临时节点来实现的：/controller节点，其data结构为：核心信息就是记录当前的controller的brokerId。<br>“version” -&gt; 1, “brokerid” -&gt; brokerId, “timestamp” -&gt; timestamp<br>1<br>当controller挂了，其它所有broker监听到此临时节点消失，然后争相创建此临时节点，谁创建成功，谁就成为新的Controller。<br>除了/controller节点，还有一个辅助的/controller_epoch，记录当前Controller的轮值数。<br>（1）KafkaController和ZookeeperLeaderElector内部各有1个Listener，一个监听session重连，1个监听/controller节点变化。<br>（2）当session重连，或者/controller节点被删除，则调用elect()函数，发起重新选举。在重新选举之前，先判断自己是否旧的Controller，如果是，则先调用onResignation退位。 <p></p>
+<p></p><h3>Failover(上任)与Resignation(退位)</h3><br>关键点：接管所有对broker/partition节点的监听<p></p>
+<p>关键点：放弃对所有broker/partition的监听</p>
+<p></p><h2>kafka ReplicaManager</h2><br>ReplicaManager：负责管理当前broker所有分区和副本的信息，会处理KafkaController发起的一些请求，副本状态的切换，添加/读取消息等<br>接收controller命令<p></p>
+<p>1）接受LeaderAndISRCommand命令 2）接受StopReplicaCommand命令 3）开启定时线程maybeShrinkIsr</p>
+<p>1）LeaderAndISRCommand命令 接受到LeaderAndIsrRequest指令时，会调用ReplicaManager的becomeLeaderOrFollower函数<br>主要是筛选出分配给该broker的partition的副本，并且根据lead是否为该brokerId区分为leader和follower，然后分别进入不同的流程</p>
+<p>2）接受StopReplicaCommand命令<br>当broker stop或用户删除某replica时，KafkaServer会接受到StopReplicaRequest指令，此时会调用ReplicaManager的stopReplicas函数：</p>
+<p>3）开启定时线程maybeShrinkIsr</p>
+<p></p><h3>partition的leader定时副本过期检查:</h3><br>通过ReplicaManager启动时,定期调用maybeShrinkIsr函数来进行处理,<br>当follower的副本向leader的副本进行数据同步操作时，如果副本已经读取到leader的log的最后的offset部分时，表示这个副本同步达到最新的副本状态，会更新每一个副本的心跳时间，这个函数定期检查这个心跳时间是否超过了配置的时间，如果超过了，就会移出这个副本在isr上的选择。<p></p>
+<p></p><h2>Coordinator</h2><p></p>
+<p></p><h3>1.Broker端的Coordinator:</h3><br>Kafka的group management protocol包括以下的动作序列：<p></p>
 <p>Group Registration：Group的成员需要向cooridnator注册自己，并且提供关于成员自身的元数据(比如，这个消费成员想要消费的topic)</p>
 <p>Group/Leader Selection：cooridnator确定这个group包括哪些成员，并且选择其中的一个作为leader。</p>
 <p>State Assignment: leader收集所有成员的metadata，并且给它们分配状态(state，可以理解为资源，或者任务)。</p>
@@ -412,9 +409,7 @@
 <p>所有的consumer线程要先向coordinator注册，由coordinator选出leader, 然后由leader来分配state。 从group memeber里选出来一个做为leader，由leader来执行性能开销大的协调任务, 这样把负载分配到client端，可以减轻broker的压力，支持更多数量的消费组。</p>
 <p>所有group member(指的是consumer线程)都需要发心跳给coordinator，这样coordinator才能确定group的成员。</p>
 <p>对于Kafka consumer，它的实际上必须跟coordinator保持连接，因为它还需要提交offset给coordinator。所以coordinator实际上负责commit offset，那么，即使leader来确定状态的分配，但是每个partition的消费起始点，还需要coordinator来确定。</p>
-<h3>2.Consumer消费者的工作过程：</h3>
-
-<p>在consumer启动时或者coordinator节点故障转移时，consumer发送ConsumerMetadataRequest给任意一个brokers。在ConsumerMetadataResponse中，它接收对应的Consumer Group所属的Coordinator的位置信息。<br>Consumer连接Coordinator节点，并发送HeartbeatRequest。如果返回的HeartbeatResponse中返回IllegalGeneration错误码，说明协调节点已经在初始化平衡。消费者就会停止抓取数据，提交offsets，发送JoinGroupRequest给协调节点。在JoinGroupResponse，它接收消费者应该拥有的topic-partitions列表以及当前Consumer Group的新的generation编号。这个时候Consumer Group管理已经完成，Consumer就可以开始fetch数据，并为它拥有的partitions提交offsets。<br>如果HeartbeatResponse没有错误返回，Consumer会从它上次拥有的partitions列表继续抓取数据，这个过程是不会被中断的。</p>
+<p></p><h3>2.Consumer消费者的工作过程：</h3><br>在consumer启动时或者coordinator节点故障转移时，consumer发送ConsumerMetadataRequest给任意一个brokers。在ConsumerMetadataResponse中，它接收对应的Consumer Group所属的Coordinator的位置信息。<br>Consumer连接Coordinator节点，并发送HeartbeatRequest。如果返回的HeartbeatResponse中返回IllegalGeneration错误码，说明协调节点已经在初始化平衡。消费者就会停止抓取数据，提交offsets，发送JoinGroupRequest给协调节点。在JoinGroupResponse，它接收消费者应该拥有的topic-partitions列表以及当前Consumer Group的新的generation编号。这个时候Consumer Group管理已经完成，Consumer就可以开始fetch数据，并为它拥有的partitions提交offsets。<br>如果HeartbeatResponse没有错误返回，Consumer会从它上次拥有的partitions列表继续抓取数据，这个过程是不会被中断的。<p></p>
 <p></p><h3>3.Coordinator存储的信息有什么</h3><br>对于每个Consumer Group，Coordinator会存储以下信息：<p></p>
 <p>1) 对每个存在的topic，可以有多个消费组group订阅同一个topic(对应消息系统中的广播)</p>
 <p>2) 对每个Consumer Group，元数据如下：</p>
@@ -423,8 +418,7 @@
 <p>组中每个Consumer的元数据。包括主机名，consumer id</p>
 <p>每个正在消费的topic partition的当前offsets</p>
 <p>Partition的ownership元数据，包括consumer消费的partitions映射关系</p>
-<h1>kafka执行流程</h1>
-
+<p></p><h1>kafka执行流程</h1><p></p>
 <p></p><h3>producer生产消息流程</h3><br>1、构建一个KafkaProducer对象，初始化一些用到的组件，比如缓存区，Sender线程等<p></p>
 <p>2、如果配置了拦截器，可用对发送的消息进行可定制化的拦截或更改</p>
 <p>3、对Key,value进行序列化</p>
@@ -557,7 +551,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -579,7 +573,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -696,7 +690,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

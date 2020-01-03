@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Kafka 源码解析," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Kafka 源码解析Kafka Producer Send Message1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586">
+<meta name="keywords" content="Kafka 源码解析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka 源码解析">
+<meta property="og:url" content="https://mrdlontheway.github.io/2019/12/09/2019-12-9 Kafka 源码解析/index.html">
+<meta property="og:site_name" content="DaiLe&#39;s blog">
+<meta property="og:description" content="Kafka 源码解析Kafka Producer Send Message1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-12-09T06:17:09.217Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kafka 源码解析">
+<meta name="twitter:description" content="Kafka 源码解析Kafka Producer Send Message1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mrdlontheway.github.io/2019/12/09/2019-12-9 Kafka 源码解析/"/>
+
+
+
+
+
+  <title>Kafka 源码解析 | DaiLe's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DaiLe's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2019/12/09/2019-12-9 Kafka 源码解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kafka 源码解析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-09T16:43:08+08:00">
+                2019-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Kafka-源码解析"><a href="#Kafka-源码解析" class="headerlink" title="Kafka 源码解析"></a>Kafka 源码解析</h1><h2 id="Kafka-Producer-Send-Message"><a href="#Kafka-Producer-Send-Message" class="headerlink" title="Kafka Producer Send Message"></a>Kafka Producer Send Message</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//kafka cluent 通过 send api 发送message</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Future&lt;RecordMetadata&gt; <span class="title">send</span><span class="params">(ProducerRecord&lt;K, V&gt; record, Callback callback)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// intercept the record, which can be potentially modified; this method does not throw exceptions</span></span><br><span class="line">    ProducerRecord&lt;K, V&gt; interceptedRecord = <span class="keyword">this</span>.interceptors.onSend(record);</span><br><span class="line">    <span class="keyword">return</span> doSend(interceptedRecord, callback);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**kafka 异步发送数据实现 kafka 默认async 异步发送数据</span></span><br><span class="line"><span class="comment"> * Implementation of asynchronously send a record to a topic.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> Future&lt;RecordMetadata&gt; <span class="title">doSend</span><span class="params">(ProducerRecord&lt;K, V&gt; record, Callback callback)</span> </span>&#123;</span><br><span class="line">    TopicPartition tp = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        throwIfProducerClosed();</span><br><span class="line">        <span class="comment">// first make sure the metadata for the topic is available</span></span><br><span class="line">        ClusterAndWaitTime clusterAndWaitTime;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            clusterAndWaitTime = waitOnMetadata(record.topic(), record.partition(), maxBlockTimeMs);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (KafkaException e) &#123;</span><br><span class="line">            <span class="keyword">if</span> (metadata.isClosed())</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> KafkaException(<span class="string">"Producer closed while send in progress"</span>, e);</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> remainingWaitMs = Math.max(<span class="number">0</span>, maxBlockTimeMs - clusterAndWaitTime.waitedOnMetadataMs);</span><br><span class="line">        Cluster cluster = clusterAndWaitTime.cluster;</span><br><span class="line">        <span class="keyword">byte</span>[] serializedKey;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            serializedKey = keySerializer.serialize(record.topic(), record.headers(), record.key());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassCastException cce) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> SerializationException(<span class="string">"Can't convert key of class "</span> + record.key().getClass().getName() +</span><br><span class="line">                    <span class="string">" to class "</span> + producerConfig.getClass(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG).getName() +</span><br><span class="line">                    <span class="string">" specified in key.serializer"</span>, cce);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">byte</span>[] serializedValue;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            serializedValue = valueSerializer.serialize(record.topic(), record.headers(), record.value());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassCastException cce) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> SerializationException(<span class="string">"Can't convert value of class "</span> + record.value().getClass().getName() +</span><br><span class="line">                    <span class="string">" to class "</span> + producerConfig.getClass(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG).getName() +</span><br><span class="line">                    <span class="string">" specified in value.serializer"</span>, cce);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//计算数据所在分区 若未指定分区生成策略 使用DefaultPartitioner </span></span><br><span class="line">        <span class="comment">//Key不为空 keyBytes hash % availablePartitions</span></span><br><span class="line">        <span class="comment">//Key为空 内置AtomicInteger 通过getAndIncrement() % availablePartitions 均分每个</span></span><br><span class="line">        <span class="keyword">int</span> partition = partition(record, serializedKey, serializedValue, cluster);</span><br><span class="line">        tp = <span class="keyword">new</span> TopicPartition(record.topic(), partition);</span><br><span class="line"></span><br><span class="line">        setReadOnly(record.headers());</span><br><span class="line">        Header[] headers = record.headers().toArray();</span><br><span class="line">        <span class="comment">//估算消息的大小</span></span><br><span class="line">        <span class="keyword">int</span> serializedSize = AbstractRecords.estimateSizeInBytesUpperBound(apiVersions.maxUsableProduceMagic(),</span><br><span class="line">                compressionType, serializedKey, serializedValue, headers);</span><br><span class="line">        ensureValidRecordSize(serializedSize);</span><br><span class="line">        <span class="keyword">long</span> timestamp = record.timestamp() == <span class="keyword">null</span> ? time.milliseconds() : record.timestamp();</span><br><span class="line">        log.trace(<span class="string">"Sending record &#123;&#125; with callback &#123;&#125; to topic &#123;&#125; partition &#123;&#125;"</span>, record, callback, record.topic(), partition);</span><br><span class="line">        <span class="comment">// producer callback will make sure to call both 'callback' and interceptor callback</span></span><br><span class="line">        Callback interceptCallback = <span class="keyword">new</span> InterceptorCallback&lt;&gt;(callback, <span class="keyword">this</span>.interceptors, tp);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (transactionManager != <span class="keyword">null</span> &amp;&amp; transactionManager.isTransactional())</span><br><span class="line">            transactionManager.maybeAddPartitionToTransaction(tp);</span><br><span class="line">        <span class="comment">//加入队列容器 Sender后续会从队列拿数据发送</span></span><br><span class="line">        RecordAccumulator.RecordAppendResult result = accumulator.append(tp, timestamp, serializedKey,</span><br><span class="line">                serializedValue, headers, interceptCallback, remainingWaitMs);</span><br><span class="line">        <span class="keyword">if</span> (result.batchIsFull || result.newBatchCreated) &#123; <span class="comment">//如果队列已满 或者新队列</span></span><br><span class="line">            log.trace(<span class="string">"Waking up the sender since topic &#123;&#125; partition &#123;&#125; is either full or getting a new batch"</span>, record.topic(), partition);</span><br><span class="line">            <span class="keyword">this</span>.sender.wakeup();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result.future;</span><br><span class="line">        <span class="comment">// handling exceptions and record the errors;</span></span><br><span class="line">        <span class="comment">// for API exceptions return them in the future,</span></span><br><span class="line">        <span class="comment">// for other exceptions throw directly</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (ApiException e) &#123;</span><br><span class="line">        log.debug(<span class="string">"Exception occurred during message send:"</span>, e);</span><br><span class="line">        <span class="keyword">if</span> (callback != <span class="keyword">null</span>)</span><br><span class="line">            callback.onCompletion(<span class="keyword">null</span>, e);</span><br><span class="line">        <span class="keyword">this</span>.errors.record();</span><br><span class="line">        <span class="keyword">this</span>.interceptors.onSendError(record, tp, e);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> FutureFailure(e);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        <span class="keyword">this</span>.errors.record();</span><br><span class="line">        <span class="keyword">this</span>.interceptors.onSendError(record, tp, e);</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> InterruptException(e);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (BufferExhaustedException e) &#123;</span><br><span class="line">        <span class="keyword">this</span>.errors.record();</span><br><span class="line">        <span class="keyword">this</span>.metrics.sensor(<span class="string">"buffer-exhausted-records"</span>).record();</span><br><span class="line">        <span class="keyword">this</span>.interceptors.onSendError(record, tp, e);</span><br><span class="line">        <span class="keyword">throw</span> e;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (KafkaException e) &#123;</span><br><span class="line">        <span class="keyword">this</span>.errors.record();</span><br><span class="line">        <span class="keyword">this</span>.interceptors.onSendError(record, tp, e);</span><br><span class="line">        <span class="keyword">throw</span> e;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="comment">// we notify interceptor about all exceptions, since onSend is called before anything else in this method</span></span><br><span class="line">        <span class="keyword">this</span>.interceptors.onSendError(record, tp, e);</span><br><span class="line">        <span class="keyword">throw</span> e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//accumulator.append 流程</span></span><br><span class="line"><span class="comment">//RecordAccumulator 内batches 是producer 内缓存message </span></span><br><span class="line"><span class="comment">//private final ConcurrentMap&lt;TopicPartition, Deque&lt;ProducerBatch&gt;&gt; batches;</span></span><br><span class="line"><span class="comment">//以topic + partition 计算hashcode  value 是batch message 队列</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> RecordAppendResult <span class="title">append</span><span class="params">(TopicPartition tp,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="keyword">long</span> timestamp,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="keyword">byte</span>[] key,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="keyword">byte</span>[] value,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 Header[] headers,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 Callback callback,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="keyword">long</span> maxTimeToBlock)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="comment">// We keep track of the number of appending thread to make sure we do not miss batches in</span></span><br><span class="line">    <span class="comment">// abortIncompleteBatches().</span></span><br><span class="line">    appendsInProgress.incrementAndGet();</span><br><span class="line">    ByteBuffer buffer = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (headers == <span class="keyword">null</span>) headers = Record.EMPTY_HEADERS;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//从缓存中根据messgage topic partition 拿到队列 </span></span><br><span class="line">        Deque&lt;ProducerBatch&gt; dq = getOrCreateDeque(tp);</span><br><span class="line">        <span class="keyword">synchronized</span> (dq) &#123;</span><br><span class="line">            <span class="keyword">if</span> (closed)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> KafkaException(<span class="string">"Producer closed while send in progress"</span>);</span><br><span class="line">            RecordAppendResult appendResult = tryAppend(timestamp, key, value, headers, callback, dq);</span><br><span class="line">            <span class="keyword">if</span> (appendResult != <span class="keyword">null</span>)</span><br><span class="line">                <span class="keyword">return</span> appendResult;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// we don't have an in-progress record batch try to allocate a new batch</span></span><br><span class="line">        <span class="keyword">byte</span> maxUsableMagic = apiVersions.maxUsableProduceMagic();</span><br><span class="line">        <span class="comment">//估算数据所需空间</span></span><br><span class="line">        <span class="keyword">int</span> size = Math.max(<span class="keyword">this</span>.batchSize, AbstractRecords.estimateSizeInBytesUpperBound(maxUsableMagic, compression, key, value, headers));</span><br><span class="line">        log.trace(<span class="string">"Allocating a new &#123;&#125; byte message buffer for topic &#123;&#125; partition &#123;&#125;"</span>, size, tp.topic(), tp.partition());</span><br><span class="line">        <span class="comment">//申请缓存</span></span><br><span class="line">        buffer = free.allocate(size, maxTimeToBlock);</span><br><span class="line">        <span class="keyword">synchronized</span> (dq) &#123;</span><br><span class="line">            <span class="comment">// Need to check if producer is closed again after grabbing the dequeue lock.</span></span><br><span class="line">            <span class="keyword">if</span> (closed)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> KafkaException(<span class="string">"Producer closed while send in progress"</span>);</span><br><span class="line"></span><br><span class="line">            RecordAppendResult appendResult = tryAppend(timestamp, key, value, headers, callback, dq);</span><br><span class="line">            <span class="keyword">if</span> (appendResult != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// Somebody else found us a batch, return the one we waited for! Hopefully this doesn't happen often...</span></span><br><span class="line">                <span class="keyword">return</span> appendResult;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            MemoryRecordsBuilder recordsBuilder = recordsBuilder(buffer, maxUsableMagic);</span><br><span class="line">            ProducerBatch batch = <span class="keyword">new</span> ProducerBatch(tp, recordsBuilder, time.milliseconds());</span><br><span class="line">            <span class="comment">//ProducerBatch 追加数据</span></span><br><span class="line">            FutureRecordMetadata future = Utils.notNull(batch.tryAppend(timestamp, key, value, headers, callback, time.milliseconds()));</span><br><span class="line"></span><br><span class="line">            <span class="comment">//加入队列</span></span><br><span class="line">            dq.addLast(batch);</span><br><span class="line">            incomplete.add(batch);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Don't deallocate this buffer in the finally block as it's being used in the record batch</span></span><br><span class="line">            buffer = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> RecordAppendResult(future, dq.size() &gt; <span class="number">1</span> || batch.isFull(), <span class="keyword">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="comment">//资源回收</span></span><br><span class="line">        <span class="keyword">if</span> (buffer != <span class="keyword">null</span>)</span><br><span class="line">            free.deallocate(buffer);</span><br><span class="line">        appendsInProgress.decrementAndGet();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//至此本地数据封装缓存完毕</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//发送数据流程 </span></span><br><span class="line"><span class="comment">//Kafka 内 private final Sender sender;负责将RecordAccumulator batches 上面添加的数据发送到指定kafka broker</span></span><br><span class="line"><span class="comment">//Sender 实现Runnable </span></span><br><span class="line"><span class="comment">// main loop, runs until close is called 循环发送数据 直到关闭</span></span><br><span class="line"><span class="keyword">while</span> (running) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        runOnce();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        log.error(<span class="string">"Uncaught error in kafka producer I/O thread: "</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Run a single iteration of sending</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">runOnce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (transactionManager != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            transactionManager.resetProducerIdIfNeeded();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!transactionManager.isTransactional()) &#123;</span><br><span class="line">                <span class="comment">// this is an idempotent producer, so make sure we have a producer id</span></span><br><span class="line">                maybeWaitForProducerId();</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (transactionManager.hasUnresolvedSequences() &amp;&amp; !transactionManager.hasFatalError()) &#123;</span><br><span class="line">                transactionManager.transitionToFatalError(</span><br><span class="line">                    <span class="keyword">new</span> KafkaException(<span class="string">"The client hasn't received acknowledgment for "</span> +</span><br><span class="line">                        <span class="string">"some previously sent messages and can no longer retry them. It isn't safe to continue."</span>));</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (maybeSendAndPollTransactionalRequest()) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// do not continue sending if the transaction manager is in a failed state or if there</span></span><br><span class="line">            <span class="comment">// is no producer id (for the idempotent case).</span></span><br><span class="line">            <span class="keyword">if</span> (transactionManager.hasFatalError() || !transactionManager.hasProducerId()) &#123;</span><br><span class="line">                RuntimeException lastError = transactionManager.lastError();</span><br><span class="line">                <span class="keyword">if</span> (lastError != <span class="keyword">null</span>)</span><br><span class="line">                    maybeAbortBatches(lastError);</span><br><span class="line">                client.poll(retryBackoffMs, time.milliseconds());</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (transactionManager.hasAbortableError()) &#123;</span><br><span class="line">                accumulator.abortUndrainedBatches(transactionManager.lastError());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (AuthenticationException e) &#123;</span><br><span class="line">            <span class="comment">// This is already logged as error, but propagated here to perform any clean ups.</span></span><br><span class="line">            log.trace(<span class="string">"Authentication exception while processing transactional request: &#123;&#125;"</span>, e);</span><br><span class="line">            transactionManager.authenticationFailed(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">long</span> currentTimeMs = time.milliseconds();</span><br><span class="line">  	<span class="comment">//发送producer data</span></span><br><span class="line">    <span class="keyword">long</span> pollTimeout = sendProducerData(currentTimeMs);</span><br><span class="line">    client.poll(pollTimeout, currentTimeMs);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">long</span> <span class="title">sendProducerData</span><span class="params">(<span class="keyword">long</span> now)</span> </span>&#123;</span><br><span class="line">    Cluster cluster = metadata.fetch();<span class="comment">//通过 MetadataRequest 获取集群元数据信息</span></span><br><span class="line">    <span class="comment">// get the list of partitions with data ready to send</span></span><br><span class="line">    RecordAccumulator.ReadyCheckResult result = <span class="keyword">this</span>.accumulator.ready(cluster, now);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// if there are any partitions whose leaders are not known yet, force metadata update</span></span><br><span class="line">    <span class="keyword">if</span> (!result.unknownLeaderTopics.isEmpty()) &#123;</span><br><span class="line">        <span class="comment">// The set of topics with unknown leader contains topics with leader election pending as well as</span></span><br><span class="line">        <span class="comment">// topics which may have expired. Add the topic again to metadata to ensure it is included</span></span><br><span class="line">        <span class="comment">// and request metadata update, since there are messages to send to the topic.</span></span><br><span class="line">        <span class="keyword">for</span> (String topic : result.unknownLeaderTopics)</span><br><span class="line">            <span class="keyword">this</span>.metadata.add(topic);</span><br><span class="line"></span><br><span class="line">        log.debug(<span class="string">"Requesting metadata update due to unknown leader topics from the batched records: &#123;&#125;"</span>,</span><br><span class="line">            result.unknownLeaderTopics);</span><br><span class="line">        <span class="keyword">this</span>.metadata.requestUpdate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// remove any nodes we aren't ready to send to</span></span><br><span class="line">    Iterator&lt;Node&gt; iter = result.readyNodes.iterator();</span><br><span class="line">    <span class="keyword">long</span> notReadyTimeout = Long.MAX_VALUE;</span><br><span class="line">    <span class="keyword">while</span> (iter.hasNext()) &#123;</span><br><span class="line">        Node node = iter.next();</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.client.ready(node, now)) &#123;</span><br><span class="line">            iter.remove();</span><br><span class="line">            notReadyTimeout = Math.min(notReadyTimeout, <span class="keyword">this</span>.client.pollDelayMs(node, now));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// create produce requests </span></span><br><span class="line">    <span class="comment">//将batches 内批量message 从metaData中 获取对应header节点  key broker_id value batch data</span></span><br><span class="line">    Map&lt;Integer, List&lt;ProducerBatch&gt;&gt; batches = <span class="keyword">this</span>.accumulator.drain(cluster, result.readyNodes, <span class="keyword">this</span>.maxRequestSize, now);</span><br><span class="line">    addToInflightBatches(batches);</span><br><span class="line">    <span class="keyword">if</span> (guaranteeMessageOrder) &#123;</span><br><span class="line">        <span class="comment">// Mute all the partitions drained</span></span><br><span class="line">        <span class="keyword">for</span> (List&lt;ProducerBatch&gt; batchList : batches.values()) &#123;</span><br><span class="line">            <span class="keyword">for</span> (ProducerBatch batch : batchList)</span><br><span class="line">                <span class="keyword">this</span>.accumulator.mutePartition(batch.topicPartition);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    accumulator.resetNextBatchExpiryTime();</span><br><span class="line">    List&lt;ProducerBatch&gt; expiredInflightBatches = getExpiredInflightBatches(now);</span><br><span class="line">    List&lt;ProducerBatch&gt; expiredBatches = <span class="keyword">this</span>.accumulator.expiredBatches(now);</span><br><span class="line">    expiredBatches.addAll(expiredInflightBatches);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Reset the producer id if an expired batch has previously been sent to the broker. Also update the metrics</span></span><br><span class="line">    <span class="comment">// for expired batches. see the documentation of @TransactionState.resetProducerId to understand why</span></span><br><span class="line">    <span class="comment">// we need to reset the producer id here.</span></span><br><span class="line">    <span class="keyword">if</span> (!expiredBatches.isEmpty())</span><br><span class="line">        log.trace(<span class="string">"Expired &#123;&#125; batches in accumulator"</span>, expiredBatches.size());</span><br><span class="line">    <span class="keyword">for</span> (ProducerBatch expiredBatch : expiredBatches) &#123;</span><br><span class="line">        String errorMessage = <span class="string">"Expiring "</span> + expiredBatch.recordCount + <span class="string">" record(s) for "</span> + expiredBatch.topicPartition</span><br><span class="line">            + <span class="string">":"</span> + (now - expiredBatch.createdMs) + <span class="string">" ms has passed since batch creation"</span>;</span><br><span class="line">        failBatch(expiredBatch, -<span class="number">1</span>, NO_TIMESTAMP, <span class="keyword">new</span> TimeoutException(errorMessage), <span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">if</span> (transactionManager != <span class="keyword">null</span> &amp;&amp; expiredBatch.inRetry()) &#123;</span><br><span class="line">            <span class="comment">// This ensures that no new batches are drained until the current in flight batches are fully resolved.</span></span><br><span class="line">            transactionManager.markSequenceUnresolved(expiredBatch.topicPartition);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sensors.updateProduceRequestMetrics(batches);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If we have any nodes that are ready to send + have sendable data, poll with 0 timeout so this can immediately</span></span><br><span class="line">    <span class="comment">// loop and try sending more data. Otherwise, the timeout will be the smaller value between next batch expiry</span></span><br><span class="line">    <span class="comment">// time, and the delay time for checking data availability. Note that the nodes may have data that isn't yet</span></span><br><span class="line">    <span class="comment">// sendable due to lingering, backing off, etc. This specifically does not include nodes with sendable data</span></span><br><span class="line">    <span class="comment">// that aren't ready to send since they would cause busy looping.</span></span><br><span class="line">    <span class="keyword">long</span> pollTimeout = Math.min(result.nextReadyCheckDelayMs, notReadyTimeout);</span><br><span class="line">    pollTimeout = Math.min(pollTimeout, <span class="keyword">this</span>.accumulator.nextExpiryTimeMs() - now);</span><br><span class="line">    pollTimeout = Math.max(pollTimeout, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (!result.readyNodes.isEmpty()) &#123;</span><br><span class="line">        log.trace(<span class="string">"Nodes with data ready to send: &#123;&#125;"</span>, result.readyNodes);</span><br><span class="line">        <span class="comment">// if some partitions are already ready to be sent, the select time would be 0;</span></span><br><span class="line">        <span class="comment">// otherwise if some partition already has some data accumulated but not ready yet,</span></span><br><span class="line">        <span class="comment">// the select time will be the time difference between now and its linger expiry time;</span></span><br><span class="line">        <span class="comment">// otherwise the select time will be the time difference between now and the metadata expiry time;</span></span><br><span class="line">        pollTimeout = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//将 batches 数据封装ProduceRequest 发送对应leader</span></span><br><span class="line">    sendProduceRequests(batches, now);</span><br><span class="line">    <span class="keyword">return</span> pollTimeout;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//封装ProduceRequest 然后通过network client 发送对应 leader</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sendProduceRequest</span><span class="params">(<span class="keyword">long</span> now, <span class="keyword">int</span> destination, <span class="keyword">short</span> acks, <span class="keyword">int</span> timeout, List&lt;ProducerBatch&gt; batches)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (batches.isEmpty())</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    Map&lt;TopicPartition, MemoryRecords&gt; produceRecordsByPartition = <span class="keyword">new</span> HashMap&lt;&gt;(batches.size());</span><br><span class="line">    <span class="keyword">final</span> Map&lt;TopicPartition, ProducerBatch&gt; recordsByPartition = <span class="keyword">new</span> HashMap&lt;&gt;(batches.size());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// find the minimum magic version used when creating the record sets</span></span><br><span class="line">    <span class="keyword">byte</span> minUsedMagic = apiVersions.maxUsableProduceMagic();</span><br><span class="line">    <span class="keyword">for</span> (ProducerBatch batch : batches) &#123;</span><br><span class="line">        <span class="keyword">if</span> (batch.magic() &lt; minUsedMagic)</span><br><span class="line">            minUsedMagic = batch.magic();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (ProducerBatch batch : batches) &#123;</span><br><span class="line">        TopicPartition tp = batch.topicPartition;</span><br><span class="line">        MemoryRecords records = batch.records();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// down convert if necessary to the minimum magic used. In general, there can be a delay between the time</span></span><br><span class="line">        <span class="comment">// that the producer starts building the batch and the time that we send the request, and we may have</span></span><br><span class="line">        <span class="comment">// chosen the message format based on out-dated metadata. In the worst case, we optimistically chose to use</span></span><br><span class="line">        <span class="comment">// the new message format, but found that the broker didn't support it, so we need to down-convert on the</span></span><br><span class="line">        <span class="comment">// client before sending. This is intended to handle edge cases around cluster upgrades where brokers may</span></span><br><span class="line">        <span class="comment">// not all support the same message format version. For example, if a partition migrates from a broker</span></span><br><span class="line">        <span class="comment">// which is supporting the new magic version to one which doesn't, then we will need to convert.</span></span><br><span class="line">        <span class="keyword">if</span> (!records.hasMatchingMagic(minUsedMagic))</span><br><span class="line">            records = batch.records().downConvert(minUsedMagic, <span class="number">0</span>, time).records();</span><br><span class="line">        produceRecordsByPartition.put(tp, records);</span><br><span class="line">        recordsByPartition.put(tp, batch);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    String transactionalId = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (transactionManager != <span class="keyword">null</span> &amp;&amp; transactionManager.isTransactional()) &#123;</span><br><span class="line">        transactionalId = transactionManager.transactionalId();</span><br><span class="line">    &#125;</span><br><span class="line">    ProduceRequest.Builder requestBuilder = ProduceRequest.Builder.forMagic(minUsedMagic, acks, timeout,</span><br><span class="line">            produceRecordsByPartition, transactionalId);</span><br><span class="line">    RequestCompletionHandler callback = <span class="keyword">new</span> RequestCompletionHandler() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onComplete</span><span class="params">(ClientResponse response)</span> </span>&#123;</span><br><span class="line">            handleProduceResponse(response, recordsByPartition, time.milliseconds());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    String nodeId = Integer.toString(destination);</span><br><span class="line">    ClientRequest clientRequest = client.newClientRequest(nodeId, requestBuilder, now, acks != <span class="number">0</span>,</span><br><span class="line">            requestTimeoutMs, callback);</span><br><span class="line">    client.send(clientRequest, now);</span><br><span class="line">    log.trace(<span class="string">"Sent produce request to &#123;&#125;: &#123;&#125;"</span>, nodeId, requestBuilder);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>producer 发送数据流程如下</p>
+<p>1.sendMessage 根据分区策略计算分区  根据compress 封装MemoryRecordsBuilder 生成MemoryRecord</p>
+<p>2.MemoryRecordsBuilder 生成ProducerBatch 加入RecordAccumulator batchs 队列</p>
+<p>3.通过MetadataRequest 获取集群元数据信息 Sender 线程 将batchs 数据 topic+partition 生成对应到该分区leader节点的 ProducerRequest 请求 最终通过Network Client发送  </p>
+<h2 id="Kafka-Broker-Recive-Message-hanle-ProducerRequest"><a href="#Kafka-Broker-Recive-Message-hanle-ProducerRequest" class="headerlink" title="Kafka Broker Recive Message( hanle ProducerRequest)"></a>Kafka Broker Recive Message( hanle ProducerRequest)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//处理producer Request</span></span><br><span class="line"><span class="function">def <span class="title">handleProduceRequest</span><span class="params">(request: RequestChannel.Request)</span>: Unit </span>= &#123;</span><br><span class="line">  val produceRequest = request.body[ProduceRequest]<span class="comment">//request 请求主体 ack 信息 memory record (messageData)</span></span><br><span class="line">  val numBytesAppended = request.header.toStruct.sizeOf + request.sizeOfBodyInBytes</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (produceRequest.hasTransactionalRecords) &#123;</span><br><span class="line">    val isAuthorizedTransactional = produceRequest.transactionalId != <span class="keyword">null</span> &amp;&amp;</span><br><span class="line">      authorize(request, WRITE, TRANSACTIONAL_ID, produceRequest.transactionalId)</span><br><span class="line">    <span class="keyword">if</span> (!isAuthorizedTransactional) &#123;</span><br><span class="line">      sendErrorResponseMaybeThrottle(request, Errors.TRANSACTIONAL_ID_AUTHORIZATION_FAILED.exception)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Note that authorization to a transactionalId implies ProducerId authorization</span></span><br><span class="line"></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (produceRequest.hasIdempotentRecords &amp;&amp; !authorize(request, IDEMPOTENT_WRITE, CLUSTER, CLUSTER_NAME)) &#123;</span><br><span class="line">    sendErrorResponseMaybeThrottle(request, Errors.CLUSTER_AUTHORIZATION_FAILED.exception)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  val unauthorizedTopicResponses = mutable.Map[TopicPartition, PartitionResponse]()</span><br><span class="line">  val nonExistingTopicResponses = mutable.Map[TopicPartition, PartitionResponse]()</span><br><span class="line">  val invalidRequestResponses = mutable.Map[TopicPartition, PartitionResponse]()</span><br><span class="line">  val authorizedRequestInfo = mutable.Map[TopicPartition, MemoryRecords]()<span class="comment">//通过权限认证的MemoryRecords</span></span><br><span class="line">  val authorizedTopics = filterAuthorized(request, WRITE, TOPIC,</span><br><span class="line">    produceRequest.partitionRecordsOrFail.asScala.toSeq.map(_._1.topic))</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> ((topicPartition, memoryRecords) &lt;- produceRequest.partitionRecordsOrFail.asScala) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!authorizedTopics.contains(topicPartition.topic))</span><br><span class="line">      unauthorizedTopicResponses += topicPartition -&gt; <span class="keyword">new</span> PartitionResponse(Errors.TOPIC_AUTHORIZATION_FAILED)</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (!metadataCache.contains(topicPartition))</span><br><span class="line">      nonExistingTopicResponses += topicPartition -&gt; <span class="keyword">new</span> PartitionResponse(Errors.UNKNOWN_TOPIC_OR_PARTITION)</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        ProduceRequest.validateRecords(request.header.apiVersion(), memoryRecords)</span><br><span class="line">        authorizedRequestInfo += (topicPartition -&gt; memoryRecords)</span><br><span class="line">      &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> e: ApiException =&gt;</span><br><span class="line">          invalidRequestResponses += topicPartition -&gt; <span class="keyword">new</span> PartitionResponse(Errors.forException(e))</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// the callback for sending a produce response</span></span><br><span class="line">  <span class="function">def <span class="title">sendResponseCallback</span><span class="params">(responseStatus: Map[TopicPartition, PartitionResponse])</span>: Unit </span>= &#123;</span><br><span class="line">    val mergedResponseStatus = responseStatus ++ unauthorizedTopicResponses ++ nonExistingTopicResponses ++ invalidRequestResponses</span><br><span class="line">    var errorInResponse = <span class="keyword">false</span></span><br><span class="line"></span><br><span class="line">    mergedResponseStatus.foreach &#123; <span class="keyword">case</span> (topicPartition, status) =&gt;</span><br><span class="line">      <span class="keyword">if</span> (status.error != Errors.NONE) &#123;</span><br><span class="line">        errorInResponse = <span class="keyword">true</span></span><br><span class="line">        debug(<span class="string">"Produce request with correlation id %d from client %s on partition %s failed due to %s"</span>.format(</span><br><span class="line">          request.header.correlationId,</span><br><span class="line">          request.header.clientId,</span><br><span class="line">          topicPartition,</span><br><span class="line">          status.error.exceptionName))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// When this callback is triggered, the remote API call has completed</span></span><br><span class="line">    request.apiRemoteCompleteTimeNanos = time.nanoseconds</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Record both bandwidth and request quota-specific values and throttle by muting the channel if any of the quotas</span></span><br><span class="line">    <span class="comment">// have been violated. If both quotas have been violated, use the max throttle time between the two quotas. Note</span></span><br><span class="line">    <span class="comment">// that the request quota is not enforced if acks == 0.</span></span><br><span class="line">    val bandwidthThrottleTimeMs = quotas.produce.maybeRecordAndGetThrottleTimeMs(request, numBytesAppended, time.milliseconds())</span><br><span class="line">    val requestThrottleTimeMs = <span class="keyword">if</span> (produceRequest.acks == <span class="number">0</span>) <span class="number">0</span> <span class="keyword">else</span> quotas.request.maybeRecordAndGetThrottleTimeMs(request)</span><br><span class="line">    val maxThrottleTimeMs = Math.max(bandwidthThrottleTimeMs, requestThrottleTimeMs)</span><br><span class="line">    <span class="keyword">if</span> (maxThrottleTimeMs &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (bandwidthThrottleTimeMs &gt; requestThrottleTimeMs) &#123;</span><br><span class="line">        quotas.produce.throttle(request, bandwidthThrottleTimeMs, sendResponse)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        quotas.request.throttle(request, requestThrottleTimeMs, sendResponse)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Send the response immediately. In case of throttling, the channel has already been muted.</span></span><br><span class="line">    <span class="comment">//ack 为0 无需等待response 记录log 关闭连接</span></span><br><span class="line">    <span class="keyword">if</span> (produceRequest.acks == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="comment">// no operation needed if producer request.required.acks = 0; however, if there is any error in handling</span></span><br><span class="line">      <span class="comment">// the request, since no response is expected by the producer, the server will close socket server so that</span></span><br><span class="line">      <span class="comment">// the producer client will know that some error has happened and will refresh its metadata</span></span><br><span class="line">      <span class="keyword">if</span> (errorInResponse) &#123;</span><br><span class="line">        val exceptionsSummary = mergedResponseStatus.map &#123; <span class="keyword">case</span> (topicPartition, status) =&gt;</span><br><span class="line">          topicPartition -&gt; status.error.exceptionName</span><br><span class="line">        &#125;.mkString(<span class="string">", "</span>)</span><br><span class="line">        info(</span><br><span class="line">          s<span class="string">"Closing connection due to error during produce request with correlation id $&#123;request.header.correlationId&#125; "</span> +</span><br><span class="line">            s<span class="string">"from client id $&#123;request.header.clientId&#125; with ack=0\n"</span> +</span><br><span class="line">            s<span class="string">"Topic and partition to exceptions: $exceptionsSummary"</span></span><br><span class="line">        )</span><br><span class="line">        closeConnection(request, <span class="keyword">new</span> ProduceResponse(mergedResponseStatus.asJava).errorCounts)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Note that although request throttling is exempt for acks == 0, the channel may be throttled due to</span></span><br><span class="line">        <span class="comment">// bandwidth quota violation.</span></span><br><span class="line">        sendNoOpResponseExemptThrottle(request)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      sendResponse(request, Some(<span class="keyword">new</span> ProduceResponse(mergedResponseStatus.asJava, maxThrottleTimeMs)), None)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">def <span class="title">processingStatsCallback</span><span class="params">(processingStats: FetchResponseStats)</span>: Unit </span>= &#123;</span><br><span class="line">    processingStats.foreach &#123; <span class="keyword">case</span> (tp, info) =&gt;</span><br><span class="line">      updateRecordConversionStats(request, tp, info)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (authorizedRequestInfo.isEmpty)</span><br><span class="line">    sendResponseCallback(Map.empty)</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    val internalTopicsAllowed = request.header.clientId == AdminUtils.AdminClientId</span><br><span class="line"></span><br><span class="line">    <span class="comment">// call the replica manager to append messages to the replicas</span></span><br><span class="line">    <span class="comment">// ReplicaManager 持久化 LogSegment append then update offset</span></span><br><span class="line">    replicaManager.appendRecords(</span><br><span class="line">      timeout = produceRequest.timeout.toLong,</span><br><span class="line">      requiredAcks = produceRequest.acks,</span><br><span class="line">      internalTopicsAllowed = internalTopicsAllowed,</span><br><span class="line">      isFromClient = <span class="keyword">true</span>,</span><br><span class="line">      entriesPerPartition = authorizedRequestInfo,</span><br><span class="line">      responseCallback = sendResponseCallback,</span><br><span class="line">      recordConversionStatsCallback = processingStatsCallback)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// if the request is put into the purgatory, it will have a held reference and hence cannot be garbage collected;</span></span><br><span class="line">    <span class="comment">// hence we clear its data here in order to let GC reclaim its memory since it is already appended to log 清空内存 partition records to GC</span></span><br><span class="line">    produceRequest.clearPartitionRecords()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Kafka recive message 持久化 流程如下</p>
+<ol>
+<li>接收ProducerRequest  做一些权限认证过滤</li>
+<li>通过 ReplicaManager(leader) 数据持久化到Log</li>
+<li>Update End log offset</li>
+</ol>
+<p>kafka 的compression 压缩  如果producer 设置的压缩与topic config 不一致 会导致broker 额外开销一次解压缩操作 默认broker 以producer compress type 所以一般使用相同解压缩 这样可以达到zero copy 更高的吞吐  </p>
+<h2 id="Kafka-Consumer-poll-Message-流程"><a href="#Kafka-Consumer-poll-Message-流程" class="headerlink" title="Kafka Consumer poll Message 流程"></a>Kafka Consumer poll Message 流程</h2><p>broker 接收数据处理流程</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kafka-源码解析/" rel="tag"># Kafka 源码解析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/06/2019-11-6-使用hdfs 搭建OSS 服务/" rel="next" title="使用hdfs 搭建OSS 服务">
+                <i class="fa fa-chevron-left"></i> 使用hdfs 搭建OSS 服务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DaiLe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MrDLontheway" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:726575153@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005055405104110/home" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/726575153Mr" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/people/Le-Dai/100023921135287" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka-源码解析"><span class="nav-number">1.</span> <span class="nav-text">Kafka 源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kafka-Producer-Send-Message"><span class="nav-number">1.1.</span> <span class="nav-text">Kafka Producer Send Message</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kafka-Broker-Recive-Message-hanle-ProducerRequest"><span class="nav-number">1.2.</span> <span class="nav-text">Kafka Broker Recive Message( hanle ProducerRequest)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kafka-Consumer-poll-Message-流程"><span class="nav-number">1.3.</span> <span class="nav-text">Kafka Consumer poll Message 流程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DaiLe</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
