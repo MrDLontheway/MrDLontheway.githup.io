@@ -79,13 +79,17 @@
 
 
 
+<meta name="description" content="JVM参数配置-server    C2引擎执行-Xms20g    最小堆内存20G-Xmx20g    最大堆内存20G-Xmn8g    新生代8G-XX:PermSize=256m    Perm大小256MB-XX:MaxPermSize=256m    Perm大小256MB-XX:SurvivorRatio=10    YoungGC 3个区的比例-XX:+UseConcMarkSw">
 <meta property="og:type" content="website">
 <meta property="og:title" content="DaiLe&#39;s blog">
-<meta property="og:url" content="https://mrdlontheway.github.io/archives/2019/page/3/index.html">
+<meta property="og:url" content="https://mrdlontheway.github.io/docs/JVM.html">
 <meta property="og:site_name" content="DaiLe&#39;s blog">
+<meta property="og:description" content="JVM参数配置-server    C2引擎执行-Xms20g    最小堆内存20G-Xmx20g    最大堆内存20G-Xmn8g    新生代8G-XX:PermSize=256m    Perm大小256MB-XX:MaxPermSize=256m    Perm大小256MB-XX:SurvivorRatio=10    YoungGC 3个区的比例-XX:+UseConcMarkSw">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-01-04T06:06:19.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DaiLe&#39;s blog">
+<meta name="twitter:description" content="JVM参数配置-server    C2引擎执行-Xms20g    最小堆内存20G-Xmx20g    最大堆内存20G-Xmn8g    新生代8G-XX:PermSize=256m    Perm大小256MB-XX:MaxPermSize=256m    Perm大小256MB-XX:SurvivorRatio=10    YoungGC 3个区的比例-XX:+UseConcMarkSw">
 
 
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://mrdlontheway.github.io/archives/2019/page/3/"/>
+  <link rel="canonical" href="https://mrdlontheway.github.io/docs/JVM.html"/>
 
 
 
 
 
-  <title>Archive | DaiLe's blog</title>
+  <title> | DaiLe's blog</title>
   
 
 
@@ -140,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -225,6 +229,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-docs">
+          <a href="/docs/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-docs"></i> <br />
+            
+            docs
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -244,77 +258,37 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 34 posts in total. Keep on posting.
-      </span>
+	<h1 class="post-title" itemprop="name headline"></h1>
+
+
+
+</header>
 
       
+      
+      
+      <div class="post-body">
+        
+        
+          <p>JVM参数配置<br>-server    C2引擎执行<br>-Xms20g    最小堆内存20G<br>-Xmx20g    最大堆内存20G<br>-Xmn8g    新生代8G<br>-XX:PermSize=256m    Perm大小256MB<br>-XX:MaxPermSize=256m    Perm大小256MB<br>-XX:SurvivorRatio=10    YoungGC 3个区的比例<br>-XX:+UseConcMarkSweepGC    Old区使用CMS GC<br>-XX:+UseCMSCompactAtFullCollection    一旦触发FullGC对Old区进行压缩减少内存碎片<br>-XX:CMSMaxAbortablePrecleanTime=5000    CMS GC的回收超时时间，避免GC时间太久<br>-XX:+CMSClassUnloadingEnabled    支持CMS GC时对Perm区的Class和ClassLoader做GC，否则要等FullGC<br>-XX:CMSInitiatingOccupancyFraction=80    Old区达到80%时触发CMS GC，如果不设置，JVM会自适应，效果不好<br>-XX:+UseCMSInitiatingOccupancyOnly    只以CMSInitiatingOccupancyFraction设定的阈值为准，不加这个参数CMSInitiatingOccupancyFraction会不生效<br>-XX:+HeapDumpOnOutOfMemoryError    OOM时自动jmap dump内存<br>-XX:HeapDumpPath=    OOM时dump内存的位置<br>-Xloggc:    GC log位置<br>-XX:+PrintGCDetails    打印GC详细信息<br>-XX:+PrintGCDateStamps    将GC时间由时间戳改为人类可识别的时刻点<br>-Dsun.net.client.defaultConnectTimeout=10000    socket连接超时时间<br>-Dsun.net.client.defaultReadTimeout=30000    socket读超时时间<br>-verbose:class    打印类加载信息<br>-XX:MaxDirectMemorySize=1g    控制DirectByteBuffer占用的堆外内存大小，防止堆外内存导致OOM<br>-XX:+ExplicitGCInvokesConcurrent    调用System.gc()时触发CMS GC而不是Full GC<br>-XX:ParallelGCThreads=${CPU_COUNT}    并发GC线程数（Young GC)<br>-Dfile.encoding=${JAVA_FILE_ENCODING}    文件默认编码</p>
 
         
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/03/2019-1-3-关于修改三方框架源码 classpath加载顺序问题总结/" itemprop="url">
-              
-                <span itemprop="name">关于修改三方框架源码 classpath加载顺序问题总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-01-03T11:14:08+08:00"
-              content="2019-01-03" >
-          01-03
-        </time>
       </div>
-
-    </header>
-  </article>
-
-
-
       
-
+      
+      
     </div>
+    
+    
+    
   </div>
-  
-  
-  
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2019/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2019/">1</a><a class="page-number" href="/archives/2019/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
-
-
 
 
           </div>
@@ -322,6 +296,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -601,6 +579,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

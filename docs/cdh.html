@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DaiLe" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="cdh 安装rpm -ivh example.rpm –nodeps –forcerpm -Uvh ./*.rpm –nodeps –force1.网络配置(master,slave1,slave2) （1）修改主机名： vi /etc/hostname　　修改完hostname必须重启后才生效（2）添加hosts: vi /etc/hosts/proc/sys/kernel/hostname 2">
+<meta property="og:type" content="website">
+<meta property="og:title" content="cdh Docs">
+<meta property="og:url" content="https://mrdlontheway.github.io/docs/cdh.html">
+<meta property="og:site_name" content="DaiLe&#39;s blog">
+<meta property="og:description" content="cdh 安装rpm -ivh example.rpm –nodeps –forcerpm -Uvh ./*.rpm –nodeps –force1.网络配置(master,slave1,slave2) （1）修改主机名： vi /etc/hostname　　修改完hostname必须重启后才生效（2）添加hosts: vi /etc/hosts/proc/sys/kernel/hostname 2">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-01-04T03:46:53.179Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cdh Docs">
+<meta name="twitter:description" content="cdh 安装rpm -ivh example.rpm –nodeps –forcerpm -Uvh ./*.rpm –nodeps –force1.网络配置(master,slave1,slave2) （1）修改主机名： vi /etc/hostname　　修改完hostname必须重启后才生效（2）添加hosts: vi /etc/hosts/proc/sys/kernel/hostname 2">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mrdlontheway.github.io/docs/cdh.html"/>
+
+
+
+
+
+  <title>cdh Docs | DaiLe's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DaiLe's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-docs">
+          <a href="/docs/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-docs"></i> <br />
+            
+            docs
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline">cdh Docs</h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <p>cdh 安装<br>rpm -ivh example.rpm –nodeps –force<br>rpm -Uvh ./*.rpm –nodeps –force<br>1.网络配置(master,slave1,slave2)</p>
+<p>（1）修改主机名： vi /etc/hostname<br>　　修改完hostname必须重启后才生效<br>（2）添加hosts: vi /etc/hosts<br>/proc/sys/kernel/hostname</p>
+<p>2.SSH免密码登录(master,salve1,slave2)</p>
+<p>只需要主节点和从节点之间SSH免密码登录就行，从节点和从节点之间不需要。<br>先删除所有密钥 rm -rf ~/.ssh/*</p>
+<p>ssh-keygen -t rsa<br>ssh-copy-id master<br>ssh-copy-id slave1<br>ssh-copy-id slave2</p>
+<p>ssh localhost</p>
+<p>3.关闭防火墙<br>systemctl stop firewalld<br>systemctl status firewalld<br>systemctl disable firewalld</p>
+<p>4.SELINUX关闭<br>//关闭Selinux服务<br>setenforce 0<br>sed -i “s/SELINUX=enforcing/SELINUX=disabled/“ /etc/selinux/config<br>iptables –flush</p>
+<p>5.设置文件打开数量及最大进程数(master,slave1,slave2)<br>vi /etc/security/limits.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">* nofile 65540</span><br><span class="line">* soft nofile 65540</span><br><span class="line">* hard nofile 65540</span><br><span class="line">* soft memlock unlimited</span><br><span class="line">* hard memlock unlimited</span><br><span class="line">* soft nproc 32000</span><br><span class="line">* hard nproc 32000</span><br></pre></td></tr></table></figure>
+<p>vi /etc/sysctl.conf</p>
+<p>vm.max_map_count=262144<br>vm.swappiness=10</p>
+<p>reboot  #重启生效</p>
+<p>解决openfile 修改不生效问题<br>echo ‘export JAVA_HOME=/usr/java/default’ &gt;&gt; /etc/profile<br>echo ‘export JRE_HOME=$JAVA_HOME/jre’ &gt;&gt; /etc/profile<br>echo ‘export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH’ &gt;&gt; /etc/profile<br>echo ‘export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH’ &gt;&gt; /etc/profile</p>
+<p>echo ‘ulimit -HSn 102400’ &gt;&gt; /etc/profile</p>
+<p>source /etc/profile<br>6.同步时间</p>
+<p>安装ntp服务：</p>
+<p>yum -y install ntp<br>1<br>启动ntp服务，并设置开机自启：</p>
+<p>时间服务器配置<br>yum -y install ntp</p>
+<p>driftfile /var/lib/ntp/drift</p>
+<p># Permit time synchronization with our time source, but do not<br># permit the source to query or modify the service on this system.<br>restrict default nomodify notrap nopeer noquery<br>restrict 210.72.145.44 nomodify notrap noquery</p>
+<p># Permit all access over the loopback interface.  This could<br># be tightened as well, but to do so would effect some of<br># the administrative functions.<br>restrict 127.0.0.1<br>restrict ::1</p>
+<p># 外部时间服务器不可用时，以本地时间作为时间服务<br>  server  127.0.0.1     # local clock<br>  fudge   127.0.0.1 stratum 10</p>
+<p># Hosts on local network are less restricted.<br>#restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap</p>
+<p># Use public servers from the pool.ntp.org project.<br># Please consider joining the pool (<a href="http://www.pool.ntp.org/join.html)" target="_blank" rel="noopener">http://www.pool.ntp.org/join.html)</a>.<br>server 210.72.145.44 perfer   # 中国国家受时中心</p>
+<p>#broadcast 192.168.1.255 autokey        # broadcast server<br>#broadcastclient                        # broadcast client<br>#broadcast 224.0.1.1 autokey            # multicast server<br>#multicastclient 224.0.1.1              # multicast client<br>#manycastserver 239.255.254.254         # manycast server<br>#manycastclient 239.255.254.254 autokey # manycast client</p>
+<p>systemctl start ntpd<br>systemctl enable ntpd</p>
+<p>7.安装JDK配置环境变量<br>// 默认解压到/usr/jave/jdk1.7.0_67-cloudera<br>rpm -i oracle-j2sdk1.7-1.7.0+update67-1.x86_64.rpm<br>cd /usr/java<br>mv jdk1.7.0_67-cloudera default  #即JAVA_HOME=/usr/java/default</p>
+<p>由于是rpm包并不需要我们来配置环境变量，我们只需要配置一个全局的JAVA_HOME变量即可，在/etc/profile末尾添加：</p>
+<p>set java env<br>export JAVA_HOME=/usr/java/default</p>
+<h2 id="export-PATH-PATH-JAVA-HOME-bin"><a href="#export-PATH-PATH-JAVA-HOME-bin" class="headerlink" title="export PATH=$PATH:$JAVA_HOME/bin"></a>export PATH=$PATH:$JAVA_HOME/bin</h2><p>再source /etc/profile 立即生效</p>
+<p>8.安装配置MariaDB（master)</p>
+<p>yum -y install mariadb mariadb-server</p>
+<p>安装完成MariaDB，首先启动MariaDB<br>systemctl start mariadb</p>
+<p>设置开机启动<br>systemctl enable mariadb</p>
+<p>接下来进行MariaDB的相关简单配置<br>mysql_secure_installation</p>
+<p>首先是设置密码，会提示先输入密码<br>Enter current password for root (enter for none):&lt;–初次运行直接回车<br>设置密码<br>Set root password? [Y/n] &lt;– 是否设置root用户密码，输入y并回车或直接回车<br>New password: &lt;– 设置root用户的密码<br>Re-enter new password: &lt;– 再输入一次你设置的密码<br>其他配置<br>Remove anonymous users? [Y/n] &lt;– 是否删除匿名用户，回车<br>Disallow root login remotely? [Y/n] &lt;–是否禁止root远程登录,回车,<br>Remove test database and access to it? [Y/n] &lt;– 是否删除test数据库，回车<br>Reload privilege tables now? [Y/n] &lt;– 是否重新加载权限表，回车</p>
+<p>初始化MariaDB完成，接下来测试登录<br>mysql -uroot -ppassword</p>
+<p>配置MariaDB字符集：<br>文件/etc/my.cnf</p>
+<p>vi /etc/my.cnf</p>
+<p>在[mysqld]标签下添加</p>
+<p>default-storage-engine = innodb<br>innodb_file_per_table<br>collation-server = utf8_general_ci<br>init_connect=’SET NAMES utf8’<br>character-set-server = utf8<br>max_allowed_packet=20M<br>max_connections=1000<br>group_concat_max_len = 102400</p>
+<p>文件/etc/my.cnf.d/client.cnf</p>
+<p>vi /etc/my.cnf.d/client.cnf</p>
+<p>在[client]中添加</p>
+<p>文件/etc/my.cnf.d/mysql-clients.cnf</p>
+<p>vi /etc/my.cnf.d/mysql-clients.cnf</p>
+<p>在[mysql]中添加</p>
+<p>default-character-set=utf8</p>
+<p> 全部配置完成，重启mariadb</p>
+<p>systemctl restart mariadb<br>vi /etc/my.cnf.d/mysql-clients.cnf</p>
+<p>之后进入MariaDB查看字符集</p>
+<p>mysql&gt; show variables like “%character%”;show variables like “%collation%”;</p>
+<p>创建数据库：</p>
+<p>为hive建库hive<br>create database hive DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database am DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database oozie DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database hue DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>设置root授权访问以上所有的数据库,因为CM安装时会创建数据库，这里设置后安装CM时可以设置数据库的host为master:</p>
+<p>grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘123456’ with grant option;<br>flush privileges;</p>
+<p>MariaDB不允许远程连接导致的,在MariaDB中运行：</p>
+<p>grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘123456’ with grant option;<br>flush privileges;</p>
+<p>9.安装第三方依赖包</p>
+<p>yum -y install chkconfig python bind-utils psmisc libxslt zlib sqlite cyrus-sasl-plain cyrus-sasl-gssapi fuse fuse-libs redhat-lsb</p>
+<p>yum  -y install psmisc MySQL-python at bc bind-libs bind-utils cups-client cups-libs cyrus-sasl-gssapi cyrus-sasl-plain ed fuse fuse-libs httpd httpd-tools keyutils-libs-devel krb5-devel libcom_err-devel libselinux-devel libsepol-devel libverto-devel mailcap noarch mailx mod_ssl openssl-devel pcre-devel postgresql-libs python-psycopg2 redhat-lsb-core redhat-lsb-submod-security  x86_64 spax time zlib-devel</p>
+<p>Cloudera Manager安装<br>1.安装Cloudera Manager Server 和Agent</p>
+<p>主节点解压安装(master)</p>
+<p>tar -zxvf cloudera-manager-centos7-cm5.11.1_x86_64.tar.gz -C /opt/</p>
+<p>2.配置 CM Server数据库（master）</p>
+<p>将mysql-connector-java-5.1.42-bin.jar放到/opt/cm-5.11.1/share/cmf/lib下并初始化数据库:</p>
+<p>cp mysql-connector-java-5.1.42-bin.jar /opt/cm-5.11.1/share/cmf/lib<br>/opt/cm-5.11.1/share/cmf/schema/scm_prepare_database.sh [-数据库类型] [-创建的数据库名] [-h主机名] [-u用户名] [-p密码]<br>/opt/cm-5.13.0/share/cmf/schema/scm_prepare_database.sh mysql cm -h sinan01 -uroot -p123456 –scm-host sinan01 scm scm scm</p>
+<p>3.配置 CM Agent(master)<br>修改/opt/cm-5.13.0/etc/cloudera-scm-agent/config.ini文件中的server_host为主节点主机名</p>
+<h1 id="vi-opt-cm-5-13-0-etc-cloudera-scm-agent-config-ini"><a href="#vi-opt-cm-5-13-0-etc-cloudera-scm-agent-config-ini" class="headerlink" title="vi /opt/cm-5.13.0/etc/cloudera-scm-agent/config.ini"></a>vi /opt/cm-5.13.0/etc/cloudera-scm-agent/config.ini</h1><p>[General]</p>
+<h1 id="Hostname-of-the-CM-server"><a href="#Hostname-of-the-CM-server" class="headerlink" title="Hostname of the CM server."></a>Hostname of the CM server.</h1><p>server_host=master  //修改为主节点主机名</p>
+<p>4.将Agent文件从主节点分发到其他从节点:(master)</p>
+<h1 id="scp-r-opt-cm-5-11-1-slave1-opt"><a href="#scp-r-opt-cm-5-11-1-slave1-opt" class="headerlink" title="scp -r /opt/cm-5.11.1 slave1:/opt"></a>scp -r /opt/cm-5.11.1 slave1:/opt</h1><h1 id="scp-r-opt-cm-5-11-1-slave2-opt"><a href="#scp-r-opt-cm-5-11-1-slave2-opt" class="headerlink" title="scp -r /opt/cm-5.11.1 slave2:/opt"></a>scp -r /opt/cm-5.11.1 slave2:/opt</h1><p>5.创建用户cloudera-scm(master,slave1,slave2)<br>每个节点上执行命令创建cloudera-scm用户，因为CM使用cloudera-scm用户管理。</p>
+<p>useradd –system –home=/opt/cm-5.13.0/run/cloudera-scm-server/ –no-create-home –shell=/bin/false –comment “Cloudera SCM User” cloudera-scm</p>
+<p>6.准备Parcels，用以安装CDH5<br>（1）在主节点master上，将cdh parcels安装包放置到/opt/cloudera/parcel-repo目录下，并修改权限：</p>
+<p>cp CDH-5.11.1-1.cdh5.11.1.p0.4-el7.parcel /opt/cloudera/parcel-repo/<br>cp CDH-5.11.1-1.cdh5.11.1.p0.4-el7.parcel.sha1 /opt/cloudera/parcel-repo/<br>mv /opt/cloudera/parcel-repo/CDH-5.11.1-1.cdh5.11.1.p0.4-el7.parcel.sha1 /opt/cloudera/parcel-repo/CDH-5.11.1-1.cdh5.11.1.p0.4-el7.parcel.sha</p>
+<p>//这一步可以不用做<br>chown -R cloudera-scm:cloudera-scm /opt/cloudera/parcel-repo </p>
+<p>（2）在所有cloudera-agent上创建parcels目录（这一步可以不用做）：<br>mkdir -p /opt/cloudera/parcels<br>chown cloudera-scm:cloudera-scm /opt/cloudera/parcels</p>
+<p>7.启动 CM Server和Agent<br>（1）启动服务<br>//主节点启动(master)：<br>/opt/cm-5.13.0/etc/init.d/cloudera-scm-server start<br>//所有节点启动(master,slave1,slave2)：<br>/opt/cm-5.13.0/etc/init.d/cloudera-scm-agent start</p>
+<p>CM Server首次启动会自动创建表以及数据，不要立即关闭和重启，否则需要删除所有表和数据，重新安装</p>
+<p>（2）添加开机自启动<br>chmod +x /etc/rc.d/rc.local<br>vi /etc/rc.d/rc.local</p>
+<p>echo never &gt; /sys/kernel/mm/transparent_hugepage/defrag<br>echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled<br>// 在此文件中添加启动命令即可实现开机启动<br>//主节点启动(master)：</p>
+<p>//所有节点启动(master,slave1,slave2)：<br>/opt/cm-5.13.0/etc/init.d/cloudera-scm-server start<br>/opt/cm-5.13.0/etc/init.d/cloudera-scm-agent start</p>
+<p>tailf  /opt/cm-5.13.0/log/cloudera-scm-agent/cloudera-scm-agent.log<br>tailf /opt/cm-5.13.0/log/cloudera-scm-server/cloudera-scm-server.log</p>
+<p>mkdir -p /var/lib/cloudera-scm-server<br>chmod 777 /var/lib/cloudera-scm-server</p>
+<p>sysctl -w vm.swappiness=10<br>echo “vm.swappiness=10” &gt;&gt;/etc/sysctl.conf</p>
+<p>//将下面两句添加到系统启动脚本中如<code>/etc/rc.local</code>，以便系统重启生效<br>echo never &gt; /sys/kernel/mm/transparent_hugepage/defrag<br>echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled</p>
+<p>//设置内存交换区 阈值 10%<br> echo ‘vm.swappiness=10’&gt;&gt; /etc/sysctl.conf<br>sysctl -p</p>
+<p> 已启用透明大页面压缩，可能会导致重大性能问题。请运行“echo never &gt; /sys/kernel/mm/transparent_hugepage/defrag”和“echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled”<br> 以禁用此设置，然后将同一命令添加到 /etc/rc.local 等初始化脚本中，以便在系统重启时予以设置。以下主机将受到影响:<br>echo never &gt; /sys/kernel/mm/transparent_hugepage/defrag<br>echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled<br>vi /etc/rc.local<br>echo never &gt; /sys/kernel/mm/transparent_hugepage/defrag<br>echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled</p>
+<p>bin/janusgraph.sh restart<br> yum -y install ntpd –downloadonly –downloaddir=./ntp</p>
+<p> yum deplist unzip</p>
+<p> es<br> vim /etc/security/limits.conf</p>
+<ul>
+<li><p>soft nofile 300000</p>
+</li>
+<li><p>hard nofile 300000</p>
+</li>
+<li><p>soft nproc 102400</p>
+</li>
+<li><p>hard nproc 102400</p>
+</li>
+<li><p>soft memlock unlimited</p>
+</li>
+<li><p>hard memlock unlimited</p>
+</li>
+</ul>
+<p>vim /etc/sysctl.conf </p>
+<p>fs.file-max = 1645037</p>
+<p>vm.max_map_count=655360</p>
+<p>sysctl -p</p>
+<p>cluster.name: elasticsearch       </p>
+<p>#集群名称<br>node.name: es-node-01            </p>
+<p>#节点名称<br>path.data: /usr/local/elasticsearch-2.4.5/data   </p>
+<p>#数据文件存储路径<br>path.logs: /usr/local/elasticsearch-2.4.5/logs    </p>
+<p>#log文件存储路径<br>network.host: 192.168.1.102                           </p>
+<p>#默认网络连接地址<br>http.port: 9200                                                </p>
+<p>#连接端口<br>discovery.zen.minimum_master_nodes: 2     </p>
+<p>#这个参数来保证集群中的节点可以知道其它N个有master资格的节点。默认为1，对于大的集群来说，可以设置大一点的值（2-4）</p>
+<h1 id="discovery-zen-ping-multicast-enabled-false"><a href="#discovery-zen-ping-multicast-enabled-false" class="headerlink" title="discovery.zen.ping.multicast.enabled: false"></a>discovery.zen.ping.multicast.enabled: false</h1><p>#禁用多播<br>discovery.zen.ping.unicast.hosts: [“192.168.1.102”, “192.168.1.103”, “192.168.1.104”]   </p>
+<p>#集群中master节点的初始列表，可以通过这些节点来自动发现新加入集群的节点。<br>discovery.zen.ping_timeout: 120s     </p>
+<p>#存活超时时间<br>bootstrap.system_call_filter: false    </p>
+<h1 id="因centos6不支持SecComp而默认bootstrap-system-call-filter为true进行检测，所以，要设置为-false。注：SecComp为secure-computing-mode简写"><a href="#因centos6不支持SecComp而默认bootstrap-system-call-filter为true进行检测，所以，要设置为-false。注：SecComp为secure-computing-mode简写" class="headerlink" title="因centos6不支持SecComp而默认bootstrap.system_call_filter为true进行检测，所以，要设置为 false。注：SecComp为secure computing mode简写"></a>因centos6不支持SecComp而默认bootstrap.system_call_filter为true进行检测，所以，要设置为 false。注：SecComp为secure computing mode简写</h1><p>http.cors.enabled: true  </p>
+<p>#是否支持跨域，默认为false<br>http.cors.allow-origin: “*”   </p>
+<p>#当设置允许跨域，默认为*,表示支持所有域名</p>
+<p>adduser es<br>chown -R es /usr/local/elasticsearch-5.4.3/*</p>
+<p>drwxr-xr-x. 3 root root   24 10月 30 09:41 demoGraph<br>drwxr-xr-x. 7 root root  103 10月 30 09:51 Graphical<br>drwxr-xr-x. 2 root root    6 10月 30 09:41 graphs<br>drwxr-xr-x. 2 root root    6 10月 30 09:41 graphs-J<br>-rw-r–r–. 1 root root 7055 10月 30 09:41 igraphdb.sql<br>drwxr-xr-x. 9 root root  124 11月 13 14:39 loadServer<br>-rw——-. 1 root root    0 10月 30 09:48 nohup.out<br>-rw-r–r–. 1 root root 5049 10月 30 09:41 sql.sql</p>
+<hr>
+<p>drwxr-xr-x. 3 root root  55 10月 30 09:51 janusGraph<br>drwxr-xr-x. 2 root root  84 11月 13 12:52 properties<br>drwxr-xr-x. 2 root root 104 10月 30 09:52 script<br>drwxr-xr-x. 2 root root  26 10月 30 09:51 sql_file<br>drwxr-xr-x. 3 root root  51 10月 30 09:51 tomcat<br>[root@sinan12 Graphical]# pwd<br>/home/iGraphDB/Graphical<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘superset‘@’%’;</p>
+<p>ambari-server setup –jdbc-db=mysql –jdbc-driver=/usr/share/java/mysql-connector-java.jar on server sinan04</p>
+<p>CREATE USER ‘root‘@’%’IDENTIFIED BY ‘123456’;<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root‘@’%’;<br>FLUSH PRIVILEGES;<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘username‘@’localhost’ IDENTIFIED BY ‘password’;</p>
+<p>accumulo 安装</p>
+<p>删除 目录下run 运行目录</p>
+<p>accumulo-env.sh</p>
+<p>HADOOP_PREFIX=  随意目录不为空即可</p>
+<p>JAVA_HOME=/usr/java/default</p>
+<p>hadoop conf 目录<br>HADOOP_CONF_DIR=”/etc/hadoop/conf”</p>
+<p>ZOOKEEPER_HOME=/opt/cloudera/parcels/CDH/lib/zookeeper</p>
+<p>masters  主节点 可多个<br>slaves  tableserver<br>tracers<br>gc<br>monitor</p>
+<p>环境变量<br>echo ‘export ACCUMULO_HOME=/usr/local/accumulo-1.9.2’  &gt;&gt; /etc/profile<br>echo ‘export PATH=$PATH:$ACCUMULO_HOME/bin’  &gt;&gt; /etc/profile<br>source /etc/profile</p>
+<h1 id="cdh卸载"><a href="#cdh卸载" class="headerlink" title="cdh卸载"></a>cdh卸载</h1><p>//主节点启动(master)：<br>/opt/cm-5.13.0/etc/init.d/cloudera-scm-server restart<br>/opt/cm-5.13.0/etc/init.d/cloudera-scm-server stop<br>//所有节点启动(master,slave1,slave2)：<br>/opt/cm-5.13.0/etc/init.d/cloudera-scm-agent restart<br>/opt/cm-5.13.0/etc/init.d/cloudera-scm-agent stop<br>scp -r ./elasticsearch-5.4.3 root@sinan02:/usr/local/<br>scp -r ./elasticsearch-5.4.3 root@sinan03:/usr/local/<br>scp -r ./elasticsearch-5.4.3 root@sinan04:/usr/local/<br>scp -r ./elasticsearch-5.4.3 root@sinan02:/usr/local/<br>umount /opt/cloudera-manager/cm-5.13.0/run/cloudera-scm-agent/process<br>umount /opt/cloudera-manager/cm-5.13.0/run/cloudera-scm-server/process<br>rm -rf /usr/share/cmf /var/lib/cloudera<em> /var/cache/yum/cloudera</em> /var/log/cloudera<em> /var/run/cloudera</em> /etc/alternatives/yarn<em><br>rm -rf /var/lib/cloudera-scm-server-db /etc/alternatives/sentry</em> /etc/alternatives/solr<em><br>rm -rf /tmp/.scm_prepare_node.lock /tmp/hsperfdata_hadoop /tmp/hsperfdata_hdfs  /tmp/hsperfdata_mapred /tmp/hsperfdata_zookeeper /tmp/hsperfdata_cloudera-scm  /tmp/hadoop-root<br>rm -rf /var/lib/flume-ng /var/lib/hadoop</em> /var/lib/hue /var/lib/navigator /var/lib/oozie /var/lib/solr /var/lib/sqoop<em> /var/lib/zookeeper<br>rm -rf /dfs /mapred /yarn /etc/alternatives/avro</em> /etc/alternatives/beeline<em><br>rm -rf  /etc/cloudera</em> /etc/alternatives/bigtop<em> /etc/alternatives/catalogd</em> /etc/alternatives/cli_<em> /etc/alternatives/hue</em> /etc/alternatives/sqoop<em><br>rm -rf  /var/cache/yum/x86_64/6/cloudera</em> /etc/alternatives/llama<em> /etc/alternatives/</em>spark<em> /etc/alternatives/pig</em> /etc/alternatives/mahout<em><br>rm -rf /var/lib/hadoop-</em> /var/lib/impala /var/lib/solr /var/lib/zookeeper /var/lib/hue /var/lib/oozie /var/lib/pgsql /etc/alternatives/impala<em><br>rm -rf /var/lib/sqoop2  /data/dfs/  /data/impala/ /data/yarn/  /dfs/ /impala/ /yarn/ /etc/alternatives/oozie</em> /etc/alternatives/mapred<em> /etc/alternatives/mahout</em><br>rm -rf /var/run/hadoop-<em>/ /var/run/hdfs-</em>/ /usr/bin/hadoop<em> /usr/bin/zookeeper</em> /usr/bin/hbase<em> /etc/alternatives/hadoop</em> /etc/alternatives/hbase<em><br>rm -rf /usr/bin/hive</em> /usr/bin/hdfs /usr/bin/mapred /usr/bin/yarn /usr/bin/sqoop<em> /usr/bin/oozie /etc/alternatives/hcat</em>  /etc/alternatives/hdfs<em><br>rm -rf /etc/hadoop</em> /etc/zookeeper<em> /etc/hive</em> /etc/hue /etc/impala /etc/sqoop<em> /etc/oozie /etc/hbase</em> /etc/hcatalog /etc/alternatives/hive<em><br>rm -rf /var/run/zookeeper /etc/alternatives/flume</em> /etc/alternatives/zookeeper<em> /etc/alternatives/parquet</em> /etc/alternatives/whirr<br>rm -rf /tmp/scm_prepare_node<em> /tmp/.scm_prepare_node.lock /etc/alternatives/bigtop</em> /etc/alternatives/yarn<em><br>rm -rf /tmp/A</em> /tmp/cmf<em> /tmp/J</em> /tmp/jffi<em> /tmp/q</em> /tmp/scm<em> /opt/cloudera/</em><br>for mnt in $(mount|cut -d ‘ ‘ -f 3); do stat $mnt 1&gt;/dev/null 2&gt;&1; rc=$?; if [ $rc -ne 0 ]; then echo “error accessing $mnt”; fi; done error accessing /run/user/42/gvfs</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DaiLe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MrDLontheway" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:726575153@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005055405104110/home" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/726575153Mr" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/people/Le-Dai/100023921135287" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#export-PATH-PATH-JAVA-HOME-bin"><span class="nav-number">1.</span> <span class="nav-text">export PATH=$PATH:$JAVA_HOME/bin</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vi-opt-cm-5-13-0-etc-cloudera-scm-agent-config-ini"><span class="nav-number"></span> <span class="nav-text">vi /opt/cm-5.13.0/etc/cloudera-scm-agent/config.ini</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hostname-of-the-CM-server"><span class="nav-number"></span> <span class="nav-text">Hostname of the CM server.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#scp-r-opt-cm-5-11-1-slave1-opt"><span class="nav-number"></span> <span class="nav-text">scp -r /opt/cm-5.11.1 slave1:/opt</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#scp-r-opt-cm-5-11-1-slave2-opt"><span class="nav-number"></span> <span class="nav-text">scp -r /opt/cm-5.11.1 slave2:/opt</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#discovery-zen-ping-multicast-enabled-false"><span class="nav-number"></span> <span class="nav-text">discovery.zen.ping.multicast.enabled: false</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#因centos6不支持SecComp而默认bootstrap-system-call-filter为true进行检测，所以，要设置为-false。注：SecComp为secure-computing-mode简写"><span class="nav-number"></span> <span class="nav-text">因centos6不支持SecComp而默认bootstrap.system_call_filter为true进行检测，所以，要设置为 false。注：SecComp为secure computing mode简写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cdh卸载"><span class="nav-number"></span> <span class="nav-text">cdh卸载</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DaiLe</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
