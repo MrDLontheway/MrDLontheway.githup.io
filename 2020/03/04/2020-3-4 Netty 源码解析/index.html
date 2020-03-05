@@ -88,7 +88,7 @@
 <meta property="og:description" content="Netty 源码解析Netty NioEventLoopGroup 基于Java NIO 实现的netty事件处理循环组 初始化线程数 优先从系统环境变量 默认CPU core * 2 使用jdk 提供的默认线程工厂管理123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://raw.githubusercontent.com/MrDLontheway/mrdlontheway.github.io/master/images/reactor.png">
-<meta property="og:updated_time" content="2020-03-05T08:45:24.815Z">
+<meta property="og:updated_time" content="2020-03-05T09:53:09.866Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty 源码解析">
 <meta name="twitter:description" content="Netty 源码解析Netty NioEventLoopGroup 基于Java NIO 实现的netty事件处理循环组 初始化线程数 优先从系统环境变量 默认CPU core * 2 使用jdk 提供的默认线程工厂管理123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495">
@@ -379,6 +379,15 @@
 <li>Concrete Event Handler (具体事件处理器impl) 是事件处理器的具体实现业务service 对于netty来说 也就是用户自定义hanler</li>
 <li>Initiation Dispatcher(初始化分发器)  也就是java nio 中的Reactor 用于控制事件的调度方式 同时又提供了应用进行尸检处理器的注册 删除等操作, 分离事件 调用事件处理器 最后调用相关回调方法调用</li>
 </ol>
+<h1 id="Reactor模式流程"><a href="#Reactor模式流程" class="headerlink" title="Reactor模式流程"></a>Reactor模式流程</h1><ol>
+<li>当应用向Initiation Dispatcher 注册具体事件处理器时, 应用会标识出该事件希望Initiation Dispatcher 在某个事件发生时向其通知该事件, 该事件与hanle关联.</li>
+<li>Initiation Dispatcher 会要求每个事件处理器向其传递内部的hanle. 该hanle 向操作系统标识了事件处理器</li>
+<li>当所有的事件处理器注册完毕后, 应用会调用hanle_events方法来启动Initiation Dispatcher的事件循环. 这时 Initiation Dispatcher会将每个注册事件管理器的hanle 合并起来并使用同步事件分离器等待这些事件的发生. 比如说 TCP协议层会使用select 同步事件分离器来等待客户端发送的数据到达连接的sockect hanle上.</li>
+<li>当与某个事件源对应的hanle变成ready状态时候 (比如 tcp socket 变成等待读状态时) 同步事件分离器就会通知Initiation Dispatcher</li>
+<li>Initiation Dispatcher 会出发事件处理器的回调方法, 从而响应这个处于ready状态的hanle .当事件发生时 Initiation Dispatcher会将事件源激活的hanle 作为key 来寻找并分发恰当的事件处理器回调方法</li>
+<li>Initiation Dispatcher 会回调事件处理器的hanle_events回调方法来执行特定于应用的功能</li>
+</ol>
+<p>(开发者自己所编写的功能) 从而响应这个事件, 所发生的事件类型可以作为该方法参数并被该方法内部使用来执行额外的特定与服务的分离与分发.</p>
 
       
     </div>
@@ -613,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty-源码解析"><span class="nav-number">1.</span> <span class="nav-text">Netty 源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Netty-NioEventLoopGroup-基于Java-NIO-实现的netty事件处理循环组-初始化线程数-优先从系统环境变量-默认CPU-core-2-使用jdk-提供的默认线程工厂管理"><span class="nav-number">1.1.</span> <span class="nav-text">Netty NioEventLoopGroup 基于Java NIO 实现的netty事件处理循环组 初始化线程数 优先从系统环境变量 默认CPU core * 2 使用jdk 提供的默认线程工厂管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty-高性能设计"><span class="nav-number">2.</span> <span class="nav-text">Netty 高性能设计:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-底层封装jdk-nio-设计思路完全基于-Reactor-模型-事件驱动的方式"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.底层封装jdk nio  设计思路完全基于 Reactor 模型 事件驱动的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用AdaptiveRecvByteBufAllocator-自适应缓冲区buffer-分配策略"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.使用AdaptiveRecvByteBufAllocator 自适应缓冲区buffer 分配策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用jvm-direct-memory-堆外内存-利用操作系统的-zero-copy-策略提高io-性能"><span class="nav-number">2.0.3.</span> <span class="nav-text">3.使用jvm direct memory 堆外内存 利用操作系统的 zero-copy 策略提高io 性能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reactor-模型"><span class="nav-number">3.</span> <span class="nav-text">Reactor 模型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty-源码解析"><span class="nav-number">1.</span> <span class="nav-text">Netty 源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Netty-NioEventLoopGroup-基于Java-NIO-实现的netty事件处理循环组-初始化线程数-优先从系统环境变量-默认CPU-core-2-使用jdk-提供的默认线程工厂管理"><span class="nav-number">1.1.</span> <span class="nav-text">Netty NioEventLoopGroup 基于Java NIO 实现的netty事件处理循环组 初始化线程数 优先从系统环境变量 默认CPU core * 2 使用jdk 提供的默认线程工厂管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty-高性能设计"><span class="nav-number">2.</span> <span class="nav-text">Netty 高性能设计:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-底层封装jdk-nio-设计思路完全基于-Reactor-模型-事件驱动的方式"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.底层封装jdk nio  设计思路完全基于 Reactor 模型 事件驱动的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用AdaptiveRecvByteBufAllocator-自适应缓冲区buffer-分配策略"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.使用AdaptiveRecvByteBufAllocator 自适应缓冲区buffer 分配策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用jvm-direct-memory-堆外内存-利用操作系统的-zero-copy-策略提高io-性能"><span class="nav-number">2.0.3.</span> <span class="nav-text">3.使用jvm direct memory 堆外内存 利用操作系统的 zero-copy 策略提高io 性能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reactor-模型"><span class="nav-number">3.</span> <span class="nav-text">Reactor 模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reactor模式流程"><span class="nav-number">4.</span> <span class="nav-text">Reactor模式流程</span></a></li></ol></div>
             
 
           </div>
