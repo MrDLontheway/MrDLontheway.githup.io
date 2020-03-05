@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="DaiLe&#39;s blog">
 <meta property="og:description" content="ps aux | grep “ConsoleConsumer” |grep -v grep| cut -c 9-15 | xargs kill -9   ps aux | grep “org.apache.accumulo.start.Main” |grep -v grep| cut -c 9-15 | xargs kill -9.  org.apache.accumulo.start.Main">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-04T03:36:45.271Z">
+<meta property="og:updated_time" content="2020-01-16T03:26:08.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kafka Docs">
 <meta name="twitter:description" content="ps aux | grep “ConsoleConsumer” |grep -v grep| cut -c 9-15 | xargs kill -9   ps aux | grep “org.apache.accumulo.start.Main” |grep -v grep| cut -c 9-15 | xargs kill -9.  org.apache.accumulo.start.Main">
@@ -299,6 +299,9 @@
 <p>kafka-consumer-groups –zookeeper sinan10:2181/kafka –list</p>
 <p>kafka-consumer-groups –zookeeper sinan10:2181/kafka –group test1 –describe</p>
 <p>kafka-manager</p>
+<h1 id="修改group-offset"><a href="#修改group-offset" class="headerlink" title="修改group offset"></a>修改group offset</h1><p>kafka-consumer-groups –bootstrap-server scistor181:9092 –group kafka-groupzvm –topic z_jss_weibo_r3p4 –execute –reset-offsets –to-offset 111020</p>
+<h1 id="查询topic-offset"><a href="#查询topic-offset" class="headerlink" title="查询topic offset"></a>查询topic offset</h1><p>kafka-run-class kafka.tools.GetOffsetShell –broker-list node110:9092 -topic compass-importer-object-topic2 –time -1</p>
+<p>注： time为-1时表示最大值，time为-2时表示最小值</p>
 <p>nohup /usr/local/kafka-manager-1.3.3.16/bin/kafka-manager -Dconfig.file=/usr/local/kafka-manager-1.3.3.16/conf/application.conf -Dhttp.port=7080 -java-home /usr/java/default &amp;</p>
 <h1 id="更改topice-设置"><a href="#更改topice-设置" class="headerlink" title="更改topice 设置"></a>更改topice 设置</h1><p>kafka-topics –alter –zookeeper sinan10:2181/kafka –topic iGraphDB_point –partitions 64</p>
 <h1 id="创建topice"><a href="#创建topice" class="headerlink" title="创建topice"></a>创建topice</h1><p>kafka-topics –create –zookeeper sinan10:2181/kafka –replication-factor 1 –partitions 6 –create –topic vertex1 iGraphDB_data</p>
@@ -405,7 +408,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -427,7 +430,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -524,7 +527,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建topic"><span class="nav-number">1.</span> <span class="nav-text">创建topic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#展示topic"><span class="nav-number">2.</span> <span class="nav-text">展示topic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改topic"><span class="nav-number">3.</span> <span class="nav-text">修改topic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除topic"><span class="nav-number">4.</span> <span class="nav-text">删除topic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#描述topic"><span class="nav-number">5.</span> <span class="nav-text">描述topic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生产者："><span class="nav-number">6.</span> <span class="nav-text">生产者：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#消费者组信息"><span class="nav-number">7.</span> <span class="nav-text">消费者组信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更改topice-设置"><span class="nav-number">8.</span> <span class="nav-text">更改topice 设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建topice"><span class="nav-number">9.</span> <span class="nav-text">创建topice</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建topic"><span class="nav-number">1.</span> <span class="nav-text">创建topic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#展示topic"><span class="nav-number">2.</span> <span class="nav-text">展示topic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改topic"><span class="nav-number">3.</span> <span class="nav-text">修改topic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除topic"><span class="nav-number">4.</span> <span class="nav-text">删除topic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#描述topic"><span class="nav-number">5.</span> <span class="nav-text">描述topic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生产者："><span class="nav-number">6.</span> <span class="nav-text">生产者：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#消费者组信息"><span class="nav-number">7.</span> <span class="nav-text">消费者组信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改group-offset"><span class="nav-number">8.</span> <span class="nav-text">修改group offset</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询topic-offset"><span class="nav-number">9.</span> <span class="nav-text">查询topic offset</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更改topice-设置"><span class="nav-number">10.</span> <span class="nav-text">更改topice 设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建topice"><span class="nav-number">11.</span> <span class="nav-text">创建topice</span></a></li></ol></div>
             
 
           </div>
