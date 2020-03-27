@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Druid 源码解析," />
+  <meta name="keywords" content="DaiLe" />
 
 
 
@@ -79,20 +79,17 @@
 
 
 
-<meta name="description" content="Apache Druid (Version 0.17)架构 以及 实现原理解析 Coordinator processes manage data availability on the cluster. 协调器进程管理群集上的数据可用性 Overlord processes control the assignment of data ingestion workloads. master进程控">
-<meta name="keywords" content="Druid 源码解析">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Apache Druid 实现原理解析">
-<meta property="og:url" content="https://mrdlontheway.github.io/2020/03/12/2020-3-12 Apache Druid 实现原理解析/index.html">
+<meta name="description" content="networknetstat -ano |grep ‘53555’ ps -ef |grep ‘pid’">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DaiLe&#39;s blog">
+<meta property="og:url" content="https://mrdlontheway.github.io/docs/network.html">
 <meta property="og:site_name" content="DaiLe&#39;s blog">
-<meta property="og:description" content="Apache Druid (Version 0.17)架构 以及 实现原理解析 Coordinator processes manage data availability on the cluster. 协调器进程管理群集上的数据可用性 Overlord processes control the assignment of data ingestion workloads. master进程控">
+<meta property="og:description" content="networknetstat -ano |grep ‘53555’ ps -ef |grep ‘pid’">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://druid.apache.org/docs/0.17.0/assets/druid-architecture.png">
-<meta property="og:updated_time" content="2020-03-14T12:59:19.027Z">
+<meta property="og:updated_time" content="2020-03-27T02:56:13.711Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Apache Druid 实现原理解析">
-<meta name="twitter:description" content="Apache Druid (Version 0.17)架构 以及 实现原理解析 Coordinator processes manage data availability on the cluster. 协调器进程管理群集上的数据可用性 Overlord processes control the assignment of data ingestion workloads. master进程控">
-<meta name="twitter:image" content="https://druid.apache.org/docs/0.17.0/assets/druid-architecture.png">
+<meta name="twitter:title" content="DaiLe&#39;s blog">
+<meta name="twitter:description" content="networknetstat -ano |grep ‘53555’ ps -ef |grep ‘pid’">
 
 
 
@@ -122,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://mrdlontheway.github.io/2020/03/12/2020-3-12 Apache Druid 实现原理解析/"/>
+  <link rel="canonical" href="https://mrdlontheway.github.io/docs/network.html"/>
 
 
 
 
 
-  <title>Apache Druid 实现原理解析 | DaiLe's blog</title>
+  <title> | DaiLe's blog</title>
   
 
 
@@ -263,186 +260,35 @@
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2020/03/12/2020-3-12 Apache Druid 实现原理解析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiLe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiLe's blog">
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">Apache Druid 实现原理解析</h1>
-        
+	<h1 class="post-title" itemprop="name headline"></h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-12T16:43:08+08:00">
-                2020-03-12
-              </time>
-            
 
-            
 
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
-                    <span itemprop="name">Learning process</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <h1 id="Apache-Druid-Version-0-17-架构-以及-实现原理解析"><a href="#Apache-Druid-Version-0-17-架构-以及-实现原理解析" class="headerlink" title="Apache Druid (Version 0.17)架构 以及 实现原理解析"></a>Apache Druid (Version 0.17)架构 以及 实现原理解析</h1><ul>
-<li><a href="https://druid.apache.org/docs/0.17.0/design/coordinator.html" target="_blank" rel="noopener"><strong>Coordinator</strong></a> processes manage data availability on the cluster. 协调器进程管理群集上的数据可用性</li>
-<li><a href="https://druid.apache.org/docs/0.17.0/design/overlord.html" target="_blank" rel="noopener"><strong>Overlord</strong></a> processes control the assignment of data ingestion workloads. master进程控制数据提取工作负载的分配。</li>
-<li><a href="https://druid.apache.org/docs/0.17.0/design/broker.html" target="_blank" rel="noopener"><strong>Broker</strong></a> processes handle queries from external clients. 代理程序处理来自外部客户端的查询。</li>
-<li><a href="https://druid.apache.org/docs/0.17.0/design/router.html" target="_blank" rel="noopener"><strong>Router</strong></a> processes are optional processes that can route requests to Brokers, Coordinators, and Overlords. 路由器进程是可选进程，可以将请求路由到broker，Coordinator和Overlords。</li>
-<li><a href="https://druid.apache.org/docs/0.17.0/design/historical.html" target="_blank" rel="noopener"><strong>Historical</strong></a> processes store queryable data. 历史过程存储可查询的数据。</li>
-<li><a href="https://druid.apache.org/docs/0.17.0/design/middlemanager.html" target="_blank" rel="noopener"><strong>MiddleManager</strong></a> processes are responsible for ingesting data. MiddleManager进程负责摄取数据。</li>
-</ul>
-<ul>
-<li><strong>Master</strong>: Runs Coordinator and Overlord processes, manages data availability and ingestion. 运行Coordinator 与 Overlord 进程 协调集群以及数据可用性</li>
-<li><strong>Query</strong>: Runs Broker and optional Router processes, handles queries from external clients. 运行Broker和Router，处理来自外部客户端的查询。</li>
-<li><strong>Data</strong>: Runs Historical and MiddleManager processes, executes ingestion workloads and stores all queryable data. 运行Historical和MiddleManager进程，执行提取工作负载并存储所有可查询的数据。</li>
-<li></li>
-</ul>
-<p>外部依赖</p>
-<ol>
-<li>元数据库（Metastore）：存储druid集群的元数据信息，如Segment的相关信息，一般使用MySQL或PostgreSQL</li>
-<li>分布式协调服务（Coordination）：为Druid集群提供一致性服务，通常为zookeeper</li>
-<li>数据文件存储（DeepStorage）：存储生成的Segment文件，供Historical Node下载，一般为使用HDFS</li>
-</ol>
-<p><img src="https://druid.apache.org/docs/0.17.0/assets/druid-architecture.png" alt="druid-architecture"></p>
+      <div class="post-body">
+        
+        
+          <h1 id="network"><a href="#network" class="headerlink" title="network"></a>network</h1><p>netstat -ano |grep ‘53555’</p>
+<p>ps -ef |grep ‘pid’</p>
 
+        
+      </div>
+      
+      
       
     </div>
     
     
     
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Druid-源码解析/" rel="tag"># Druid 源码解析</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/03/04/2020-3-04 Netty 源码解析/" rel="next" title="Netty 源码解析">
-                <i class="fa fa-chevron-left"></i> Netty 源码解析
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
@@ -619,7 +465,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Apache-Druid-Version-0-17-架构-以及-实现原理解析"><span class="nav-number">1.</span> <span class="nav-text">Apache Druid (Version 0.17)架构 以及 实现原理解析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#network"><span class="nav-number">1.</span> <span class="nav-text">network</span></a></li></ol></div>
             
 
           </div>
