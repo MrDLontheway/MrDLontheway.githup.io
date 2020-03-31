@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="DaiLe&#39;s blog">
 <meta property="og:description" content="JVM参数配置-server    C2引擎执行-Xms20g    最小堆内存20G-Xmx20g    最大堆内存20G-Xmn8g    新生代8G-XX:PermSize=256m    Perm大小256MB-XX:MaxPermSize=256m    Perm大小256MB-XX:SurvivorRatio=10    YoungGC 3个区的比例-XX:+UseConcMarkSw">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-17T02:43:15.099Z">
+<meta property="og:updated_time" content="2020-03-27T15:12:24.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DaiLe&#39;s blog">
 <meta name="twitter:description" content="JVM参数配置-server    C2引擎执行-Xms20g    最小堆内存20G-Xmx20g    最大堆内存20G-Xmn8g    新生代8G-XX:PermSize=256m    Perm大小256MB-XX:MaxPermSize=256m    Perm大小256MB-XX:SurvivorRatio=10    YoungGC 3个区的比例-XX:+UseConcMarkSw">
@@ -279,6 +279,7 @@
         
           <p>JVM参数配置<br>-server    C2引擎执行<br>-Xms20g    最小堆内存20G<br>-Xmx20g    最大堆内存20G<br>-Xmn8g    新生代8G<br>-XX:PermSize=256m    Perm大小256MB<br>-XX:MaxPermSize=256m    Perm大小256MB<br>-XX:SurvivorRatio=10    YoungGC 3个区的比例<br>-XX:+UseConcMarkSweepGC    Old区使用CMS GC<br>-XX:+UseCMSCompactAtFullCollection    一旦触发FullGC对Old区进行压缩减少内存碎片<br>-XX:CMSMaxAbortablePrecleanTime=5000    CMS GC的回收超时时间，避免GC时间太久<br>-XX:+CMSClassUnloadingEnabled    支持CMS GC时对Perm区的Class和ClassLoader做GC，否则要等FullGC<br>-XX:CMSInitiatingOccupancyFraction=80    Old区达到80%时触发CMS GC，如果不设置，JVM会自适应，效果不好<br>-XX:+UseCMSInitiatingOccupancyOnly    只以CMSInitiatingOccupancyFraction设定的阈值为准，不加这个参数CMSInitiatingOccupancyFraction会不生效<br>-XX:+HeapDumpOnOutOfMemoryError    OOM时自动jmap dump内存<br>-XX:HeapDumpPath=    OOM时dump内存的位置<br>-Xloggc:    GC log位置<br>-XX:+PrintGCDetails    打印GC详细信息<br>-XX:+PrintGCDateStamps    将GC时间由时间戳改为人类可识别的时刻点<br>-Dsun.net.client.defaultConnectTimeout=10000    socket连接超时时间<br>-Dsun.net.client.defaultReadTimeout=30000    socket读超时时间<br>-verbose:class    打印类加载信息<br>-XX:MaxDirectMemorySize=1g    控制DirectByteBuffer占用的堆外内存大小，防止堆外内存导致OOM<br>-XX:+ExplicitGCInvokesConcurrent    调用System.gc()时触发CMS GC而不是Full GC<br>-XX:ParallelGCThreads=${CPU_COUNT}    并发GC线程数（Young GC)<br>-Dfile.encoding=${JAVA_FILE_ENCODING}    文件默认编码</p>
 <h1 id="远程debug"><a href="#远程debug" class="headerlink" title="远程debug"></a>远程debug</h1><p>被动连接<br>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005</p>
+<p>-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n</p>
 <p>主动连接<br>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</p>
 
         
@@ -347,7 +348,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -369,7 +370,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
