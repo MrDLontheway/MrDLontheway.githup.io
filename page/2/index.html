@@ -269,6 +269,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2019/01/28/2019-1-28-spark 数据本地性级别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DaiLe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DaiLe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/28/2019-1-28-spark 数据本地性级别/" itemprop="url">spark 数据本地性级别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-28T10:09:08+08:00">
+                2019-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning process</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          spark 数据本地性级别
+
+  数据本地性对Spark作业往往会有较大的影响。如果代码和其所操作的数据在同一节点上，那么计算速度肯定会更快一些。但如果二者不在一起，那必然需要移动其中之一。一般来说，移动序列化好的代码肯定比挪动一大堆数据要快。Spark就是基于这个一般性原则来构建数据本地性的调度。
+数据本地性是指代码和其所处理的数据的距离。基于数据当前的位置，数据本地性可以划分成以下几个层次（按从近到远排序）：
+
+PROCESS_LOCAL 数据和运行的代码处于同一个JVM进程内。
+NODE_LOCAL 数据和代码处于同一节点。例如，数据处于HDFS上某个节点，而对应的执行器（executor）也在同一个机器节点上。这会比PROCESS_LOCAL稍微慢一些，因为数据需要跨进程传递。
+NO
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/28/2019-1-28-spark 数据本地性级别/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2019/01/25/2019-1-25-graphx 切图方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1607,165 +1762,6 @@ Pulsar简介 Apache Pulsar是一个企业级的分布式消息系统，最初由
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mrdlontheway.github.io/2018/08/10/2018-08-10-flink quick start 初探索/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DaiLe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DaiLe's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/10/2018-08-10-flink quick start 初探索/" itemprop="url">Flink quick start 初探索</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-10T15:00:08+08:00">
-                2018-08-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Learning-process/" itemprop="url" rel="index">
-                    <span itemprop="name">Learning process</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Flink quick start 初探索(windows)
-
-1.环境搭建
-
-https://flink.apache.org/ 到flink 官网下载flink 安装包  这里下载的是1.6 binaries 依赖库
-解压至windows 任意目录  直接运行 bin 目录下的 start-cluster.bat
-这里对flink的初步印象 环境方面 local方式简单无需配置 比较人性化  然后 webui 是8081端口 http://localhost:8081 web端页面比较友好可以直接通过web端提交任务 任务的各个运行步骤解析也比较全
-
-这里 环境搭建就结束了
-2.本地开发
-
-这里我使用的是scala api 开发 首先idea 创建maven 项目 在pom 加入依赖包 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/10/2018-08-10-flink quick start 初探索/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1816,7 +1812,7 @@ https://flink.apache.org/ 到flink 官网下载flink 安装包  这里下载的�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1838,7 +1834,7 @@ https://flink.apache.org/ 到flink 官网下载flink 安装包  这里下载的�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
